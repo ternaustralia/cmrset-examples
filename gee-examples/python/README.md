@@ -5,10 +5,10 @@ These code examples will demonstrate how you can access the [CMRSET Landsat](htt
 
 You can run these examples directly in your browser via  <a href="https://colab.research.google.com/?utm_source=scs-index" target="_blank">Google Colab</a> using the direct links below:
 
-1. <a href="https://colab.research.google.com/drive/15D4tycxJQ4cwlHsT4kP5wG_jrHSrI0rD#scrollTo=2wal3JNtAncS" target="_blank">Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)</a>
-2. <a href="https://colab.research.google.com/drive/1s9Usdgh-EuVnnwM6X4Y3M_LnMTcAICd3#scrollTo=W0M1nRFz7h_g" target="_blank">Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)</a>
-3. <a href="https://colab.research.google.com/drive/1OAlle-YIGb7UmhCxv1NAwQKRySRw6wL3#scrollTo=vILLXX5tLLgc" target="_blank">Example 3 - Unpacking the CMRSET QA Band</a>
-4. <a href="https://colab.research.google.com/drive/19wJjdvvkAuLfS2TYoY_pVLrNYHAS4pe5#scrollTo=sH8Y3EPBTjOG" target="_blank">Example 4 - Exporting the Image Stack for a Region</a>
+1. <a href="https://colab.research.google.com/github/jamievleeshouwer/cmrset-examples/blob/main/gee-examples/python/Example_1_CMRSET_Long_Term_Average_ET_(Temporal_Aggregation).ipynb" target="_blank">Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)</a>
+2. <a href="https://colab.research.google.com/github/jamievleeshouwer/cmrset-examples/blob/main/gee-examples/python/Example_2_Aggregating_CMRSET_for_a_set_of_Features_(Spatial_Aggregation).ipynb" target="_blank">Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)</a>
+3. <a href="https://colab.research.google.com/github/jamievleeshouwer/cmrset-examples/blob/main/gee-examples/python/Example_3_Unpacking_the_CMRSET_QA_Band.ipynb" target="_blank">Example 3 - Unpacking the CMRSET QA Band</a>
+4. <a href="https://colab.research.google.com/github/jamievleeshouwer/cmrset-examples/blob/main/gee-examples/python/Example_4_Exporting_the_Image_Stack_for_a_Region.ipynb" target="_blank">Example 4 - Exporting the Image Stack for a Region</a>
 
 ### Additional Resources
 
