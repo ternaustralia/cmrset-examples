@@ -1,20 +1,20 @@
 
 ## Google Earth Engine Code Examples
 
-These code examples will demonstrate how you can access the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="blank">CMRSET Landsat</a> actual evapotranspiration data product via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a> catalog.
+These code examples will demonstrate how you can access the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="_blank">CMRSET Landsat</a> actual evapotranspiration data product via the <a href="https://earthengine.google.com/" target="_blank">Google Earth Engine</a> catalog.
 
 The code examples are implemented in both:
-1. **Python** - in the form of <a href="https://jupyter.org/" target="blank">Jupyter Notebooks</a>, and can be run in the cloud via <a href="https://colab.research.google.com/?utm_source=scs-index" target="blank">Google Colab</a>
-2. **Javascript** - and can be run in the cloud via the <a href="https://developers.google.com/earth-engine/guides/playground" target="blank">Earth Engine Code Editor</a>
+1. **Python** - in the form of <a href="https://jupyter.org/" target="_blank">Jupyter Notebooks</a>, and can be run in the cloud via <a href="https://colab.research.google.com/?utm_source=scs-index" target="_blank">Google Colab</a>
+2. **Javascript** - and can be run in the cloud via the <a href="https://developers.google.com/earth-engine/guides/playground" target="_blank">Earth Engine Code Editor</a>
 
 The Python/Javascript implementations of the Earth Engine API are near identical (hence so are the examples)...  So choose your preferred flavour!
 
-To run these examples it is assumed you have <a href="https://signup.earthengine.google.com/#!/" target="blank">registered</a> to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
+To run these examples it is assumed you have <a href="https://signup.earthengine.google.com/#!/" target="_blank">registered</a> to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
 
 ### Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)
 
 ![alt text](./GEE-Example1.png "Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)")
-This example illustrates how to access the CMRSET Landsat V2.2 data product via Earth Engine and compute the long-term average evapotranspiration for a section of the Lachlan River. Finally the result is exported to <a href="https://www.google.com/drive/" target="blank">Google Drive</a> as a <a href="https://www.cogeo.org/" target="blank">Cloud-Optimised GeoTIFF</a>.
+This example illustrates how to access the CMRSET Landsat V2.2 data product via Earth Engine and compute the long-term average evapotranspiration for a section of the Lachlan River. Finally the result is exported to <a href="https://www.google.com/drive/" target="_blank">Google Drive</a> as a <a href="https://www.cogeo.org/" target="_blank">Cloud-Optimised GeoTIFF</a>.
 
 **Execution Time:** ~8 minutes  
 **Storage Required:** 55 MB (on Google Drive)
@@ -25,7 +25,7 @@ This example illustrates how to access the CMRSET Landsat V2.2 data product via 
 ### Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)
 
 ![alt text](./GEE-Example2.png "Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)")
-This example illustrates how to compute the average evapotranspiration for a set of features (such as a multi-polygon/multi-point set). In this example we will use the Australian World Herritage Sites (which cover land) as our feature set. The monthly timeseries for each feature is then exported as a CSV to <a href="https://www.google.com/drive/" target="blank">Google Drive</a>.
+This example illustrates how to compute the average evapotranspiration for a set of features (such as a multi-polygon/multi-point set). In this example we will use the Australian World Herritage Sites (which cover land) as our feature set. The monthly timeseries for each feature is then exported as a CSV to <a href="https://www.google.com/drive/" target="_blank">Google Drive</a>.
 
 **Execution Time:** ~8 minutes  
 **Storage Required:** 16 kB (on Google Drive)
