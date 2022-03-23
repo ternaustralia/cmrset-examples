@@ -4,7 +4,7 @@
 These code examples demonstrate how you can access the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="_blank">CMRSET Landsat</a> actual evapotranspiration data product via the <a href="https://earthengine.google.com/" target="_blank">Google Earth Engine</a> catalog.
 
 The code examples are implemented in both:
-1. **Python** - can be run in the cloud via <a href="https://colab.research.google.com/?utm_source=scs-index" target="_blank">Google Colab</a>, in the form of <a href="https://jupyter.org/" target="_blank">Jupyter Notebooks</a>
+1. **Python** - can be run in the cloud via <a href="https://colab.research.google.com/?utm_source=scs-index" target="_blank">Google Colab</a> (in the form of <a href="https://jupyter.org/" target="_blank">Jupyter Notebooks</a>)
 2. **JavaScript** - can be run in the cloud via the <a href="https://developers.google.com/earth-engine/guides/playground" target="_blank">Earth Engine Code Editor</a>
 
 The Python/JavaScript implementations of the Earth Engine API are near identical (hence so are the examples)...  So choose your preferred flavour!
