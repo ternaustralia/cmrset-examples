@@ -10,6 +10,8 @@ You can run these examples directly in your browser via  <a href="https://colab.
 3. <a href="https://colab.research.google.com/github/jamievleeshouwer/cmrset-examples/blob/main/gee-examples/python/Example_3_Unpacking_the_CMRSET_QA_Band.ipynb" target="_blank">Example 3 - Unpacking the CMRSET QA Band</a>
 4. <a href="https://colab.research.google.com/github/jamievleeshouwer/cmrset-examples/blob/main/gee-examples/python/Example_4_Exporting_the_Image_Stack_for_a_Region.ipynb" target="_blank">Example 4 - Exporting the Image Stack for a Region</a>
 
+If you would like to obtain these notebook examples as a *pure* python script... After clicking the link, click **File > Download > Download .py**
+
 ### Additional Resources
 
 In addition to the CMRSET specific notebooks referenced above, you may also find the following notebook resources useful. These notebooks are ***not*** specific to the CMRSET Landsat data product, however may assist you with any customisations you may wish to implement.
