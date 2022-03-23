@@ -10,7 +10,7 @@ You can run these examples directly in your browser via  <a href="https://colab.
 3. <a href="https://colab.research.google.com/github/jamievleeshouwer/cmrset-examples/blob/main/gee-examples/python/Example_3_Unpacking_the_CMRSET_QA_Band.ipynb" target="_blank">Example 3 - Unpacking the CMRSET QA Band</a>
 4. <a href="https://colab.research.google.com/github/jamievleeshouwer/cmrset-examples/blob/main/gee-examples/python/Example_4_Exporting_the_Image_Stack_for_a_Region.ipynb" target="_blank">Example 4 - Exporting the Image Stack for a Region</a>
 
-If you would like to obtain these notebook examples as a *pure* python script... After clicking the link, click **File > Download > Download .py** within Google Colab.
+If you would like to obtain these notebook examples as a *pure* python script... After clicking the links above, click **File > Download > Download .py** within Google Colab.
 
 ### Additional Resources
 
