@@ -17,5 +17,5 @@ In addition to the CMRSET specific notebooks referenced above, you may also find
 1.	**Google Earth Engine with Python (EEwPython)** - a free open source notebook course on learning GEE:  
 https://colab.research.google.com/github/csaybar/EEwPython/blob/master/index.ipynb
 
-2.	**Qiusheng Wu’s Library** of over 360 GEE related notebooks:  
+2.	**Qiusheng Wu’s Repository** of over 360 GEE notebooks:  
 https://github.com/giswqs/earthengine-py-notebooks
