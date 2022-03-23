@@ -35,7 +35,7 @@ This example illustrates how to compute the average evapotranspiration for a set
 ### Example 3 - Unpacking the CMRSET QA Band
 
 ![alt text](./GEE-Example3.png "Example 3 - Unpacking the CMRSET QA Band")
-This example illustrates how to uppack the CMRSET QA band. The CMRSET QA band contains 4 pieces of extra information for each pixel which may further assist with your analysis. These 4 pieces of information are: the source of the data; condensation adjustment; the number of Landsat observations used for this pixel; and whether the pixel value was derived from Landsat SLC-Off data.
+This example illustrates how to uppack the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2#bands" target="_blank">CMRSET QA band</a>. The CMRSET QA band contains 4 pieces of extra information for each pixel which may further assist with your analysis. These 4 pieces of information are: the source of the data; condensation adjustment; the number of Landsat observations used for this pixel; and whether the pixel value was derived from Landsat SLC-Off data.
 
 **Execution Time:** Real-time  
 **Storage Required:** Nil
@@ -45,7 +45,7 @@ This example illustrates how to uppack the CMRSET QA band. The CMRSET QA band co
 ### Example 4 - Exporting the Image Stack for a Region
 
 ![alt text](./GEE-Example4.png "Example 4 - Exporting the Image Stack for a Region")
-This example illustrates how to export the CMRSET Landsat V2.2 imagery via Earth Engine for a study area in the Pilbara. Both ETa and QA bands are exported. We will also illustrate changing the projection of the exported images to GDA94 (EPSG:4283). This example can potentially generate gigabytes of data, so we demonstrate two different methods for exporting the data to suit your own storage capabilities. These methods are:
+This example illustrates how to export the CMRSET Landsat V2.2 imagery via Earth Engine for a study area in the Pilbara. Both ETa and QA bands are exported. We will also illustrate changing the <a href="https://developers.google.com/earth-engine/guides/projections" target="_blank">projection</a> of the exported images to <a href="https://epsg.io/4283" target="_blank">GDA94</a> (EPSG:4283). This example can potentially generate gigabytes of data, so we demonstrate two different methods for exporting the data to suit your own storage capabilities. These methods are:
 
 1. **Via Google Drive** - This method is the simplest, however you may not be prepared to pay for a monthly subscription to upgrade your Google Drive storage limits if your export exceeds the free storage teir (20 GB).
 
