@@ -1,11 +1,11 @@
 
 ## Google Earth Engine Code Examples
 
-These code examples will demonstrate how you can access the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="blank">CMRSET Landsat</a> Actual Evapotranspiration data product via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a> catalog.
+These code examples will demonstrate how you can access the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="blank">CMRSET Landsat</a> actual evapotranspiration data product via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a> catalog.
 
 The code examples are implemented in both:
-1. **Python** - in the form of <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a>[Jupyter Notebooks](https://jupyter.org/), and can also be run in the cloud via <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a>[Google Colab](https://colab.research.google.com/?utm_source=scs-index)
-2. **Javascript** (via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a>[Earth Engine Code Editor](https://developers.google.com/earth-engine/guides/playground))
+1. **Python** - in the form of <a href="https://jupyter.org/" target="blank">Jupyter Notebooks</a>, and can also be run in the cloud via <a href="https://colab.research.google.com/?utm_source=scs-index" target="blank">Google Colab</a>
+2. **Javascript** (via the <a href="https://developers.google.com/earth-engine/guides/playground" target="blank">Earth Engine Code Editor</a>)
 
 The Python/Javascript implementations of the Earth Engine API are near identical (hence so are the examples)...  So choose your preferred flavour!
 
