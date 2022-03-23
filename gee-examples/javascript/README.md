@@ -1,7 +1,7 @@
 
 ## Google Earth Engine Javascript Examples
 
-These code examples will demonstrate how you can access the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="blank">CMRSET Landsat</a> Actual Evapotranspiration data product via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a> catalog. To run these examples it is assumed you have <a href="https://signup.earthengine.google.com/#!/" target="blank">registered</a> to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
+These code examples will demonstrate how you can access the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="blank">CMRSET Landsat</a> actual evapotranspiration data product via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a> catalog. To run these examples it is assumed you have <a href="https://signup.earthengine.google.com/#!/" target="blank">registered</a> to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
 
 You can run these examples directly in your browser via the <a href="https://developers.google.com/earth-engine/guides/playground" target="blank">Earth Engine Code Editor</a> using the direct links below. After opening the link, click the **RUN** button located in the Code Editor toolbar to execute the example.
 

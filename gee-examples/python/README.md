@@ -1,9 +1,9 @@
 
 ### Google Earth Engine Python Examples
 
-These code examples will demonstrate how you can access the [CMRSET Landsat](https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2) Actual Evapotranspiration data product via the [Google Earth Engine](https://earthengine.google.com/) catalogue. To run these examples it is assumed you have [registered](https://signup.earthengine.google.com/#!/) to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
+These code examples will demonstrate how you can access the [CMRSET Landsat](https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2) actual evapotranspiration data product via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a> catalog. To run these examples it is assumed you have  <a href="https://signup.earthengine.google.com/#!/" target="blank">registered</a> to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
 
-You can run these examples directly in your browser via [Google Colab](https://colab.research.google.com/?utm_source=scs-index) using the direct links below:
+You can run these examples directly in your browser via  <a href="https://colab.research.google.com/?utm_source=scs-index" target="blank">Google Colab</a> using the direct links below:
 
 1. <a href="https://colab.research.google.com/drive/15D4tycxJQ4cwlHsT4kP5wG_jrHSrI0rD#scrollTo=2wal3JNtAncS" target="blank">Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)</a>
 2. <a href="https://colab.research.google.com/drive/1s9Usdgh-EuVnnwM6X4Y3M_LnMTcAICd3#scrollTo=W0M1nRFz7h_g" target="blank">Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)</a>
