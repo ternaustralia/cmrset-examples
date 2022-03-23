@@ -7,7 +7,7 @@ The code examples are implemented in both:
 1. **Python** - in the form of [Jupyter Notebooks](https://jupyter.org/), and can also be run in the cloud via [Google Colab](https://colab.research.google.com/?utm_source=scs-index)
 2. **Javascript** (via the [Earth Engine Code Editor](https://developers.google.com/earth-engine/guides/playground))
 
-The Python/Javascript implementations of the Earth Engine API are near identical...  So choose your preferred flavour!
+The Python/Javascript implementations of the Earth Engine API are near identical (hence so are the examples)...  So choose your preferred flavour!
 
 To run these examples it is assumed you have [registered](https://signup.earthengine.google.com/#!/) to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
 
