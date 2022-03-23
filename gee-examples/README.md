@@ -1,20 +1,20 @@
 
-### Google Earth Engine Code Examples
+## Google Earth Engine Code Examples
 
-These code examples will demonstrate how you can access the [CMRSET Landsat](https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2) Actual Evapotranspiration data product via the [Google Earth Engine](https://earthengine.google.com/) catalogue.
+These code examples will demonstrate how you can access the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="blank">CMRSET Landsat</a> Actual Evapotranspiration data product via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a> catalog.
 
 The code examples are implemented in both:
-1. **Python** - in the form of [Jupyter Notebooks](https://jupyter.org/), and can also be run in the cloud via [Google Colab](https://colab.research.google.com/?utm_source=scs-index)
-2. **Javascript** (via the [Earth Engine Code Editor](https://developers.google.com/earth-engine/guides/playground))
+1. **Python** - in the form of <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a>[Jupyter Notebooks](https://jupyter.org/), and can also be run in the cloud via <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a>[Google Colab](https://colab.research.google.com/?utm_source=scs-index)
+2. **Javascript** (via the <a href="https://earthengine.google.com/" target="blank">Google Earth Engine</a>[Earth Engine Code Editor](https://developers.google.com/earth-engine/guides/playground))
 
 The Python/Javascript implementations of the Earth Engine API are near identical (hence so are the examples)...  So choose your preferred flavour!
 
-To run these examples it is assumed you have [registered](https://signup.earthengine.google.com/#!/) to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
+To run these examples it is assumed you have <a href="https://signup.earthengine.google.com/#!/" target="blank">registered</a> to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
 
-#### Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)
+### Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)
 
 ![alt text](./GEE-Example1.png "Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)")
-This example illustrates how to access the CMRSET Landsat V2.2 data product via Earth Engine and compute the long-term average evapotranspiration for a section of the Lachlan River. Finally the result is exported to [Google Drive](https://www.google.com/drive/) as a [Cloud-Optimised GeoTIFF](https://www.cogeo.org/).
+This example illustrates how to access the CMRSET Landsat V2.2 data product via Earth Engine and compute the long-term average evapotranspiration for a section of the Lachlan River. Finally the result is exported to <a href="https://www.google.com/drive/" target="blank">Google Drive</a> as a <a href="https://www.cogeo.org/" target="blank">Cloud-Optimised GeoTIFF</a>.
 
 **Execution Time:** ~8 minutes  
 **Storage Required:** 55 MB (on Google Drive)
@@ -22,17 +22,17 @@ This example illustrates how to access the CMRSET Landsat V2.2 data product via 
 
 ---
 
-#### Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)
+### Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)
 
 ![alt text](./GEE-Example2.png "Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)")
-This example illustrates how to compute the average evapotranspiration for a set of features (such as a multi-polygon/multi-point set). In this example we will use the Australian World Herritage Sites (which cover land) as our feature set. The monthly timeseries for each feature is then exported as a CSV to [Google Drive](https://www.google.com/drive/).
+This example illustrates how to compute the average evapotranspiration for a set of features (such as a multi-polygon/multi-point set). In this example we will use the Australian World Herritage Sites (which cover land) as our feature set. The monthly timeseries for each feature is then exported as a CSV to <a href="https://www.google.com/drive/" target="blank">Google Drive</a>.
 
 **Execution Time:** ~8 minutes  
 **Storage Required:** 16 kB (on Google Drive)
 
 ---
 
-#### Example 3 - Unpacking the CMRSET QA Band
+### Example 3 - Unpacking the CMRSET QA Band
 
 ![alt text](./GEE-Example3.png "Example 3 - Unpacking the CMRSET QA Band")
 This example illustrates how to uppack the CMRSET QA band. The CMRSET QA band contains 4 pieces of extra information for each pixel which may further assist with your analysis. These 4 pieces of information are: the source of the data; condensation adjustment; the number of Landsat observations used for this pixel; and whether the pixel value was derived from Landsat SLC-Off data.
@@ -42,7 +42,7 @@ This example illustrates how to uppack the CMRSET QA band. The CMRSET QA band co
 
 ---
 
-#### Example 4 - Exporting the Image Stack for a Region
+### Example 4 - Exporting the Image Stack for a Region
 
 ![alt text](./GEE-Example4.png "Example 4 - Exporting the Image Stack for a Region")
 This example illustrates how to export the CMRSET Landsat V2.2 imagery via Earth Engine for a study area in the Pilbara. Both ETa and QA bands are exported. We will also illustrate changing the projection of the exported images to GDA94 (EPSG:4283). This example can potentially generate gigabytes of data, so we demonstrate two different methods for exporting the data to suit your own storage capabilities. These methods are:
