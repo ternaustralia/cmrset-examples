@@ -13,7 +13,7 @@ To run these examples it is assumed you have [registered](https://signup.earthen
 
 #### Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)
 
-![alt text](./images/GEE-Example1.png "Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)")
+![alt text](./GEE-Example1.png "Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)")
 This example illustrates how to access the CMRSET Landsat V2.2 data product via Earth Engine and compute the long-term average evapotranspiration for a section of the Lachlan River. Finally the result is exported to [Google Drive](https://www.google.com/drive/) as a [Cloud-Optimised GeoTIFF](https://www.cogeo.org/).
 
 **Execution Time:** ~8 minutes  
@@ -24,7 +24,7 @@ This example illustrates how to access the CMRSET Landsat V2.2 data product via 
 
 #### Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)
 
-![alt text](./images/GEE-Example2.png "Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)")
+![alt text](./GEE-Example2.png "Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)")
 This example illustrates how to compute the average evapotranspiration for a set of features (such as a multi-polygon/multi-point set). In this example we will use the Australian World Herritage Sites (which cover land) as our feature set. The monthly timeseries for each feature is then exported as a CSV to [Google Drive](https://www.google.com/drive/).
 
 **Execution Time:** ~8 minutes  
@@ -34,7 +34,7 @@ This example illustrates how to compute the average evapotranspiration for a set
 
 #### Example 3 - Unpacking the CMRSET QA Band
 
-![alt text](./images/GEE-Example3.png "Example 3 - Unpacking the CMRSET QA Band")
+![alt text](./GEE-Example3.png "Example 3 - Unpacking the CMRSET QA Band")
 This example illustrates how to uppack the CMRSET QA band. The CMRSET QA band contains 4 pieces of extra information for each pixel which may further assist with your analysis. These 4 pieces of information are: the source of the data; condensation adjustment; the number of Landsat observations used for this pixel; and whether the pixel value was derived from Landsat SLC-Off data.
 
 **Execution Time:** Real-time  
@@ -44,7 +44,7 @@ This example illustrates how to uppack the CMRSET QA band. The CMRSET QA band co
 
 #### Example 4 - Exporting the Image Stack for a Region
 
-![alt text](./images/GEE-Example4.png "Example 4 - Exporting the Image Stack for a Region")
+![alt text](./GEE-Example4.png "Example 4 - Exporting the Image Stack for a Region")
 This example illustrates how to export the CMRSET Landsat V2.2 imagery via Earth Engine for a study area in the Pilbara. Both ETa and QA bands are exported. We will also illustrate changing the projection of the exported images to GDA94 (EPSG:4283). This example can potentially generate gigabytes of data, so we demonstrate two different methods for exporting the data to suit your own storage capabilities. These methods are:
 
 1. **Via Google Drive** - This method is the simplest, however you may not be prepared to pay for a monthly subscription to upgrade your Google Drive storage limits if your export exceeds the free storage teir (20 GB).
