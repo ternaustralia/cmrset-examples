@@ -12,7 +12,7 @@ You can run these examples directly in your browser via  <a href="https://colab.
 
 #### Additional Resources
 
-In addition to the CMRSET specific notebooks referenced above, you may also find the following notebook resources useful. These notbooks are ***not*** specific to the CMRSET Landsat data product, however may assist you with any custimisations you may wish to implement.
+In addition to the CMRSET specific notebooks referenced above, you may also find the following notebook resources useful. These notbooks are ***not*** specific to the CMRSET Landsat data product, however may assist you with any customisations you may wish to implement.
 
 1.	**Google Earth Engine with Python (EEwPython)** - a free open source notebook course on learning GEE:  
 https://colab.research.google.com/github/csaybar/EEwPython/blob/master/index.ipynb
