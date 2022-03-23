@@ -5,9 +5,9 @@ These code examples demonstrate how you can access the <a href="https://develope
 
 The code examples are implemented in both:
 1. **Python** - can be run in the cloud via <a href="https://colab.research.google.com/?utm_source=scs-index" target="_blank">Google Colab</a>, in the form of <a href="https://jupyter.org/" target="_blank">Jupyter Notebooks</a>
-2. **Javascript** - can be run in the cloud via the <a href="https://developers.google.com/earth-engine/guides/playground" target="_blank">Earth Engine Code Editor</a>
+2. **JavaScript** - can be run in the cloud via the <a href="https://developers.google.com/earth-engine/guides/playground" target="_blank">Earth Engine Code Editor</a>
 
-The Python/Javascript implementations of the Earth Engine API are near identical (hence so are the examples)...  So choose your preferred flavour!
+The Python/JavaScript implementations of the Earth Engine API are near identical (hence so are the examples)...  So choose your preferred flavour!
 
 To run these examples it is assumed you have <a href="https://signup.earthengine.google.com/#!/" target="_blank">registered</a> to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
 
