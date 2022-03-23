@@ -8,7 +8,7 @@ The product has been made available to users via two methods:
 2. <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2" target="_blank">Google Earth Engine (GEE)</a>  
    The data on GEE is provided as an <a href="https://developers.google.com/earth-engine/guides/ic_creating" target="_blank">Image Collection</a>, whereby each monthly asset within the collection represents the whole of Australia. Using GEE, your analysis may benefit by easily being able to integrate the vast number of other datasets available within the <a href="https://developers.google.com/earth-engine/datasets" target="_blank">Earth Engine catalog</a>. Similarly, you can also export data from GEE as <a href="https://www.cogeo.org/" target="_blank">Cloud-Optimized GeoTIFF's</a> (and other formats) as you will discover from these examples.
 
-This repository provides code examples of how you can access the data via both of these medhods, depending on your desired source.
+This repository provides code examples of how you can access the data via both of these methods, depending on your desired source.
 
 ### Additional data access options
 
