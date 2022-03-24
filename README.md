@@ -1,7 +1,5 @@
-![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://github.com/jamievleeshouwer/cmrset-examples)
-![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![hits](https://hits.deltapapa.io/github/jamievleeshouwer/cmrset-examples.svg)](https://github.com/jamievleeshouwer/cmrset-examples)
 
 ## CMRSET Code Examples
 
