@@ -1,6 +1,6 @@
 
 // Example 3 - Unpacking the CMRSET QA Band
-// This example illustrates how to uppack the CMRSET QA band.  The CMRSET QA band
+// This example illustrates how to unpack the CMRSET QA band.  The CMRSET QA band
 // contains 4 pieces of extra information for each pixel which may further assist
 // with your analysis. These 4 pieces of information are: the source of the data;
 // condensation adjustment;the number of Landsat observations used for this pixel;

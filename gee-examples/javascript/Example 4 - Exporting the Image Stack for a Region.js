@@ -9,7 +9,7 @@
 
 // 1) Via Google Drive - This method is the simplest, however you may not be prepared
 // to pay for a monthly subscription to upgrade your Google Drive storage limits if
-// your export exceeds the free storage teir (20 GB).
+// your export exceeds the free storage tier (20 GB).
 
 // 2) Via Google Cloud Storage - This method will incur a once-off fee (rather than a subscription)
 // for the egress costs associated with downloading the imagery from Google Cloud Storage.
