@@ -21,7 +21,7 @@ To run these examples it is assumed you have <a href="https://signup.earthengine
 ![alt text](./GEE-Example1.png "Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)")
 This example illustrates how to access the CMRSET Landsat V2.2 data product via Earth Engine and compute the long-term average evapotranspiration for a section of the Lachlan River. Finally the result is exported to <a href="https://www.google.com/drive/" target="_blank">Google Drive</a> as a <a href="https://www.cogeo.org/" target="_blank">Cloud-Optimised GeoTIFF</a>.
 
-**Execution Time:** ~8 minutes  
+**Execution Time:** ~20 minutes  
 **Storage Required:** 55 MB (on Google Drive)
 
 ---

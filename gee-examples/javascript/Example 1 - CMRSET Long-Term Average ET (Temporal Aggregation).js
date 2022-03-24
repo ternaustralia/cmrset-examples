@@ -5,14 +5,14 @@
 // section of the Lachlan River. Finally the result is exported to Google Drive
 // as a Cloud-Optimised GeoTIFF.
 
-// Execution Time: ~8 minutes
+// Execution Time: ~20 minutes
 // Storage Required: 55 MB (on Google Drive)
 
 // Define a region of interest.
 var region = ee.Geometry.Rectangle([145.0, -34.0, 146.0, -33.0])
 
 // Define the period of interest.
-var start = '2012-02-01'
+var start = '2000-01-01'
 var end = '2021-03-01'
 
 // Define the export settings.
