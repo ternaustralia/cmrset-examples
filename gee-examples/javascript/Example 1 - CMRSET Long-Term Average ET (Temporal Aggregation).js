@@ -12,7 +12,7 @@
 var region = ee.Geometry.Rectangle([145.0, -34.0, 146.0, -33.0])
 
 // Define the period of interest.
-var start = '2000-01-01'
+var start = '2000-02-01'
 var end = '2021-03-01'
 
 // Define the export settings.
