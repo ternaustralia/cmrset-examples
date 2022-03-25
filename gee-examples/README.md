@@ -12,7 +12,7 @@ The code examples are implemented in *both* of the <a href="https://github.com/g
 1. **Python** - can be run in the cloud via <a href="https://colab.research.google.com/?utm_source=scs-index" target="_blank">Google Colab</a> (in the form of <a href="https://jupyter.org/" target="_blank">Jupyter Notebooks</a>)
 2. **JavaScript** - can be run in the cloud via the <a href="https://developers.google.com/earth-engine/guides/playground" target="_blank">Earth Engine Code Editor</a>
 
-The JavaScript flavour is probably slightly simpler for GEE beginners (since you have everything at your fingertips in the Earth Engine Code Editor). However there is more documentation within the python notebooks (jokes too!). The Python/JavaScript implementations of the Earth Engine API are near identical (hence so are the examples)...  So choose your preferred flavour, but perhaps reference both? 
+The JavaScript flavour is arguably simpler for GEE beginners (having everything at your fingertips in the Earth Engine Code Editor). However, there is more documentation within the Python notebooks (and jokes too!). The Python/JavaScript implementations of the Earth Engine API are near identical (hence so are the examples)...  So perhaps cross-reference both of them? 
 
 To run these examples it is assumed you have <a href="https://signup.earthengine.google.com/#!/" target="_blank">registered</a> to Google Earth Engine. Please feel free to adapt these examples to meet your own requirements.
 
