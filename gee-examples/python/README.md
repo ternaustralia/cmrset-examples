@@ -18,7 +18,7 @@ If you would like to obtain these notebook examples as a *pure* python script...
 
 ### Additional Resources
 
-In addition to the CMRSET specific notebooks provided in this repository, you may also find the following notebook resources useful. These notebooks are ***not*** specific to the CMRSET Landsat data product, however may assist you with any customisations you may wish to implement.
+In addition to the CMRSET specific notebooks provided in this repository, you may also find the following notebook resources useful. These notebooks are ***not*** specific to the CMRSET Landsat data product, however they may assist you with any customisations you may wish to implement.
 
 1.	**Google Earth Engine with Python (EEwPython)** - a free open source notebook course on learning GEE:  
 https://colab.research.google.com/github/csaybar/EEwPython/blob/master/index.ipynb
