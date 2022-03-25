@@ -19,7 +19,7 @@ This repository provides code examples of how you can access the data. The produ
 
 ### Additional data access options
 
-If your use case for accessing CMRSET data is the *really simple* kind... you may also be interested in the <a href="https://tern-landscapes.earthengine.app/view/cmrset-landsat-v22" target="_blank">AET Explorer</a>. This tool allows you to mark out points/polygons/transects on a map in your web browser to extract CSV data... You can also choose your favourite units as well!
+If your use case for accessing CMRSET data happens to be the *really simple* kind... you may also be interested in the <a href="https://tern-landscapes.earthengine.app/view/cmrset-landsat-v22" target="_blank">AET Explorer</a>. This tool allows you to mark out points/polygons/transects on a map in your web browser to extract CSV data... You can also choose your favourite units as well!
 
 ![alt text](./AET_Explorer.png "AET Explorer")
 
