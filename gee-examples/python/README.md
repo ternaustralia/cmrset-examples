@@ -16,7 +16,7 @@ You can run these examples in your browser via  <a href="https://colab.research.
 
 If you would like to obtain these notebook examples as a *pure* python script... After clicking the links above, click **File > Download > Download .py** within Google Colab.
 
-### Additional Resources
+### Additional Notebooks
 
 In addition to the CMRSET specific notebooks provided in this repository, you may also find the following notebook resources useful. These notebooks are ***not*** specific to the CMRSET Landsat data product, however they may assist you with any customisations you may wish to implement.
 
@@ -25,6 +25,25 @@ https://colab.research.google.com/github/csaybar/EEwPython/blob/master/index.ipy
 
 2.	**Qiusheng Wu’s Repository** of over 360 GEE notebooks:  
 https://github.com/giswqs/earthengine-py-notebooks
+
+### Supplementary Tutorials
+
+Also here are some additional media/content which we think you might find useful:
+
+1. **Earth Engine User Summits and Earth Outreach** video lectures:
+https://developers.google.com/earth-engine/tutorials/videos
+
+2. **Earth Engine Community Tutorials**:
+https://developers.google.com/earth-engine/tutorials/community/explore
+
+3. **End-to-End Google Earth Engine (Full Course Material)** - Spatial Thoughts course:
+https://courses.spatialthoughts.com/end-to-end-gee.html
+
+4. **Google Earth Engine for Water Resources Management (Full Course Material)** - Spatial Thoughts course:
+https://courses.spatialthoughts.com/gee-water-resources-management.html
+
+5. **Awesome Earth Engine** - A curated list of Google Earth Engine resources:
+https://github.com/giswqs/Awesome-GEE
 
 ### References
 
