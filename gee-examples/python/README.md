@@ -30,19 +30,19 @@ https://github.com/giswqs/earthengine-py-notebooks
 
 Also here are some additional media/content which we think you might find useful:
 
-1. **Earth Engine User Summits and Earth Outreach** video lectures:
+1. **Earth Engine User Summits and Earth Outreach** video lectures:  
 https://developers.google.com/earth-engine/tutorials/videos
 
-2. **Earth Engine Community Tutorials**:
+2. **Earth Engine Community Tutorials**:  
 https://developers.google.com/earth-engine/tutorials/community/explore
 
-3. **End-to-End Google Earth Engine (Full Course Material)** - Spatial Thoughts course:
+3. **End-to-End Google Earth Engine (Full Course Material)** - Spatial Thoughts course:  
 https://courses.spatialthoughts.com/end-to-end-gee.html
 
-4. **Google Earth Engine for Water Resources Management (Full Course Material)** - Spatial Thoughts course:
+4. **Google Earth Engine for Water Resources Management (Full Course Material)** - Spatial Thoughts course:  
 https://courses.spatialthoughts.com/gee-water-resources-management.html
 
-5. **Awesome Earth Engine** - A curated list of Google Earth Engine resources:
+5. **Awesome Earth Engine** - A curated list of Google Earth Engine resources:  
 https://github.com/giswqs/Awesome-GEE
 
 ### References
