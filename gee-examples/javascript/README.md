@@ -13,25 +13,24 @@ You can run these examples in your browser via the <a href="https://developers.g
 3. <a href="https://code.earthengine.google.com/?scriptPath=users%2Fjamievleeshouwer%2FTERN%3AExamples%2FExample%203%20-%20Unpacking%20the%20CMRSET%20QA%20Band" target="_blank">Example 3 - Unpacking the CMRSET QA Band</a>
 4. <a href="https://code.earthengine.google.com/?scriptPath=users%2Fjamievleeshouwer%2FTERN%3AExamples%2FExample%204%20-%20Exporting%20the%20Image%20Stack%20for%20a%20Region" target="_blank">Example 4 - Exporting the Image Stack for a Region</a>
 
-### Supplementary Tutorials
+### Supplementary Material
 
-Also here are some additional media/content which we think you might find useful:
+Also, here are some links to additional content which we think you might find useful:
 
-1. **Earth Engine User Summits and Earth Outreach** video lectures:  
-https://developers.google.com/earth-engine/tutorials/videos
-
-2. **Earth Engine Community Tutorials**:  
-https://developers.google.com/earth-engine/tutorials/community/explore
-
-3. **End-to-End Google Earth Engine (Full Course Material)** - Spatial Thoughts course:  
-https://courses.spatialthoughts.com/end-to-end-gee.html
-
-4. **Google Earth Engine for Water Resources Management (Full Course Material)** - Spatial Thoughts course:  
-https://courses.spatialthoughts.com/gee-water-resources-management.html
-
-5. **Awesome Earth Engine** - A curated list of Google Earth Engine resources:  
+1. **Awesome Earth Engine** - A curated list of Google Earth Engine resources:  
 https://github.com/giswqs/Awesome-GEE
 
+2. **End-to-End Google Earth Engine (Full Course Material)** - Spatial Thoughts course:  
+https://courses.spatialthoughts.com/end-to-end-gee.html
+
+3. **Google Earth Engine for Water Resources Management (Full Course Material)** - Spatial Thoughts course:  
+https://courses.spatialthoughts.com/gee-water-resources-management.html
+
+4. **Earth Engine User Summits and Earth Outreach** video lectures:  
+https://developers.google.com/earth-engine/tutorials/videos
+
+5. **Earth Engine Community Tutorials**:  
+https://developers.google.com/earth-engine/tutorials/community/explore
 
 ### References
 

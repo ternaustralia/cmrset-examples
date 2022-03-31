@@ -26,24 +26,24 @@ https://colab.research.google.com/github/csaybar/EEwPython/blob/master/index.ipy
 2.	**Qiusheng Wu’s Repository** of over 360 GEE notebooks:  
 https://github.com/giswqs/earthengine-py-notebooks
 
-### Supplementary Tutorials
+### Supplementary Material
 
-Also here are some additional media/content which we think you might find useful:
+Also, here are some links to additional content which we think you might find useful:
 
-1. **Earth Engine User Summits and Earth Outreach** video lectures:  
-https://developers.google.com/earth-engine/tutorials/videos
+1. **Awesome Earth Engine** - A curated list of Google Earth Engine resources:  
+https://github.com/giswqs/Awesome-GEE
 
-2. **Earth Engine Community Tutorials**:  
-https://developers.google.com/earth-engine/tutorials/community/explore
-
-3. **End-to-End Google Earth Engine (Full Course Material)** - Spatial Thoughts course:  
+2. **End-to-End Google Earth Engine (Full Course Material)** - Spatial Thoughts course:  
 https://courses.spatialthoughts.com/end-to-end-gee.html
 
-4. **Google Earth Engine for Water Resources Management (Full Course Material)** - Spatial Thoughts course:  
+3. **Google Earth Engine for Water Resources Management (Full Course Material)** - Spatial Thoughts course:  
 https://courses.spatialthoughts.com/gee-water-resources-management.html
 
-5. **Awesome Earth Engine** - A curated list of Google Earth Engine resources:  
-https://github.com/giswqs/Awesome-GEE
+4. **Earth Engine User Summits and Earth Outreach** video lectures:  
+https://developers.google.com/earth-engine/tutorials/videos
+
+5. **Earth Engine Community Tutorials**:  
+https://developers.google.com/earth-engine/tutorials/community/explore
 
 ### References
 
