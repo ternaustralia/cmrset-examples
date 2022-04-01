@@ -20,6 +20,9 @@ To run these examples it is assumed you have <a href="https://signup.earthengine
 
 <img src="./GEE-Example1.png" alt="Example 1 - CMRSET Long-Term Average ET (Temporal Aggregation)" width="600"/>
 
+[![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54&label=try%20in%20)](https://colab.research.google.com/github/ternaustralia/cmrset-examples/blob/main/gee-examples/python/Example_1_CMRSET_Long_Term_Average_ET_(Temporal_Aggregation).ipynb)
+[![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E&label=try%20in%20)](https://code.earthengine.google.com/?scriptPath=users%2Fjamievleeshouwer%2FTERN%3AExamples%2FExample%201%20-%20CMRSET%20Long-Term%20Average%20ET%20(Temporal%20Aggregation))
+
 This example illustrates how to access the CMRSET Landsat V2.2 data product via Earth Engine and compute the long-term average evapotranspiration for a section of the Lachlan River. Finally the result is exported to <a href="https://www.google.com/drive/" target="_blank">Google Drive</a> as a <a href="https://www.cogeo.org/" target="_blank">Cloud-Optimised GeoTIFF</a>.
 
 **Execution Time:** ~20 minutes  
@@ -30,6 +33,9 @@ This example illustrates how to access the CMRSET Landsat V2.2 data product via 
 ### Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)
 
 <img src="./GEE-Example2.png" alt="Example 2 - Aggregating CMRSET for a set of Features (Spatial Aggregation)" width="600"/>
+
+[![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54&label=try%20in%20)](https://colab.research.google.com/github/ternaustralia/cmrset-examples/blob/main/gee-examples/python/Example_2_Aggregating_CMRSET_for_a_set_of_Features_(Spatial_Aggregation).ipynb)
+[![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E&label=try%20in%20)](https://code.earthengine.google.com/?scriptPath=users%2Fjamievleeshouwer%2FTERN%3AExamples%2FExample%202%20-%20Aggregating%20CMRSET%20for%20a%20set%20of%20Features%20(Spatial%20Aggregation))
 
 This example illustrates how to compute the average evapotranspiration for a set of features (such as a multi-polygon/multi-point set). In this example we will use the Australian World Herritage Sites (which cover land) as our feature set. The monthly timeseries for each feature is then exported as a CSV to <a href="https://www.google.com/drive/" target="_blank">Google Drive</a>.
 
@@ -42,6 +48,9 @@ This example illustrates how to compute the average evapotranspiration for a set
 
 <img src="./GEE-Example3.png" alt="Example 3 - Unpacking the CMRSET QA Band" width="600"/>
 
+[![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54&label=try%20in%20)](https://colab.research.google.com/github/ternaustralia/cmrset-examples/blob/main/gee-examples/python/Example_3_Unpacking_the_CMRSET_QA_Band.ipynb)
+[![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E&label=try%20in%20)](https://code.earthengine.google.com/?scriptPath=users%2Fjamievleeshouwer%2FTERN%3AExamples%2FExample%203%20-%20Unpacking%20the%20CMRSET%20QA%20Band)
+
 This example illustrates how to unpack the <a href="https://developers.google.com/earth-engine/datasets/catalog/TERN_AET_CMRSET_LANDSAT_V2_2#bands" target="_blank">CMRSET QA band</a>. The CMRSET QA band contains 4 pieces of extra information for each pixel which may further assist with your analysis. These 4 pieces of information are: the source of the data; condensation adjustment; the number of Landsat observations used for this pixel; and whether the pixel value was derived from Landsat SLC-Off data.
 
 **Execution Time:** Real-time  
@@ -52,6 +61,9 @@ This example illustrates how to unpack the <a href="https://developers.google.co
 ### Example 4 - Exporting the Image Stack for a Region
 
 <img src="./GEE-Example4.png" alt="Example 4 - Exporting the Image Stack for a Region" width="600"/>
+
+[![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54&label=try%20in%20)](https://colab.research.google.com/github/ternaustralia/cmrset-examples/blob/main/gee-examples/python/Example_4_Exporting_the_Image_Stack_for_a_Region.ipynb)
+[![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E&label=try%20in%20)](https://code.earthengine.google.com/?scriptPath=users%2Fjamievleeshouwer%2FTERN%3AExamples%2FExample%204%20-%20Exporting%20the%20Image%20Stack%20for%20a%20Region)
 
 This example illustrates how to export the CMRSET Landsat V2.2 imagery via Earth Engine for a study area in the Pilbara. Both ETa and QA bands are exported. We will also illustrate changing the <a href="https://developers.google.com/earth-engine/guides/projections" target="_blank">projection</a> of the exported images to <a href="https://epsg.io/4283" target="_blank">GDA94</a> (EPSG:4283). This example can potentially generate gigabytes of data, so we demonstrate two different methods for exporting the data to suit your own storage capabilities. These methods are:
 
