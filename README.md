@@ -2,7 +2,7 @@
 ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=flat&logo=jupyter&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
-[![hits](https://hits.deltapapa.io/github/jamievleeshouwer/cmrset-examples.svg)](https://github.com/jamievleeshouwer/cmrset-examples)
+[![hits](https://hits.deltapapa.io/github/ternaustralia/cmrset-examples.svg)](https://github.com/jamievleeshouwer/cmrset-examples)
 
 ## CMRSET Code Examples
 
