@@ -3,7 +3,7 @@
 ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=flat&logo=jupyter&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
 
-## TERN Data Services Code Examples
+## TERN Landscapes WPS Code Examples
 
 Examples of accessing functions on the TERN Landscapes Web Processing Server (WPS).
 
