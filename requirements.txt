@@ -1,1 +1,9 @@
+# Modules for Earth Engine Examples
 geemap
+# Modules for TERN Examples
+owslib
+pandas
+shapely
+matplotlib
+ipyleaflet
+rasterio
