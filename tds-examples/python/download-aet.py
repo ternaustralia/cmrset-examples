@@ -121,7 +121,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 		file_vrt = download_file(url, tmp)
 
 		# Load the XML file and select all the source files.
-		if file_vrt.tell() == 0: file_vrt.close()
+		if file_vrt.tell() == 0: file_vrt.close() # If no data returned in VRT, then abort.
 		try:
 			xd = tmp.read()
 			nodes = ET.fromstring(xd).findall(".//VRTRasterBand/ComplexSource/SourceFilename")
@@ -165,7 +165,6 @@ def main():
 	logging.info("Processing data for the following dates:")
 	for date in dates: logging.info(date.strftime("%b %Y"))
 	
-
 	# Get the relative paths for each the VRT files for each date.
 	vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, "ETa", dates)
 	logging.info("Generated {count} VRT path(s) to download...".format(count=len(vrt_relative_paths)))
