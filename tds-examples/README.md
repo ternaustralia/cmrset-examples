@@ -44,7 +44,7 @@ The list of tile indicies you wish to download.
 The default value is a list containing all 12 tiles.
 Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may use a list which contains the values 10 and 11.
 
-<img src="./CMRSET_Grid_Indicies.png" alt="CMRSET Grid Indicies" width="530"/>
+<img src="./CMRSET_Grid_Indicies.png" alt="CMRSET Grid Indicies" width="550"/>
 
 ### Generating an API Key
 
