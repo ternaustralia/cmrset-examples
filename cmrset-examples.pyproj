@@ -1,0 +1,80 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>ff57c95d-80d4-4da0-a8fd-435fb54ea7ad</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>tds-examples\python\download-aet.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>cmrset-examples</Name>
+    <RootNamespace>cmrset-examples</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="gee-examples\" />
+    <Folder Include="gee-examples\javascript\" />
+    <Folder Include="gee-examples\python\" />
+    <Folder Include="tds-examples\" />
+    <Folder Include="tds-examples\python\" />
+    <Folder Include="tds-examples\PowerShell\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gee-examples\GEE-Example1.png" />
+    <Content Include="gee-examples\GEE-Example2.png" />
+    <Content Include="gee-examples\GEE-Example3.png" />
+    <Content Include="gee-examples\GEE-Example4.png" />
+    <Content Include="gee-examples\javascript\Example 1 - CMRSET Long-Term Average ET %28Temporal Aggregation%29.js" />
+    <Content Include="gee-examples\javascript\Example 2 - Aggregating CMRSET for a set of Features %28Spatial Aggregation%29.js" />
+    <Content Include="gee-examples\javascript\Example 3 - Unpacking the CMRSET QA Band.js" />
+    <Content Include="gee-examples\javascript\Example 4 - Exporting the Image Stack for a Region.js" />
+    <Content Include="gee-examples\javascript\README.md" />
+    <Content Include="gee-examples\python\Example_1_CMRSET_Long_Term_Average_ET_%28Temporal_Aggregation%29.ipynb" />
+    <Content Include="gee-examples\python\Example_2_Aggregating_CMRSET_for_a_set_of_Features_%28Spatial_Aggregation%29.ipynb" />
+    <Content Include="gee-examples\python\Example_3_Unpacking_the_CMRSET_QA_Band.ipynb" />
+    <Content Include="gee-examples\python\Example_4_Exporting_the_Image_Stack_for_a_Region.ipynb" />
+    <Content Include="gee-examples\python\README.md" />
+    <Content Include="gee-examples\README.md" />
+    <Content Include="LICENSE" />
+    <Content Include="README.md" />
+    <Content Include="requirements.txt" />
+    <Content Include="tds-examples\PowerShell\download-aet.ps1" />
+    <Content Include="tds-examples\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tds-examples\python\download-aet.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.7</Version>
+      <Description>env (Python 3.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
