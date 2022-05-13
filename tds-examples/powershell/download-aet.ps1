@@ -43,10 +43,10 @@ $TileLookup = @{
 function get_months([datetime]$start, [datetime]$end) {
 
     $date = $start
-    [System.Collections.ArrayList]$array = @()
+    [System.Collections.ArrayList]$array = @() # Cast to ArrayLaist for efficiency.
     while($date -le $end)
     {
-        [void]$array.Add($date)
+        [void]$array.Add($date) # Cast to void to avoid inteference from .Add().
         $date = $date.AddMonths(1)
     }
     return $array
@@ -74,7 +74,7 @@ function download_file([string]$url, [string]$output){
         Write-Information "Downloading: $($url)" -InformationAction continue
         $Headers = @{ "X-API-Key" = "$($API_KEY)" }
         $output_dir = Split-Path -Path $output
-        $null = New-Item -ItemType Directory -Force -Path $output_dir
+        $null = New-Item -ItemType Directory -Force -Path $output_dir # Assign to $null to avoid inteference from New-Item.
         Invoke-WebRequest -Uri "$($url)" -OutFile $output -Headers $Headers
     }
     catch{
@@ -88,7 +88,7 @@ function download_file([string]$url, [string]$output){
 function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids) {
 
     Write-Information "Processing $($relative_paths.Count) VRT file(s)..." -InformationAction continue
-    foreach ($relative_path in $relative_paths.GetEnumerator() | Sort-Object -Property name) # need to sort keys
+    foreach ($relative_path in $relative_paths.GetEnumerator() | Sort-Object -Property name) # Need to sort keys from Enumerator
     {
         $date = $relative_path.Name
         $date_str = $date.tostring("yyyy_MM_dd")
@@ -108,11 +108,11 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
         catch{ continue }
 
         # Filter the tiles to those specified.
-        [System.Collections.ArrayList]$filtered_files = @()
+        [System.Collections.ArrayList]$filtered_files = @() # Cast to ArrayLaist for efficiency.
         foreach ($file in $files){
             foreach ($tile_id in $tile_ids){
                 if ($file.Contains($tile_id)){
-                    [void]$filtered_files.Add($file)
+                    [void]$filtered_files.Add($file) # Cast to void to avoid inteference from .Add().
                 }
             }
         }

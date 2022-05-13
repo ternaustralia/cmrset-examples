@@ -186,5 +186,7 @@ def main():
 	download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup))
 	logging.info("Processing complete")
 
+
+# Run the script
 if __name__=="__main__":
 	main()
