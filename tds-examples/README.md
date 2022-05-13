@@ -26,14 +26,17 @@ The following parameters are configurable on all of the CMRSET AET downloading s
 
 #### API_KEY
 Your TERN API Key which is used to authenticate to TERN Data Services.  
+
 *Further details on how to obtain an API key are provided below*.
 
 #### PATH_OUT
 The output folder where data will be saved.  
-The full path where files will be saved to will be: \{ **PATH_OUT** } / \{ PRODUCT_CODE } / \{ YYYY } / \{ YYYY_MM_DD } /
+
+The complete path where files will be saved to is: \{ **PATH_OUT** } / \{ PRODUCT_CODE } / \{ YYYY } / \{ YYYY_MM_DD } /
 
 #### PRODUCT_CODE
-The CMRSET AET product code that will be downloaded.  
+The CMRSET AET product code to download.  
+
 The default value is *CMRSET_LANDSAT_V2_2* which is the ***latest*** and ***recommended*** version.
 
 #### START
@@ -43,14 +46,21 @@ The dataset start date to begin downloading data from (formatted as YYYY-MM-DD).
 The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
 
 #### OVERWRITE
-If set to True will overwrite files which have already been downloaded, otherwise will skip downloading if it already exists.
+If set to True, will overwrite files which have already been downloaded, otherwise will skip downloading if it already exists.  
+
+The default value is False.
 
 #### DRYRUN
-If set to True will not download any data product files. The script will just go through the *motions* of downloading the data product for debugging purposes.
+If set to True, will not download any data product files. 
+The script will just go through the *motions* of downloading the data product for debugging purposes.  
+
+The default value is False.
 
 #### TILES
-The list of tile indicies you wish to download.  
-The default value is a list containing ***all 12 tiles***.
+The list of tile indicies to download, which specify a region within Australia.  
+
+The default value is a list containing ***all 12 tiles***.  
+
 Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may use a list which contains the values 10 and 11.
 
 <img src="./CMRSET_Grid_Indicies.png" alt="CMRSET Grid Indicies" width="600"/>
