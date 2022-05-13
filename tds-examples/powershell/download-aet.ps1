@@ -43,7 +43,7 @@ $TileLookup = @{
 function get_months([datetime]$start, [datetime]$end) {
 
     $date = $start
-    [System.Collections.ArrayList]$array = @() # Cast to ArrayLaist for efficiency.
+    [System.Collections.ArrayList]$array = @() # Cast to ArrayList for efficiency.
     while($date -le $end)
     {
         [void]$array.Add($date) # Cast to void to avoid inteference from .Add().
@@ -108,7 +108,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
         catch{ continue }
 
         # Filter the tiles to those specified.
-        [System.Collections.ArrayList]$filtered_files = @() # Cast to ArrayLaist for efficiency.
+        [System.Collections.ArrayList]$filtered_files = @() # Cast to ArrayList for efficiency.
         foreach ($file in $files){
             foreach ($tile_id in $tile_ids){
                 if ($file.Contains($tile_id)){
