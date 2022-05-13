@@ -3,8 +3,8 @@
 API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
 PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET"
 PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
-START = "2016-01-01"
-END = "2016-12-01"
+START = "2020-01-01"
+END = "2020-12-01"
 OVERWRITE = False
 DRYRUN = False
 TILES = list(range(0, 12)) # All tiles
@@ -89,7 +89,7 @@ def download_file(url, output):
 			os.makedirs(os.path.dirname(output), exist_ok=True)
 			file = open(output,"wb")
 		else:
-		   file = output
+			file = output
 
 		response = requests.get(url, headers=headers, stream = True)
 		if (response.ok):
@@ -150,9 +150,12 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 			out_file = "{base_folder}/{year}/{date_str}/{file}".format(base_folder=base_folder,year=date.year,date_str=date_str,file=file)
 
 			# Only download files which have not already been downloaded or if forced to.
-			if (not os.path.exists(out_file) or OVERWRITE == True) and DRYRUN == False:
-				file_cog = download_file(tile_url, out_file)
-				file_cog.close()
+			if (not os.path.exists(out_file) or OVERWRITE == True):
+				if DRYRUN == False:
+					file_cog = download_file(tile_url, out_file)
+					file_cog.close()
+				else:
+					logging.info("Downloading: {tile_url}".format(tile_url=tile_url))
 			else:
 				logging.info("Skipping already existing tile: {tile_url}".format(tile_url=tile_url))
 

@@ -1,10 +1,10 @@
 # Setup variables
 
 $API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
-$PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET/"
+$PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET"
 $PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
-$START = "2016-01-01"
-$END = "2016-12-01"
+$START = "2020-01-01"
+$END = "2020-12-01"
 $OVERWRITE = $false
 $DRYRUN = $false
 $TILES = 0..11 # All tiles
@@ -15,6 +15,7 @@ $TILES = 0..11 # All tiles
 # https://github.com/ternaustralia/cmrset-examples/tree/main/tds-examples
 
 ########################################################################################
+
 
 # Lookup for available products.
 $ProductCodes = @{
@@ -123,8 +124,13 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
             $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
 
             # Only download files which have not already been downloaded or if forced to.
-            if ((-Not (Test-Path -Path $out_file)) -or ($OVERWRITE -eq $true)) -and ($DRYRUN -eq %false) {
-                download_file $tile_url $out_file
+            if ((-Not (Test-Path -Path $out_file)) -or ($OVERWRITE -eq $true)) {
+                if ($DRYRUN -eq $false){
+                    download_file $tile_url $out_file
+                }else{
+                    Write-Information "Downloading: $($tile_url)" -InformationAction continue
+                }
+
             }   else {
                 Write-Information "Skipping already existing file: $($tile_url)" -InformationAction continue
             }     
