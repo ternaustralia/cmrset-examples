@@ -5,17 +5,27 @@
 
 # Important Notes
 
-To execute this script you will need to set the [Execution Policy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.2) for PowerShell.
-To do this, you can run the following command from with PowerShell as **Administrator**:
+To execute this script you will need to ensure you have the following 2 python packages installed:
 
+
+## 1. Requests
+
+https://docs.python-requests.org/en/latest/
+
+To install the *requests* package run the following command:
 ```
-Set-ExecutionPolicy RemoteSigned
+pip install requests
 ```
 
-You will then be prompted for confirmation where you will need to press **Y**.
 
-![alt text](../Set_Execution_Policy.png "Set Execution Policy")
+## 2. dateutil
 
+https://dateutil.readthedocs.io/en/stable/
+
+To install the *dateutil* package run the following command:
+```
+pip install python-dateutil
+```
 
 
 ### References

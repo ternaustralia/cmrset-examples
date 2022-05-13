@@ -6,6 +6,6 @@ pandas
 shapely
 matplotlib
 ipyleaflet
-#rasterio
+rasterio
 # Modules for TERN Data Services Examples
 python-dateutil

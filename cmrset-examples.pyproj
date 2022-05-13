@@ -23,6 +23,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="certs\" />
     <Folder Include="gee-examples\" />
     <Folder Include="gee-examples\javascript\" />
     <Folder Include="gee-examples\python\" />
@@ -33,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="certs\TERN_API_Key.txt" />
     <Content Include="gee-examples\GEE-Example1.png" />
     <Content Include="gee-examples\GEE-Example2.png" />
     <Content Include="gee-examples\GEE-Example3.png" />
@@ -58,6 +60,10 @@
     <Content Include="tds-examples\Execution_Policy_Error.png" />
     <Content Include="tds-examples\powershell\download-aet.ps1" />
     <Content Include="tds-examples\powershell\README.md" />
+    <Content Include="tds-examples\python\README.md" />
+    <Content Include="tds-examples\python\requirements.txt">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tds-examples\README.md" />
     <Content Include="tds-examples\SignIn.png" />
     <Content Include="wps-examples\DrillPoint.ipynb" />

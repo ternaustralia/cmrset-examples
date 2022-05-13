@@ -1,18 +1,21 @@
 # Setup variables
 
 API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
-PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
-START = "2024-10-01"
-END = "2025-03-01"
 PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET"
+PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
+START = "2020-01-01"
+END = "2020-12-01"
 TILES = list(range(0, 12)) # All tiles
 #TILES = [10,11] # Some tiles
 
+# Dataset status (up/down), and important notes for running this script:
+# https://github.com/ternaustralia/cmrset-examples/tree/main/tds-examples
 
 ########################################################################################
+API_KEY = "WEg2TTM0NHB4ZUFRUlk3SS4JfnZmKXcndGpWMD03MS13OiYzKAwyellzLWVGZGA0DURIJjpdMiwsRQ1xZkB9PjhGQS5lMjlSM3JfRkw9TElh"
+PATH_OUT = "C:/Downloads/AET/"
 
-
-import requests   
+import requests
 import logging
 import tempfile
 import datetime
@@ -104,7 +107,7 @@ def download_file(url, output):
 # Downloads the image tiles for the specified paths.
 def download_images(base_url, base_folder, relative_paths, tile_ids):
 
-	logging.info("Downloading {count} VRT Files...".format(count=len(relative_paths)))
+	logging.info("Processing {count} VRT file(s)...".format(count=len(relative_paths)))
 	for relative_path in relative_paths:
 	
 		date = relative_path
@@ -132,7 +135,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 		
 
 		# Loop through all files and download each one.
-		logging.info("Downloading {count} Tiles for {date_str}...".format(count=len(nodes),date_str=date_str))
+		logging.info("Downloading {count} tile(s) for {date_str}...".format(count=len(nodes),date_str=date_str))
 		for file in filtered_files:
 
 			tile_url = "{base_url}/{year}/{date_str}/{file}".format(base_url=base_url,year=date.year,date_str=date_str,file=file)
@@ -159,12 +162,12 @@ def main():
 	# Generate the list of dates to download.
 	dates = get_months(startDate, endDate)
 	logging.info("Processing data for the following dates:")
-	for date in dates: logging.info(date)
+	for date in dates: logging.info(date.strftime("%b %Y"))
 	
 
 	# Get the relative paths for each the VRT files for each date.
 	vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, "ETa", dates)
-	logging.info("Generated {count} VRT paths to download...".format(count=len(vrt_relative_paths)))
+	logging.info("Generated {count} VRT path(s) to download...".format(count=len(vrt_relative_paths)))
 
 	# Download all the tiles referenced in each VRT file.
 	download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup))

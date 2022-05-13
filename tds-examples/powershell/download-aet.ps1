@@ -1,13 +1,15 @@
 # Setup variables
 
-#$API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
-$PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
-$START = "2016-01-01"
-$END = "2016-01-01"
+$API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
 $PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET/"
+$PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
+$START = "2020-01-01"
+$END = "2021-12-01"
 $TILES = 0..11 # All tiles
 #$TILES = @(10,11) # Some tiles
 
+# Dataset status (up/down), and important notes for running this script:
+# https://github.com/ternaustralia/cmrset-examples/tree/main/tds-examples
 
 ########################################################################################
 
@@ -37,10 +39,10 @@ $TileLookup = @{
 function get_months([datetime]$start, [datetime]$end) {
 
     $date = $start
-    $array = @()
+    [System.Collections.ArrayList]$array = @()
     while($date -le $end)
     {
-        $array += $date
+        [void]$array.Add($date)
         $date = $date.AddMonths(1)
     }
     return $array
@@ -68,21 +70,20 @@ function download_file([string]$url, [string]$output){
         Write-Information "Downloading: $($url)" -InformationAction continue
         $Headers = @{ "X-API-Key" = "$($API_KEY)" }
         $output_dir = Split-Path -Path $output
-        New-Item -ItemType Directory -Force -Path $output_dir
+        $null = New-Item -ItemType Directory -Force -Path $output_dir
         Invoke-WebRequest -Uri "$($url)" -OutFile $output -Headers $Headers
     }
     catch{
         Write-Error "Error downloading file: $($_.Exception.Message)"
-        $url
         continue
     }
 
 }
 
 # Downloads the image tiles for the specified paths.
-function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths) {
+function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids) {
 
-    Write-Information "Downloading $($relative_paths.Count) VRT Files..." -InformationAction continue
+    Write-Information "Processing $($relative_paths.Count) VRT file(s)..." -InformationAction continue
     foreach ($relative_path in $relative_paths.GetEnumerator() | Sort-Object -Property name) # need to sort keys
     {
         $date = $relative_path.Name
@@ -98,29 +99,28 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
         try{
             [xml]$xml_doc = Get-Content $tmp.FullName
             $nodes = $xml_doc.selectnodes("/VRTDataset/VRTRasterBand/ComplexSource/SourceFilename")
-            $files = $nodes | ForEach-Object { $_.get_InnerXml()}
+            $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object
         }
         catch{ continue }
 
         # Filter the tiles to those specified.
-        $filtered_files = @()
-        $tile_ids = $TileLookup[$TILES]
+        [System.Collections.ArrayList]$filtered_files = @()
         foreach ($file in $files){
             foreach ($tile_id in $tile_ids){
                 if ($file.Contains($tile_id)){
-                    $filtered_files += $file
+                    [void]$filtered_files.Add($file)
                 }
             }
         }
 
         # Loop through all files and download each one.
-        Write-Information "Downloading $($filtered_files.Count) Tiles for $($date_str)..." -InformationAction continue
+        Write-Information "Downloading $($filtered_files.Count) tile(s) for $($date_str)..." -InformationAction continue
         foreach ($file in $filtered_files) {
             
             $tile_url = "$($base_url)/$($date.Year)/$($date_str)/$($file)"
             $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
 
-            # File doesn't exist locally, so download it.
+            # Only download files which have not already been downloaded.
             if (-Not (Test-Path -Path $out_file)) {
                 download_file $tile_url $out_file
             }        
@@ -142,15 +142,15 @@ $main = {
     # Generate the list of dates to download.
     $dates = get_months $startDate $endDate
     Write-Information "Processing data for the following dates:" -InformationAction continue
-    $dates
+    $dates | ForEach-Object {$_.ToString("MMM yyyy")}
 
     # Get the relative paths for each the VRT files for each date.
     $vrt_relative_paths = get_vrt_relative_paths $PRODUCT_CODE "ETa" $dates
-    Write-Information "Generated $($vrt_relative_paths.Count) VRT paths to download..." -InformationAction continue
-    #$vrt_relative_paths
+    Write-Information "Generated $($vrt_relative_paths.Count) VRT path(s) to download..." -InformationAction continue
+    $vrt_relative_paths
 
     # Download all the tiles referenced in each VRT file.
-    download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths
+    download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES]
 
 }
 

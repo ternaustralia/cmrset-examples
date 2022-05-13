@@ -5,8 +5,44 @@
 
 ## TERN Data Services Code Examples
 
-These examples allow you to download the CMRSET Actual Evapotranspiration product from the TERN Data Services Catalogue as Cloud-Optimized GeoTIFF's.
-To be able to access the data you will first need to generate an API Key so these scripts can authenticate you.
+These examples allow you to download the CMRSET Actual Evapotranspiration products from the TERN Data Services Catalogue as Cloud-Optimized GeoTIFF's.
+
+The two implementations we provide here are:
+
+1. **PowerShell:** a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework.
+    [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2) runs on Windows, Linux, and macOS.
+    Windows PowerShell also comes installed [by default](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2) in every Windows, starting with Windows 7 SP1 and Windows Server 2008 R2 SP1.
+
+2. **Python:** an interpreted, object-oriented, high-level programming language with dynamic semantics.
+    This makes [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) very attractive for Rapid Application Development, as well as for use as a scripting or glue language to connect existing components together. 
+    Python also runs on Windows, Linux, and macOS.
+
+### Script Parameters
+
+The following parameters are configurable on all AET downloading scripts provided in this repository:
+
+#### API_KEY
+Your TERN API Key which is used to authenticate to TERN Data Services.  
+*Further details on how to obtain an API key are provided below*.
+
+#### PRODUCT_CODE
+The CMRSET AET product code that will be downloaded.  
+The default value is *CMRSET_LANDSAT_V2_2* which is the ***latest*** and ***recommended*** version.
+
+#### START
+The dataset start date to begin downloading data from (formatted as YYYY-MM-DD).
+
+#### END
+The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
+
+#### PATH_OUT
+The output folder where data will be saved.  
+The full path where files will be saved to will be: \{ **PATH_OUT** } / \{ PRODUCT_CODE } / \{ YYYY } / \{ YYYY_MM_DD } /
+
+#### TILES
+The list of tile indicies you wish to download.  Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may use a list which contains the values 10 and 11.
+
+![alt text](./CMRSET_Grid_Indicies.png "CMRSET Grid Indicies")
 
 ### Generating an API Key
 
@@ -22,30 +58,6 @@ To be able to access the data you will first need to generate an API Key so thes
 4. After generation the API key, you need to copy the key and store it in a secure place (Note: The API key is only displayed once in the API Key
 Information page - and will not be shown or accessible after this - for security reasons)
 
-
-### Script Parameters
-
-The following parameters are configurable on all scripts provided here:.
-
-#### API_KEY
-Paste the API Key you generated in the previous steps into this parameter.
-
-#### PRODUCT_CODE
-The product code you wish to download. **CMRSET_LANDSAT_V2_2** is the latest and **recommended** version.
-
-#### START
-The start date you whish the begin downloading data from (formatted as YYYY-MM-DD)
-
-#### END
-The end date you whish to finish downloading data up to (formatted as YYYY-MM-DD)
-
-#### PATH_OUT
-The output folder you wish to save the data to.
-
-#### TILES
-The list of tile indicies you wish to download.  Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may put 10 and 11 in your list.
-
-![alt text](./CMRSET_Grid_Indicies.png "CMRSET Grid Indicies")
 
 
 ### References
