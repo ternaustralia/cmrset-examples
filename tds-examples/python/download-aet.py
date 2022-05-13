@@ -11,9 +11,9 @@ TILES = list(range(0, 12)) # All tiles
 # Dataset status (up/down), and important notes for running this script:
 # https://github.com/ternaustralia/cmrset-examples/tree/main/tds-examples
 
+
 ########################################################################################
-API_KEY = "WEg2TTM0NHB4ZUFRUlk3SS4JfnZmKXcndGpWMD03MS13OiYzKAwyellzLWVGZGA0DURIJjpdMiwsRQ1xZkB9PjhGQS5lMjlSM3JfRkw9TElh"
-PATH_OUT = "C:/Downloads/AET/"
+
 
 import requests
 import logging
@@ -46,8 +46,8 @@ TileLookup = {
 	11: "0000087552-0000131328"
 }
 
-# Get a monthly array of dates between start and end.
 def get_months(start, end):
+	""" Get a monthly array of dates between start and end. """
 
 	date = start
 	array = []
@@ -60,9 +60,11 @@ def get_months(start, end):
 
 
 
-# Get the relative paths for the VRT files.
-# This XML encoded file has all the metadata of the image tiles in that directory.
 def get_vrt_relative_paths(product_code, band, dates):
+	"""
+	Get the relative paths for the VRT files.
+	This XML encoded file has all the metadata of the image tiles in that directory.
+	"""
 
 	hash = {}
 	for date in dates:
@@ -74,8 +76,8 @@ def get_vrt_relative_paths(product_code, band, dates):
 
 
 
-# Download a file requiring basic auth from a base64 encoded key.
 def download_file(url, output):
+	""" Download a file requiring basic auth from a base64 encoded key. """
 
 	try:
 		logging.info("Downloading: {url}".format(url=url))
@@ -103,9 +105,8 @@ def download_file(url, output):
 		return file
 
 
-
-# Downloads the image tiles for the specified paths.
 def download_images(base_url, base_folder, relative_paths, tile_ids):
+	""" Downloads the image tiles for the specified paths. """
 
 	logging.info("Processing {count} VRT file(s)...".format(count=len(relative_paths)))
 	for relative_path in relative_paths:
