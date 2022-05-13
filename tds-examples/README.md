@@ -25,9 +25,7 @@ Information page - and will not be shown or accessible after this - for security
 
 ### Script Parameters
 
-All script languages provided here contain the same set of configuration parameters.
-
-These parameters are:
+The following parameters are configurable on all scripts provided here:.
 
 #### API_KEY
 Paste the API Key you generated in the previous steps into this parameter.
