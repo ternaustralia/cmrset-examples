@@ -28,9 +28,11 @@
     <Folder Include="gee-examples\python\" />
     <Folder Include="tds-examples\" />
     <Folder Include="tds-examples\python\" />
-    <Folder Include="tds-examples\PowerShell\" />
+    <Folder Include="tds-examples\powershell\" />
+    <Folder Include="wps-examples\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="gee-examples\GEE-Example1.png" />
     <Content Include="gee-examples\GEE-Example2.png" />
     <Content Include="gee-examples\GEE-Example3.png" />
@@ -49,8 +51,19 @@
     <Content Include="LICENSE" />
     <Content Include="README.md" />
     <Content Include="requirements.txt" />
-    <Content Include="tds-examples\PowerShell\download-aet.ps1" />
+    <Content Include="tds-examples\API_Keys_Menu.png" />
+    <Content Include="tds-examples\API_Key_Generation.png" />
+    <Content Include="tds-examples\CMRSET_Grid_Indicies.png" />
+    <Content Include="tds-examples\Create_API_Key.png" />
+    <Content Include="tds-examples\Execution_Policy_Error.png" />
+    <Content Include="tds-examples\powershell\download-aet.ps1" />
+    <Content Include="tds-examples\powershell\README.md" />
     <Content Include="tds-examples\README.md" />
+    <Content Include="tds-examples\SignIn.png" />
+    <Content Include="wps-examples\DrillPoint.ipynb" />
+    <Content Include="wps-examples\README.md" />
+    <Content Include="wps-examples\Stats2D.ipynb" />
+    <Content Include="wps-examples\Subset2D.ipynb" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="tds-examples\python\download-aet.py">

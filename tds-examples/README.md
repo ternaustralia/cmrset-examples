@@ -5,8 +5,49 @@
 
 ## TERN Data Services Code Examples
 
-These examples are currently in preperation... please revisit again soon, or in the meanwhile you can check out the Google Earth Engine Code Examples
+These examples allow you to download the CMRSET Actual Evapotranspiration product from the TERN Data Services Catalogue as Cloud-Optimized GeoTIFF's.
+To be able to access the data you will first need to generate an API Key so these scripts can authenticate you.
 
+### Generating an API Key
+
+1. Firstly, please visit the TERN Accounts portal at (https://account.tern.org.au) and **Sign In**.
+![alt text](./SignIn.png "Sign-In")
+
+2. After singing in, in the **Sign In** dropdown menu, select the **API Keys** item.
+![alt text](./API_Keys_Menu.png "API Keys Menu")
+
+3. Click **Create API key** in the left hand menu, and givie your key a **name**.
+![alt text](./Create_API_Key.png "Create API Key")
+
+4. After generation the API key, you need to copy the key and store it in a secure place (Note: The API key is only displayed once in the API Key
+Information page - and will not be shown or accessible after this - for security reasons)
+
+
+### Script Parameters
+
+All script languages provided here contain the same set of configuration parameters.
+
+These parameters are:
+
+#### API_KEY
+Paste the API Key you generated in the previous steps into this parameter.
+
+#### PRODUCT_CODE
+The product code you wish to download. **CMRSET_LANDSAT_V2_2** is the latest and **recommended** version.
+
+#### START
+The start date you whish the begin downloading data from (formatted as YYYY-MM-DD)
+
+#### END
+The end date you whish to finish downloading data up to (formatted as YYYY-MM-DD)
+
+#### PATH_OUT
+The output folder you wish to save the data to.
+
+#### TILES
+The list of tile indicies you wish to download.  Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may put 10 and 11 in your list.
+
+![alt text](./CMRSET_Grid_Indicies.png "CMRSET Grid Indicies")
 
 
 ### References
