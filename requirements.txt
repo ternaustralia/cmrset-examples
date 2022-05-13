@@ -1,9 +1,11 @@
 # Modules for Earth Engine Examples
 geemap
-# Modules for TERN Examples
+# Modules for TERN-WPS Examples
 owslib
 pandas
 shapely
 matplotlib
 ipyleaflet
-rasterio
+#rasterio
+# Modules for TERN Data Services Examples
+python-dateutil
