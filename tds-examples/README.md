@@ -45,6 +45,9 @@ The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
 #### OVERWRITE
 If set to True will overwrite files which have already been downloaded, otherwise will skip downloading if it already exists.
 
+#### DRYRUN
+If set to True will not download any data product files. The script will just go through the *motions* of downloading the data product for debugging purposes.
+
 #### TILES
 The list of tile indicies you wish to download.  
 The default value is a list containing ***all 12 tiles***.

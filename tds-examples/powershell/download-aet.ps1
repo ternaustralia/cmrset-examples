@@ -6,6 +6,7 @@ $PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
 $START = "2016-01-01"
 $END = "2016-12-01"
 $OVERWRITE = $false
+$DRYRUN = $false
 $TILES = 0..11 # All tiles
 #$TILES = @(10,11) # Some tiles
 
@@ -122,7 +123,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
             $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
 
             # Only download files which have not already been downloaded or if forced to.
-            if ((-Not (Test-Path -Path $out_file)) -or ($OVERWRITE -eq $true)) {
+            if ((-Not (Test-Path -Path $out_file)) -or ($OVERWRITE -eq $true)) -and ($DRYRUN -eq %false) {
                 download_file $tile_url $out_file
             }   else {
                 Write-Information "Skipping already existing file: $($tile_url)" -InformationAction continue

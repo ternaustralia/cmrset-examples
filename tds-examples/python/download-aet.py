@@ -4,8 +4,9 @@ API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJ
 PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET"
 PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
 START = "2016-01-01"
-END = "2016-01-01"
+END = "2016-12-01"
 OVERWRITE = False
+DRYRUN = False
 TILES = list(range(0, 12)) # All tiles
 #TILES = [10,11] # Some tiles
 
@@ -149,7 +150,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 			out_file = "{base_folder}/{year}/{date_str}/{file}".format(base_folder=base_folder,year=date.year,date_str=date_str,file=file)
 
 			# Only download files which have not already been downloaded or if forced to.
-			if not os.path.exists(out_file) or OVERWRITE == True:
+			if (not os.path.exists(out_file) or OVERWRITE == True) and DRYRUN == False:
 				file_cog = download_file(tile_url, out_file)
 				file_cog.close()
 			else:
