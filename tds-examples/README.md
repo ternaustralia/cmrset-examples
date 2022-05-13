@@ -15,6 +15,7 @@ The two implementations we provide here are:
 
 2. **Python:** an interpreted, object-oriented, high-level programming language with dynamic semantics.
     This makes <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank">Python</a> very attractive for Rapid Application Development, as well as for use as a scripting or glue language to connect existing components together. 
+    This is why it's also referred to as the *"universal language for data science"*.
     Python also runs on Windows, Linux, and macOS.
 
 ### Script Parameters
