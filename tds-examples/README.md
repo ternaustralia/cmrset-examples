@@ -5,16 +5,16 @@
 
 ## TERN Data Services Code Examples
 
-These examples allow you to download the CMRSET Actual Evapotranspiration products from the TERN Data Services Catalogue as Cloud-Optimized GeoTIFF's.
+These examples allow you to download the CMRSET Actual Evapotranspiration product archive from the TERN Data Services Catalogue as <a href="https://www.cogeo.org/" target="_blank">Cloud-Optimized GeoTIFF's</a>.
 
 The two implementations we provide here are:
 
 1. **PowerShell:** a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework.
-    [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2) runs on Windows, Linux, and macOS.
-    Windows PowerShell also comes installed [by default](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2) in every Windows, starting with Windows 7 SP1 and Windows Server 2008 R2 SP1.
+    <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2" target="_blank">PowerShell</a> runs on Windows, Linux, and macOS.
+    Windows PowerShell also comes installed <a href="https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2" target="_blank">by default</a> in every Windows, starting with Windows 7 SP1 and Windows Server 2008 R2 SP1.
 
 2. **Python:** an interpreted, object-oriented, high-level programming language with dynamic semantics.
-    This makes [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) very attractive for Rapid Application Development, as well as for use as a scripting or glue language to connect existing components together. 
+    This makes <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank">Python</a> very attractive for Rapid Application Development, as well as for use as a scripting or glue language to connect existing components together. 
     Python also runs on Windows, Linux, and macOS.
 
 ### Script Parameters
@@ -24,6 +24,10 @@ The following parameters are configurable on all AET downloading scripts provide
 #### API_KEY
 Your TERN API Key which is used to authenticate to TERN Data Services.  
 *Further details on how to obtain an API key are provided below*.
+
+#### PATH_OUT
+The output folder where data will be saved.  
+The full path where files will be saved to will be: \{ **PATH_OUT** } / \{ PRODUCT_CODE } / \{ YYYY } / \{ YYYY_MM_DD } /
 
 #### PRODUCT_CODE
 The CMRSET AET product code that will be downloaded.  
@@ -35,12 +39,9 @@ The dataset start date to begin downloading data from (formatted as YYYY-MM-DD).
 #### END
 The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
 
-#### PATH_OUT
-The output folder where data will be saved.  
-The full path where files will be saved to will be: \{ **PATH_OUT** } / \{ PRODUCT_CODE } / \{ YYYY } / \{ YYYY_MM_DD } /
-
 #### TILES
-The list of tile indicies you wish to download.  Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may use a list which contains the values 10 and 11.
+The list of tile indicies you wish to download.  
+Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may use a list which contains the values 10 and 11.
 
 ![alt text](./CMRSET_Grid_Indicies.png "CMRSET Grid Indicies")
 

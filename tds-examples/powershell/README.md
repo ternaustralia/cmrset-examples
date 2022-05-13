@@ -5,7 +5,7 @@
 
 # Important Notes
 
-To execute this script you will need to set the [Execution Policy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.2) for PowerShell.
+To execute this script you will need to set the <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.2" target="_blank">Execution Policy</a> for PowerShell.
 To do this, you can run the following command from with PowerShell as **Administrator**:
 
 ```

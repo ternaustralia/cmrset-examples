@@ -7,6 +7,8 @@
 
 Examples of accessing functions on the TERN Landscapes Web Processing Server (WPS).
 
+Note: these processing services are based upon the datasets provided through the TERN Data Services Catalogue (also referred to tds-examples in this repository).
+
 
 
 
