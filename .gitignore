@@ -1,3 +1,2 @@
-*.pyproj
-*.sln
 *.suo
+env
