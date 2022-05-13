@@ -49,9 +49,9 @@ Indicies are shown in the figure below. i.e. if you are only interested in data 
 
 <img src="./CMRSET_Grid_Indicies.png" alt="CMRSET Grid Indicies" width="600"/>
 
-### Generating an API Key
+### Generating a TERN API Key
 
-1. Firstly, please visit the TERN Accounts portal at (https://account.tern.org.au) and **Sign In**.
+1. Firstly, visit the <a href="https://account.tern.org.au" target="_blank">TERN Accounts Portal</a> and **Sign In** using your preferred method.
 
 ![alt text](./SignIn.png "Sign-In")
 
