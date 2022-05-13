@@ -11,7 +11,7 @@ The two implementations we provide here are:
 
 1. **PowerShell:** a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework.
     <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.2" target="_blank">PowerShell</a> runs on Windows, Linux, and macOS.
-    Windows PowerShell also comes installed <a href="https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2" target="_blank">by default</a> in every Windows, starting with Windows 7 SP1 and Windows Server 2008 R2 SP1.
+    Windows PowerShell also comes <a href="https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/install/installing-windows-powershell?view=powershell-7.2" target="_blank">installed by default</a> in every Windows, starting with Windows 7 SP1 and Windows Server 2008 R2 SP1.
 
 2. **Python:** an interpreted, object-oriented, high-level programming language with dynamic semantics.
     This makes <a href="https://en.wikipedia.org/wiki/Python_(programming_language)" target="_blank">Python</a> very attractive for Rapid Application Development, as well as for use as a scripting or glue language to connect existing components together. 
@@ -44,7 +44,7 @@ The list of tile indicies you wish to download.
 The default value is a list containing all 12 tiles.
 Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may use a list which contains the values 10 and 11.
 
-![alt text](./CMRSET_Grid_Indicies.png "CMRSET Grid Indicies")
+<img src="./CMRSET_Grid_Indicies.png" alt="CMRSET Grid Indicies" width="530"/>
 
 ### Generating an API Key
 
@@ -60,8 +60,10 @@ Indicies are shown in the figure below. i.e. if you are only interested in data 
 
 ![alt text](./Create_API_Key.png "Create API Key")
 
-4. After generation the API key, you need to copy the key and store it in a secure place (Note: The API key is only displayed once in the API Key
-Information page - and will not be shown or accessible after this - for security reasons)
+4. After generation the API key, you need to copy the key and store it in a secure place.  
+    Note: The API key is only **displayed once** in the API Key Information page - *and will not be shown or accessible after this (for security reasons)*.
+
+![alt text](./API_Key_Generation.png "API Key")
 
 
 
