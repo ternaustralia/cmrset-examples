@@ -23,6 +23,7 @@ $ProductCodes = @{
     CMRSET_LANDSAT_V2_1 = "https://data.tern.org.au/landscapes/aet/v2_1" # Discontinued
 }
 
+# Lookup for tile indicies.
 $TileLookup = @{
     0 = "0000000000-0000000000";
     1 = "0000000000-0000043776";
