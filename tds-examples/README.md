@@ -6,7 +6,7 @@
 ## TERN Data Services Code Examples
 
 These examples allow you to download the CMRSET Actual Evapotranspiration productd from the TERN Data Services Catalogue as <a href="https://www.cogeo.org/" target="_blank">Cloud-Optimized GeoTIFF's</a>.
-These scripts are effictively *"bots"* which will scrape the data archive for you.
+These scripts are effictively *"bots"* which will scrape the data archive for you (to save you clicking!).
 
 The two implementations we provide here are:
 
