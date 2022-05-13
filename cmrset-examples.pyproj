@@ -60,6 +60,7 @@
     <Content Include="tds-examples\Execution_Policy_Error.png" />
     <Content Include="tds-examples\powershell\download-aet.ps1" />
     <Content Include="tds-examples\powershell\README.md" />
+    <Content Include="tds-examples\Set_Execution_Policy.png" />
     <Content Include="tds-examples\python\README.md" />
     <Content Include="tds-examples\python\requirements.txt">
       <SubType>Code</SubType>

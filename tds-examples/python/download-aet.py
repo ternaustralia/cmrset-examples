@@ -3,8 +3,9 @@
 API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
 PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET"
 PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
-START = "2020-01-01"
-END = "2020-12-01"
+START = "2016-01-01"
+END = "2016-01-01"
+OVERWRITE = False
 TILES = list(range(0, 12)) # All tiles
 #TILES = [10,11] # Some tiles
 
@@ -101,7 +102,6 @@ def download_file(url, output):
 		logging.info("Error downloading file: {error}".format(error=e))
 
 	finally:
-		file.seek(0)
 		return file
 
 
@@ -123,16 +123,22 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 		# Load the XML file and select all the source files.
 		if file_vrt.tell() == 0: file_vrt.close() # If no data returned in VRT, then abort.
 		try:
+			file_vrt.seek(0) # Go to beginning of file.
 			xd = tmp.read()
 			nodes = ET.fromstring(xd).findall(".//VRTRasterBand/ComplexSource/SourceFilename")
-			files = list(map(lambda node: node.text, nodes))
+			files = sorted(list(map(lambda node: node.text, nodes)))
 		except Exception as e:
 			logging.info("Error reading file: {error}".format(error=e))
 			file_vrt.close()
 			continue
 
 		# Filter the tiles to those specified.
-		filtered_files = list(map(lambda tile_id: list(filter(lambda file: tile_id in file, files)), tile_ids))
+		filtered_files = []
+		for file in files:
+			for tile_id in tile_ids:
+				if tile_id in file and file not in filtered_files:
+					filtered_files.append(file)
+
 		
 
 		# Loop through all files and download each one.
@@ -142,10 +148,12 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 			tile_url = "{base_url}/{year}/{date_str}/{file}".format(base_url=base_url,year=date.year,date_str=date_str,file=file)
 			out_file = "{base_folder}/{year}/{date_str}/{file}".format(base_folder=base_folder,year=date.year,date_str=date_str,file=file)
 
-			# File doesn't exist locally, so download it.
-			if not os.path.exists(out_file):
+			# Only download files which have not already been downloaded or if forced to.
+			if not os.path.exists(out_file) or OVERWRITE == True:
 				file_cog = download_file(tile_url, out_file)
 				file_cog.close()
+			else:
+				logging.info("Skipping already existing tile: {tile_url}".format(tile_url=tile_url))
 
 		# Delete the temporary VRT file.
 		file_vrt.close()
@@ -171,7 +179,7 @@ def main():
 
 	# Download all the tiles referenced in each VRT file.
 	download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup))
-
+	logging.info("Processing complete")
 
 if __name__=="__main__":
 	main()

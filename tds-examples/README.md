@@ -42,6 +42,9 @@ The dataset start date to begin downloading data from (formatted as YYYY-MM-DD).
 #### END
 The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
 
+#### OVERWRITE
+If set to True will overwrite files which have already been downloaded, otherwise will skip downloading if it already exists.
+
 #### TILES
 The list of tile indicies you wish to download.  
 The default value is a list containing ***all 12 tiles***.
