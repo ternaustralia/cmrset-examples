@@ -41,6 +41,7 @@ The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
 
 #### TILES
 The list of tile indicies you wish to download.  
+The default value is a list containing all 12 tiles.
 Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may use a list which contains the values 10 and 11.
 
 ![alt text](./CMRSET_Grid_Indicies.png "CMRSET Grid Indicies")
