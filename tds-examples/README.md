@@ -49,12 +49,15 @@ Indicies are shown in the figure below. i.e. if you are only interested in data 
 ### Generating an API Key
 
 1. Firstly, please visit the TERN Accounts portal at (https://account.tern.org.au) and **Sign In**.
+
 ![alt text](./SignIn.png "Sign-In")
 
 2. After singing in, in the **Sign In** dropdown menu, select the **API Keys** item.
+
 ![alt text](./API_Keys_Menu.png "API Keys Menu")
 
 3. Click **Create API key** in the left hand menu, and givie your key a **name**.
+
 ![alt text](./Create_API_Key.png "Create API Key")
 
 4. After generation the API key, you need to copy the key and store it in a secure place (Note: The API key is only displayed once in the API Key
