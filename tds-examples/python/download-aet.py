@@ -149,6 +149,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 						logging.error(error)
 						continue
 				else:
+					# It's not really downloading, but just say it is.
 					logging.info("Downloading: {tile_url}".format(tile_url=tile_url))
 			else:
 				logging.info("Skipping already existing tile: {tile_url}".format(tile_url=tile_url))

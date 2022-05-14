@@ -133,16 +133,14 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
                         continue 
                     }
                 }else{
+                    # It's not really downloading, but just say it is.
                     Write-Information "Downloading: $($tile_url)" -InformationAction continue
                 }
-
             }   else {
                 Write-Information "Skipping already existing file: $($tile_url)" -InformationAction continue
             }     
         }
- 
-
-    }
+     }
 }
 
 $main = {
