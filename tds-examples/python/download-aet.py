@@ -108,7 +108,7 @@ def download_file(url, out_file):
 	if is_str: out_file.close()
 
 
-def download_images(base_url, base_folder, relative_paths, tile_ids):
+def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0, 12)), overwrite=False, dryrun=False):
 	""" Downloads the image tiles for the specified paths. """
 
 	logging.info("Processing {count} VRT file(s)...".format(count=len(relative_paths)))
@@ -138,8 +138,8 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 			out_file = "{base_folder}/{year}/{date_str}/{file}".format(base_folder=base_folder,year=date.year,date_str=date_str,file=file)
 
 			# Only download files which have not already been downloaded or if forced to.
-			if (not os.path.exists(out_file) or OVERWRITE == True):
-				if DRYRUN == False:
+			if (not os.path.exists(out_file) or overwrite == True):
+				if dryrun == False:
 					try: download_file(tile_url, out_file)
 					except Exception as error:
 						logging.error(error)
@@ -163,16 +163,16 @@ def main():
 	logging.info("Processing data for the following dates:")
 	for date in dates: logging.info(date.strftime("%b %Y"))
 
-	def download_band(band, dates):
+	def download_product_band(band, dates):
 			
 		# Get the relative paths for each the VRT files for each date.
 		vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, band, dates)
 		logging.info("Generated {count} VRT path(s) to download for {band}...".format(count=len(vrt_relative_paths),band=band))
 
 		# Download all the tiles referenced in each VRT file.
-		download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup))
+		download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup), overwrite=OVERWRITE, dryrun=DRYRUN)
 	
-	for band in BANDS: download_band(band, dates)
+	for band in BANDS: download_product_band(band, dates)
 	logging.info("Processing complete")
 
 

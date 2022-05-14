@@ -91,7 +91,7 @@ function download_file([string]$url, [string]$out_file){
 }
 
 # Downloads the image tiles for the specified paths.
-function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids){
+function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids=0..11, [bool]$overwrite=$false, [bool]$dryrun=$false){
 
     Write-Information "Processing $($relative_paths.Count) VRT file(s)..." -InformationAction continue
     foreach ($relative_path in $relative_paths.GetEnumerator() | Sort-Object -Property name){ # Need to sort keys from Enumerator
@@ -121,8 +121,8 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
             $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
 
             # Only download files which have not already been downloaded or if forced to.
-            if ((-Not (Test-Path -Path $out_file)) -or ($OVERWRITE -eq $true)) {
-                if ($DRYRUN -eq $false){
+            if ((-Not (Test-Path -Path $out_file)) -or ($overwrite -eq $true)) {
+                if ($dryrun -eq $false){
                     try { download_file $tile_url $out_file }
                     catch { 
                         Write-Error $_.Exception.Message
@@ -154,7 +154,7 @@ $main = {
     Write-Information "Processing data for the following dates:" -InformationAction continue
     $dates | ForEach-Object {$_.ToString("MMM yyyy")}
 
-    function download_band([string]$band, [datetime[]]$dates){
+    function download_product_band([string]$band, [datetime[]]$dates){
 
         # Get the relative paths for each the VRT files for each date.
         $vrt_relative_paths = get_vrt_relative_paths $PRODUCT_CODE $band $dates
@@ -162,10 +162,10 @@ $main = {
         $vrt_relative_paths
 
         # Download all the tiles referenced in each VRT file.
-        download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES]
+        download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES] $OVERWRITE $DRYRUN
     }
 
-    $BANDS | ForEach-Object { download_band $_ $dates }
+    $BANDS | ForEach-Object { download_product_band $_ $dates }
     Write-Information "Processing complete!" -InformationAction continue
 
 }
