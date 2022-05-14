@@ -51,7 +51,7 @@ function get_months([datetime]$start, [datetime]$end) {
     [System.Collections.ArrayList]$array = @() # Cast to ArrayList for efficiency.
     while($date -le $end)
     {
-        [void]$array.Add($date) # Cast to void to avoid inteference from .Add().
+        [void]$array.Add($date)                # Cast to void to avoid inteference from .Add().
         $date = $date.AddMonths(1)
     }
     return $array
@@ -86,7 +86,7 @@ function get_vrt_sources([string]$file) {
 function download_file([string]$url, [string]$out_file) {
 
     Write-Information "Downloading: $($url)" -InformationAction continue
-    $Headers = @{ "X-API-Key" = "$($API_KEY)" } # Accessed from global scope.
+    $Headers = @{ "X-API-Key" = "$($API_KEY)" }                # Accessed from global scope.
     $out_dir = Split-Path -Path $out_file
     $null = New-Item -ItemType Directory -Force -Path $out_dir # Assign to $null to avoid inteference from New-Item.
     Invoke-WebRequest -Uri "$($url)" -OutFile $out_file -Headers $Headers
@@ -102,15 +102,15 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
         # Download VRT file that contains references to the files it mosaics.
         try {
             $vrt_url = "$($base_url)$($relative_paths[$date])"
-            $vrt_file = New-TemporaryFile                   # Create temporary file for VRT.
-            download_file $vrt_url $vrt_file	            # Download VRT contents to the temporary file.
-            $files = get_vrt_sources($vrt_file.FullName)    # Read the source files referenced within the VRT.
+            $vrt_file = New-TemporaryFile                               # Create temporary file for VRT.
+            download_file $vrt_url $vrt_file                            # Download VRT contents to the temporary file.
+            $files = get_vrt_sources($vrt_file.FullName)                # Read the source files referenced within the VRT.
             $filtered_files = $files | Select-String -Pattern $tile_ids # Filter the tiles to those specified.
         } catch { 
             Write-Error $_.Exception.Message
             continue 
         } finally {
-            Remove-Item $vrt_file.FullName                  # Delete the temporary file.
+            Remove-Item $vrt_file.FullName                              # Delete the temporary file.
         }
                 
         # Download all the tiles for the filtered space/time parameters.
