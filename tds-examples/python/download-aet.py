@@ -91,7 +91,7 @@ def get_vrt_sources(file):
 
 
 def download_file(url, out_file):
-	""" Download a file requiring basic auth from a base64 encoded key. """
+	""" Download a file requiring X-API-Key auth from a base64 encoded key. """
 
 	logging.info("Downloading: {url}".format(url=url))
 	headers = {"X-API-Key": API_KEY} # Accessed from global scope.

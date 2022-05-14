@@ -82,7 +82,7 @@ function get_vrt_sources([string]$file) {
 
 }
 
-# Download a file requiring basic auth from a base64 encoded key.
+# Download a file requiring X-API-Key auth from a base64 encoded key.
 function download_file([string]$url, [string]$out_file) {
 
     Write-Information "Downloading: $($url)" -InformationAction continue
