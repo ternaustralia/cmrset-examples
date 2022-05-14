@@ -59,7 +59,7 @@ The default value is False.
 #### BANDS
 The list of bands to download. Available values are **ETa** and **pixel_qa**.
 
-The default value is both ETa and pixel_qa.
+The default value is a list containing both ETa and pixel_qa.
 
 #### TILES
 The list of tile indicies to download, which specify a region within Australia. Available values are 0 through 11.
