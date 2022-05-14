@@ -1,7 +1,7 @@
 # Script Parameters
 
-$API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
-$PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET"
+$API_KEY = "your-api-key" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
+$PATH_OUT = "your-output-path"  # e.g."C:/Downloads/AET"
 $PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
 $START = "2020-01-01"
 $END = "2020-12-01"
