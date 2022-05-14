@@ -43,6 +43,7 @@ $TileLookup = @{
 # Get a monthly array of dates between start and end.
 function get_months([datetime]$start, [datetime]$end) {
 
+    # Ensure dates are 1st of the month.
     $start = GET-DATE $start -Day 1
     $end = GET-DATE $end -Day 1
 
@@ -75,8 +76,8 @@ function get_vrt_relative_paths([string]$product_code, [string]$band, [datetime[
 function get_vrt_sources([string]$file) {
 
     [xml]$xml_doc = Get-Content $file
-    $nodes = $xml_doc.selectnodes("/VRTDataset/VRTRasterBand/*/SourceFilename")
-    $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object
+    $nodes = $xml_doc.selectnodes("/VRTDataset/VRTRasterBand/*/SourceFilename") # Use wildcard for different source types.
+    $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object # Sort data after findall.
 
     return $files
 
@@ -86,7 +87,7 @@ function get_vrt_sources([string]$file) {
 function download_file([string]$url, [string]$out_file){
 
     Write-Information "Downloading: $($url)" -InformationAction continue
-    $Headers = @{ "X-API-Key" = "$($API_KEY)" } # Accessed from global scope
+    $Headers = @{ "X-API-Key" = "$($API_KEY)" } # Accessed from global scope.
     $out_dir = Split-Path -Path $out_file
     $null = New-Item -ItemType Directory -Force -Path $out_dir # Assign to $null to avoid inteference from New-Item.
     Invoke-WebRequest -Uri "$($url)" -OutFile $out_file -Headers $Headers

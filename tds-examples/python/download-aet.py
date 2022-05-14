@@ -53,6 +53,7 @@ TileLookup = {
 def get_months(start, end):
 	""" Get a monthly array of dates between start and end. """
 
+	# Ensure dates are 1st of the month.
 	start = start.replace(day=1)
 	end = end.replace(day=1)
 
@@ -86,8 +87,8 @@ def get_vrt_sources(file):
 
 	file.seek(0) # Go to beginning of file.
 	xml_doc = file.read()
-	nodes = ET.fromstring(xml_doc).findall(".//VRTRasterBand/*/SourceFilename")
-	files = sorted(list(map(lambda node: node.text, nodes)))
+	nodes = ET.fromstring(xml_doc).findall(".//VRTRasterBand/*/SourceFilename") # Use wildcard for different source types.
+	files = sorted(list(map(lambda node: node.text, nodes))) # Sort data after findall.
 
 	return files
 
@@ -96,7 +97,7 @@ def download_file(url, out_file):
 	""" Download a file requiring basic auth from a base64 encoded key. """
 
 	logging.info("Downloading: {url}".format(url=url))
-	headers = {"X-API-Key": API_KEY} # Accessed from global scope
+	headers = {"X-API-Key": API_KEY} # Accessed from global scope.
 
 	is_str = isinstance(out_file, str)
 	if is_str:
