@@ -113,7 +113,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
             Remove-Item $vrt_file.FullName                              # Delete the temporary file.
         }
                 
-        # Download all the tiles for the filtered space/time parameters.
+        # Download all the tiles for the filtered space/time/variable parameters.
         Write-Information "Downloading $($filtered_files.Count) tile(s) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
         foreach ($file in $filtered_files)
         {

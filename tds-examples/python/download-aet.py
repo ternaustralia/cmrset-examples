@@ -128,7 +128,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 		finally:
 			vrt_file.close()                    # Delete the temporary file.
 
-		# Download all the tiles for the filtered space/time parameters.
+		# Download all the tiles for the filtered space/time/variable parameters.
 		logging.info("Downloading {count} tile(s) for {date}...".format(count=len(filtered_files),date=date.strftime("%Y-%m-%d")))
 		for file in filtered_files:
 
