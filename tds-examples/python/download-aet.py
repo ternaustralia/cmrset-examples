@@ -89,25 +89,23 @@ def get_vrt_sources(file):
 	return files
 
 
-def download_file(url, output):
+def download_file(url, out_file):
 	""" Download a file requiring basic auth from a base64 encoded key. """
 
 	logging.info("Downloading: {url}".format(url=url))
 	headers = {"X-API-Key": API_KEY}
 
-	is_url = isinstance(output, str)
-	if is_url:
-		os.makedirs(os.path.dirname(output), exist_ok=True)
-		file = open(output,"wb")
-	else:
-		file = output
+	is_str = isinstance(out_file, str)
+	if is_str:
+		os.makedirs(os.path.dirname(out_file), exist_ok=True)
+		out_file = open(out_file,"wb")
 
 	response = requests.get(url, headers=headers, stream = True)
 	response.raise_for_status()
 	for chunk in response.iter_content(chunk_size=1024):
-		file.write(chunk)
+		out_file.write(chunk)
 
-	if is_url: file.close()
+	if is_str: out_file.close()
 
 
 def download_images(base_url, base_folder, relative_paths, tile_ids):

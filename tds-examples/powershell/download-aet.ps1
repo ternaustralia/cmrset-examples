@@ -80,13 +80,13 @@ function get_vrt_sources([string]$file) {
 }
 
 # Download a file requiring basic auth from a base64 encoded key.
-function download_file([string]$url, [string]$output){
+function download_file([string]$url, [string]$out_file){
 
-        Write-Information "Downloading: $($url)" -InformationAction continue
-        $Headers = @{ "X-API-Key" = "$($API_KEY)" }
-        $output_dir = Split-Path -Path $output
-        $null = New-Item -ItemType Directory -Force -Path $output_dir # Assign to $null to avoid inteference from New-Item.
-        Invoke-WebRequest -Uri "$($url)" -OutFile $output -Headers $Headers
+    Write-Information "Downloading: $($url)" -InformationAction continue
+    $Headers = @{ "X-API-Key" = "$($API_KEY)" }
+    $out_dir = Split-Path -Path $out_file
+    $null = New-Item -ItemType Directory -Force -Path $out_dir # Assign to $null to avoid inteference from New-Item.
+    Invoke-WebRequest -Uri "$($url)" -OutFile $out_file -Headers $Headers
 
 }
 
