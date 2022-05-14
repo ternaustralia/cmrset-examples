@@ -76,7 +76,7 @@ function get_vrt_sources([string]$file) {
 
     [xml]$xml_doc = Get-Content $file
     $nodes = $xml_doc.selectnodes("/VRTDataset/VRTRasterBand/*/SourceFilename") # Use wildcard for different source types.
-    $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object # Sort data after findall.
+    $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object         # Sort data after findall.
 
     return $files
 
@@ -102,7 +102,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
         # Download VRT file that contains references to the files it mosaics.
         try {
             $vrt_url = "$($base_url)$($relative_paths[$date])"
-            $vrt_file = New-TemporaryFile 	                # Create temporary file for VRT.
+            $vrt_file = New-TemporaryFile                   # Create temporary file for VRT.
             download_file $vrt_url $vrt_file	            # Download VRT contents to the temporary file.
             $files = get_vrt_sources($vrt_file.FullName)    # Read the source files referenced within the VRT.
             $filtered_files = $files | Select-String -Pattern $tile_ids # Filter the tiles to those specified.
@@ -110,7 +110,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
             Write-Error $_.Exception.Message
             continue 
         } finally {
-            Remove-Item $vrt_file.FullName # Delete the temporary file.
+            Remove-Item $vrt_file.FullName                  # Delete the temporary file.
         }
                 
         # Download all the tiles for the filtered space/time parameters.
@@ -123,6 +123,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
 
             # Only download files which have not already been downloaded or if forced to.
             if ((-Not (Test-Path -Path $out_file)) -or ($overwrite -eq $true)) {
+                # And if dryrun is not set.
                 if ($dryrun -eq $false) {
                     try { download_file $tile_url $out_file }
                     catch { 
@@ -153,6 +154,7 @@ $main = {
     Write-Information "Processing data for the following dates:" -InformationAction continue
     $dates | ForEach-Object {$_.ToString("MMM yyyy")}
 
+    # Download all images for the specified band and period.
     function download_product_band([string]$band, [datetime[]]$dates) {
 
         # Get the relative paths for each the VRT files for each date.

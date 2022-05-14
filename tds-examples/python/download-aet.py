@@ -85,7 +85,7 @@ def get_vrt_sources(file):
 	file.seek(0) # Go to beginning of file.
 	xml_doc = file.read()
 	nodes = ET.fromstring(xml_doc).findall(".//VRTRasterBand/*/SourceFilename") # Use wildcard for different source types.
-	files = sorted(list(map(lambda node: node.text, nodes))) # Sort data after findall.
+	files = sorted(list(map(lambda node: node.text, nodes)))					# Sort data after findall.
 
 	return files
 
@@ -102,7 +102,7 @@ def download_file(url, out_file):
 		out_file = open(out_file,"wb")
 
 	response = requests.get(url, headers=headers, stream = True)
-	response.raise_for_status()
+	response.raise_for_status()		# Trigger exception for unacceptable status codes.
 	for chunk in response.iter_content(chunk_size=1024):
 		out_file.write(chunk)
 
@@ -126,7 +126,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 			logging.error(error)
 			continue
 		finally:
-			vrt_file.close() # Delete the temporary file.
+			vrt_file.close()					# Delete the temporary file.
 
 		# Download all the tiles for the filtered space/time parameters.
 		logging.info("Downloading {count} tile(s) for {date}...".format(count=len(filtered_files),date=date.strftime("%Y-%m-%d")))
@@ -138,6 +138,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 
 			# Only download files which have not already been downloaded or if forced to.
 			if (not os.path.exists(out_file) or overwrite == True):
+				# And if dryrun is not set.
 				if dryrun == False:
 					try: download_file(tile_url, out_file)
 					except Exception as error:
@@ -164,6 +165,7 @@ def main():
 	for date in dates: logging.info(date.strftime("%b %Y"))
 
 	def download_product_band(band, dates):
+		""" Download all images for the specified band and period. """
 			
 		# Get the relative paths for each the VRT files for each date.
 		vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, band, dates)
