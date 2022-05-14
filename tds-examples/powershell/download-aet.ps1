@@ -76,7 +76,7 @@ function get_vrt_sources([string]$file) {
 
     [xml]$xml_doc = Get-Content $file
     $nodes = $xml_doc.selectnodes("/VRTDataset/VRTRasterBand/*/SourceFilename") # Use wildcard for different source types.
-    $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object         # Sort data after findall.
+    $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object         # Sort the node values after searching the nodes.
 
     return $files
 
