@@ -1,4 +1,4 @@
-# Setup variables
+# Script Parameters
 
 API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
 PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET"
@@ -154,12 +154,14 @@ def main():
 
 	# Parse the period of interest.
 	startDate = datetime.date.fromisoformat(START)
+	start = startDate.replace(day=1)
 	endDate = datetime.date.fromisoformat(END)
-	logging.info("Start: {start}".format(start=startDate))
-	logging.info("End: {end}".format(end=endDate))
+	end = endDate.replace(day=1)
+	logging.info("Start: {start}".format(start=start))
+	logging.info("End: {end}".format(end=end))
 
 	# Generate the list of dates to download.
-	dates = get_months(startDate, endDate)
+	dates = get_months(start, end)
 	logging.info("Processing data for the following dates:")
 	for date in dates: logging.info(date.strftime("%b %Y"))
 

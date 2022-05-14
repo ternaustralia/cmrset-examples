@@ -1,4 +1,4 @@
-# Setup variables
+# Script Parameters
 
 $API_KEY = "<paste api key here>" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
 $PATH_OUT = "<paste output directory path here>"  # e.g."C:/Downloads/AET"
@@ -145,12 +145,14 @@ $main = {
 
     # Parse the period of interest.
     $startDate = [datetime]::ParseExact($START, 'yyyy-MM-dd', $null)
+    $start = GET-DATE $startDate -Day 1
     $endDate = [datetime]::ParseExact($END, 'yyyy-MM-dd', $null)
-    Write-Information "Start: $startDate" -InformationAction continue
-    Write-Information "End: $endDate" -InformationAction continue
+    $end = GET-DATE $endDate -Day 1
+    Write-Information "Start: $start" -InformationAction continue
+    Write-Information "End: $end" -InformationAction continue
 
     # Generate the list of dates to download.
-    $dates = get_months $startDate $endDate
+    $dates = get_months $start $end
     Write-Information "Processing data for the following dates:" -InformationAction continue
     $dates | ForEach-Object {$_.ToString("MMM yyyy")}
 
