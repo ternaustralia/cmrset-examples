@@ -116,14 +116,11 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 	""" Downloads the image tiles for the specified paths. """
 
 	logging.info("Processing {count} VRT file(s)...".format(count=len(relative_paths)))
-	for relative_path in relative_paths:
+	for date in relative_paths:
 	
-		date = relative_path
-		date_str = date.strftime("%Y_%m_%d")
-		vrt_url = "{base_url}{relative_path}".format(base_url=base_url,relative_path=relative_paths[date])
-
 		# Download VRT file that contains references to the files it mosaics.
 		try:
+			vrt_url = "{base_url}{relative_path}".format(base_url=base_url,relative_path=relative_paths[date])
 			vrt_file = tempfile.TemporaryFile() # We use a system temporary file.
 			download_file(vrt_url, vrt_file)
 			files = get_vrt_sources(vrt_file)
@@ -138,6 +135,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 		logging.info("Downloading {count} tile(s) for {date}...".format(count=len(filtered_files),date=date.strftime("%Y-%m-%d")))
 		for file in filtered_files:
 
+			date_str = date.strftime("%Y_%m_%d")
 			tile_url = "{base_url}/{year}/{date_str}/{file}".format(base_url=base_url,year=date.year,date_str=date_str,file=file)
 			out_file = "{base_folder}/{year}/{date_str}/{file}".format(base_folder=base_folder,year=date.year,date_str=date_str,file=file)
 

@@ -84,7 +84,7 @@ function get_vrt_sources([string]$file) {
 }
 
 # Download a file requiring basic auth from a base64 encoded key.
-function download_file([string]$url, [string]$out_file){
+function download_file([string]$url, [string]$out_file) {
 
     Write-Information "Downloading: $($url)" -InformationAction continue
     $Headers = @{ "X-API-Key" = "$($API_KEY)" } # Accessed from global scope.
@@ -95,48 +95,46 @@ function download_file([string]$url, [string]$out_file){
 }
 
 # Downloads the image tiles for the specified paths.
-function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids=0..11, [bool]$overwrite=$false, [bool]$dryrun=$false){
+function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids=0..11, [bool]$overwrite=$false, [bool]$dryrun=$false) {
 
     Write-Information "Processing $($relative_paths.Count) VRT file(s)..." -InformationAction continue
-    foreach ($relative_path in $relative_paths.GetEnumerator() | Sort-Object -Property name){ # Need to sort keys from Enumerator
-    
-        $date = $relative_path.Name
-        $date_str = $date.tostring("yyyy_MM_dd")
-        $vrt_url = "$($base_url)$($relative_path.Value)"
-        
+    foreach ($date in $relative_paths.Keys.GetEnumerator() | Sort-Object) # Need to sort keys from Enumerator
+    {
         # Download VRT file that contains references to the files it mosaics.
-        try{
+        try {
+            $vrt_url = "$($base_url)$($relative_paths[$date])"
             $vrt_file = New-TemporaryFile # We use a system temporary file.
             download_file $vrt_url $vrt_file
             $files = get_vrt_sources($vrt_file.FullName)
             $filtered_files = $files | Select-String -Pattern $tile_ids # Filter the tiles to those specified.
-        }catch{ 
+        } catch { 
             Write-Error $_.Exception.Message
             continue 
-        }finally{
+        } finally {
             Remove-Item $vrt_file.FullName # Delete the temporary VRT file.
         }
                 
         # Loop through all files and download each one.
         Write-Information "Downloading $($filtered_files.Count) tile(s) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
-        foreach ($file in $filtered_files) {
-            
+        foreach ($file in $filtered_files)
+        {
+            $date_str = $date.tostring("yyyy_MM_dd")
             $tile_url = "$($base_url)/$($date.Year)/$($date_str)/$($file)"
             $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
 
             # Only download files which have not already been downloaded or if forced to.
             if ((-Not (Test-Path -Path $out_file)) -or ($overwrite -eq $true)) {
-                if ($dryrun -eq $false){
+                if ($dryrun -eq $false) {
                     try { download_file $tile_url $out_file }
                     catch { 
                         Write-Error $_.Exception.Message
                         continue 
                     }
-                }else{
+                } else {
                     # It's not really downloading, but just say it is.
                     Write-Information "Downloading: $($tile_url)" -InformationAction continue
                 }
-            }   else {
+            } else {
                 Write-Information "Skipping already existing file: $($tile_url)" -InformationAction continue
             }     
         }
@@ -156,7 +154,7 @@ $main = {
     Write-Information "Processing data for the following dates:" -InformationAction continue
     $dates | ForEach-Object {$_.ToString("MMM yyyy")}
 
-    function download_product_band([string]$band, [datetime[]]$dates){
+    function download_product_band([string]$band, [datetime[]]$dates) {
 
         # Get the relative paths for each the VRT files for each date.
         $vrt_relative_paths = get_vrt_relative_paths $PRODUCT_CODE $band $dates
