@@ -53,6 +53,9 @@ TileLookup = {
 def get_months(start, end):
 	""" Get a monthly array of dates between start and end. """
 
+	start = start.replace(day=1)
+	end = end.replace(day=1)
+
 	date = start
 	array = []
 	while(date <= end):
@@ -153,10 +156,8 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 def main():
 
 	# Parse the period of interest.
-	startDate = datetime.date.fromisoformat(START)
-	start = startDate.replace(day=1)
-	endDate = datetime.date.fromisoformat(END)
-	end = endDate.replace(day=1)
+	start = datetime.date.fromisoformat(START)
+	end = datetime.date.fromisoformat(END)
 	logging.info("Start: {start}".format(start=start))
 	logging.info("End: {end}".format(end=end))
 

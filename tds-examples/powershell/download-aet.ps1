@@ -43,6 +43,9 @@ $TileLookup = @{
 # Get a monthly array of dates between start and end.
 function get_months([datetime]$start, [datetime]$end) {
 
+    $start = GET-DATE $start -Day 1
+    $end = GET-DATE $end -Day 1
+
     $date = $start
     [System.Collections.ArrayList]$array = @() # Cast to ArrayList for efficiency.
     while($date -le $end)
@@ -144,10 +147,8 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
 $main = {
 
     # Parse the period of interest.
-    $startDate = [datetime]::ParseExact($START, 'yyyy-MM-dd', $null)
-    $start = GET-DATE $startDate -Day 1
-    $endDate = [datetime]::ParseExact($END, 'yyyy-MM-dd', $null)
-    $end = GET-DATE $endDate -Day 1
+    $start = [datetime]::ParseExact($START, 'yyyy-MM-dd', $null)
+    $end = [datetime]::ParseExact($END, 'yyyy-MM-dd', $null)
     Write-Information "Start: $start" -InformationAction continue
     Write-Information "End: $end" -InformationAction continue
 
