@@ -7,6 +7,7 @@ START = "2020-01-01"
 END = "2020-12-01"
 OVERWRITE = False
 DRYRUN = False
+BANDS = ["ETa", "pixel_qa"]
 TILES = list(range(0, 12)) # All tiles
 #TILES = [10,11] # Some tiles
 
@@ -62,11 +63,10 @@ def get_months(start, end):
 	return array
 
 
-
 def get_vrt_relative_paths(product_code, band, dates):
 	"""
 	Get the relative paths for the VRT files.
-	This XML encoded file has all the metadata of the image tiles in that directory.
+	This XML encoded file contains all the file references it will mosaic.
 	"""
 
 	hash = {}
@@ -78,33 +78,36 @@ def get_vrt_relative_paths(product_code, band, dates):
 	return hash
 
 
+def get_vrt_sources(file):
+	"""	Get all the sources referenced within a VRT file. """
+
+	file.seek(0) # Go to beginning of file.
+	xml_doc = file.read()
+	nodes = ET.fromstring(xml_doc).findall(".//VRTRasterBand/*/SourceFilename")
+	files = sorted(list(map(lambda node: node.text, nodes)))
+
+	return files
+
 
 def download_file(url, output):
 	""" Download a file requiring basic auth from a base64 encoded key. """
 
-	try:
-		logging.info("Downloading: {url}".format(url=url))
-		headers = {"X-API-Key": API_KEY}
+	logging.info("Downloading: {url}".format(url=url))
+	headers = {"X-API-Key": API_KEY}
 
-		if isinstance(output, str):
-			os.makedirs(os.path.dirname(output), exist_ok=True)
-			file = open(output,"wb")
-		else:
-			file = output
+	is_url = isinstance(output, str)
+	if is_url:
+		os.makedirs(os.path.dirname(output), exist_ok=True)
+		file = open(output,"wb")
+	else:
+		file = output
 
-		response = requests.get(url, headers=headers, stream = True)
-		if (response.ok):
-			for chunk in response.iter_content(chunk_size=1024):
-				file.write(chunk)
-		else:
-			logging.info("Error downloading file: {status_code} {reason}".format(status_code=response.status_code,reason=response.reason))
+	response = requests.get(url, headers=headers, stream = True)
+	response.raise_for_status()
+	for chunk in response.iter_content(chunk_size=1024):
+		file.write(chunk)
 
-	
-	except Exception as e:
-		logging.info("Error downloading file: {error}".format(error=e))
-
-	finally:
-		return file
+	if is_url: file.close()
 
 
 def download_images(base_url, base_folder, relative_paths, tile_ids):
@@ -115,36 +118,22 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 	
 		date = relative_path
 		date_str = date.strftime("%Y_%m_%d")
+		vrt_url = "{base_url}{relative_path}".format(base_url=base_url,relative_path=relative_paths[date])
 
-		# Download VRT file that contains references to the files it mosaics together.
-		# We use a system temporary file.
-		url = "{base_url}{relative_path}".format(base_url=base_url,relative_path=relative_paths[date])
-		tmp = tempfile.TemporaryFile()
-		file_vrt = download_file(url, tmp)
-
-		# Load the XML file and select all the source files.
-		if file_vrt.tell() == 0: file_vrt.close() # If no data returned in VRT, then abort.
+		# Download VRT file that contains references to the files it mosaics.
 		try:
-			file_vrt.seek(0) # Go to beginning of file.
-			xd = tmp.read()
-			nodes = ET.fromstring(xd).findall(".//VRTRasterBand/ComplexSource/SourceFilename")
-			files = sorted(list(map(lambda node: node.text, nodes)))
-		except Exception as e:
-			logging.info("Error reading file: {error}".format(error=e))
-			file_vrt.close()
+			vrt_file = tempfile.TemporaryFile() # We use a system temporary file.
+			download_file(vrt_url, vrt_file)
+			files = get_vrt_sources(vrt_file)
+			filtered_files = list(filter(lambda file: any(tile_id in file for tile_id in tile_ids), files)) # Filter the tiles to those specified.
+		except Exception as error:
+			logging.error(error)
 			continue
-
-		# Filter the tiles to those specified.
-		filtered_files = []
-		for file in files:
-			for tile_id in tile_ids:
-				if tile_id in file and file not in filtered_files:
-					filtered_files.append(file)
-
-		
+		finally:
+			vrt_file.close() # Delete the temporary VRT file.
 
 		# Loop through all files and download each one.
-		logging.info("Downloading {count} tile(s) for {date_str}...".format(count=len(nodes),date_str=date_str))
+		logging.info("Downloading {count} tile(s) for {date_str}...".format(count=len(filtered_files),date_str=date_str))
 		for file in filtered_files:
 
 			tile_url = "{base_url}/{year}/{date_str}/{file}".format(base_url=base_url,year=date.year,date_str=date_str,file=file)
@@ -153,18 +142,16 @@ def download_images(base_url, base_folder, relative_paths, tile_ids):
 			# Only download files which have not already been downloaded or if forced to.
 			if (not os.path.exists(out_file) or OVERWRITE == True):
 				if DRYRUN == False:
-					file_cog = download_file(tile_url, out_file)
-					file_cog.close()
+					try: download_file(tile_url, out_file)
+					except Exception as error:
+						logging.error(error)
+						continue
 				else:
 					logging.info("Downloading: {tile_url}".format(tile_url=tile_url))
 			else:
 				logging.info("Skipping already existing tile: {tile_url}".format(tile_url=tile_url))
 
-		# Delete the temporary VRT file.
-		file_vrt.close()
-
 	
-
 def main():
 
 	# Parse the period of interest.
@@ -177,13 +164,17 @@ def main():
 	dates = get_months(startDate, endDate)
 	logging.info("Processing data for the following dates:")
 	for date in dates: logging.info(date.strftime("%b %Y"))
-	
-	# Get the relative paths for each the VRT files for each date.
-	vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, "ETa", dates)
-	logging.info("Generated {count} VRT path(s) to download...".format(count=len(vrt_relative_paths)))
 
-	# Download all the tiles referenced in each VRT file.
-	download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup))
+	def download_band(band, dates):
+			
+		# Get the relative paths for each the VRT files for each date.
+		vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, band, dates)
+		logging.info("Generated {count} VRT path(s) to download for {band}...".format(count=len(vrt_relative_paths),band=band))
+
+		# Download all the tiles referenced in each VRT file.
+		download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup))
+	
+	for band in BANDS: download_band(band, dates)
 	logging.info("Processing complete")
 
 

@@ -7,6 +7,7 @@ $START = "2020-01-01"
 $END = "2020-12-01"
 $OVERWRITE = $false
 $DRYRUN = $false
+$BANDS = @("ETa", "pixel_qa")
 $TILES = 0..11 # All tiles
 #$TILES = @(10,11) # Some tiles
 
@@ -54,7 +55,7 @@ function get_months([datetime]$start, [datetime]$end) {
 }
 
 # Get the relative paths for the VRT files.
-# This XML encoded file has all the metadata of the image tiles in that directory.
+# This XML encoded file contains all the file references it will mosaic.
 function get_vrt_relative_paths([string]$product_code, [string]$band, [datetime[]]$dates) {
 
     $hash = [ordered]@{}
@@ -67,56 +68,51 @@ function get_vrt_relative_paths([string]$product_code, [string]$band, [datetime[
 
 }
 
+# Get all the sources referenced within a VRT file.
+function get_vrt_sources([string]$file) {
+
+    [xml]$xml_doc = Get-Content $file
+    $nodes = $xml_doc.selectnodes("/VRTDataset/VRTRasterBand/*/SourceFilename")
+    $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object
+
+    return $files
+
+}
+
 # Download a file requiring basic auth from a base64 encoded key.
 function download_file([string]$url, [string]$output){
 
-    try{
         Write-Information "Downloading: $($url)" -InformationAction continue
         $Headers = @{ "X-API-Key" = "$($API_KEY)" }
         $output_dir = Split-Path -Path $output
         $null = New-Item -ItemType Directory -Force -Path $output_dir # Assign to $null to avoid inteference from New-Item.
         Invoke-WebRequest -Uri "$($url)" -OutFile $output -Headers $Headers
-    }
-    catch{
-        Write-Error "Error downloading file: $($_.Exception.Message)"
-        continue
-    }
 
 }
 
 # Downloads the image tiles for the specified paths.
-function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids) {
+function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids){
 
     Write-Information "Processing $($relative_paths.Count) VRT file(s)..." -InformationAction continue
-    foreach ($relative_path in $relative_paths.GetEnumerator() | Sort-Object -Property name) # Need to sort keys from Enumerator
-    {
+    foreach ($relative_path in $relative_paths.GetEnumerator() | Sort-Object -Property name){ # Need to sort keys from Enumerator
+    
         $date = $relative_path.Name
         $date_str = $date.tostring("yyyy_MM_dd")
-
-        # Download VRT file that contains references to the files it mosaics together.
-        # We use a system temporary file.
-        $url = "$($base_url)$($relative_path.Value)"
-        $tmp = New-TemporaryFile
-        download_file $url $tmp
-
-        # Load the XML file and select all the source files.
+        $vrt_url = "$($base_url)$($relative_path.Value)"
+        
+        # Download VRT file that contains references to the files it mosaics.
         try{
-            [xml]$xml_doc = Get-Content $tmp.FullName
-            $nodes = $xml_doc.selectnodes("/VRTDataset/VRTRasterBand/ComplexSource/SourceFilename")
-            $files = $nodes | ForEach-Object { $_.get_InnerXml()} | Sort-Object
+            $vrt_file = New-TemporaryFile # We use a system temporary file.
+            download_file $vrt_url $vrt_file
+            $files = get_vrt_sources($vrt_file.FullName)
+            $filtered_files = $files | Select-String -Pattern $tile_ids # Filter the tiles to those specified.
+        }catch{ 
+            Write-Error $_.Exception.Message
+            continue 
+        }finally{
+            Remove-Item $vrt_file.FullName # Delete the temporary VRT file.
         }
-        catch{ continue }
-
-        # Filter the tiles to those specified.
-        [System.Collections.ArrayList]$filtered_files = @() # Cast to ArrayList for efficiency.
-        foreach ($file in $files){
-            foreach ($tile_id in $tile_ids){
-                if ($file.Contains($tile_id)){
-                    [void]$filtered_files.Add($file) # Cast to void to avoid inteference from .Add().
-                }
-            }
-        }
-
+                
         # Loop through all files and download each one.
         Write-Information "Downloading $($filtered_files.Count) tile(s) for $($date_str)..." -InformationAction continue
         foreach ($file in $filtered_files) {
@@ -127,7 +123,11 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
             # Only download files which have not already been downloaded or if forced to.
             if ((-Not (Test-Path -Path $out_file)) -or ($OVERWRITE -eq $true)) {
                 if ($DRYRUN -eq $false){
-                    download_file $tile_url $out_file
+                    try { download_file $tile_url $out_file }
+                    catch { 
+                        Write-Error $_.Exception.Message
+                        continue 
+                    }
                 }else{
                     Write-Information "Downloading: $($tile_url)" -InformationAction continue
                 }
@@ -136,8 +136,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
                 Write-Information "Skipping already existing file: $($tile_url)" -InformationAction continue
             }     
         }
-        # Delete the temporary VRT file.
-        Remove-Item $tmp.FullName     
+ 
 
     }
 }
@@ -155,13 +154,18 @@ $main = {
     Write-Information "Processing data for the following dates:" -InformationAction continue
     $dates | ForEach-Object {$_.ToString("MMM yyyy")}
 
-    # Get the relative paths for each the VRT files for each date.
-    $vrt_relative_paths = get_vrt_relative_paths $PRODUCT_CODE "ETa" $dates
-    Write-Information "Generated $($vrt_relative_paths.Count) VRT path(s) to download..." -InformationAction continue
-    $vrt_relative_paths
+    function download_band([string]$band, [datetime[]]$dates){
 
-    # Download all the tiles referenced in each VRT file.
-    download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES]
+        # Get the relative paths for each the VRT files for each date.
+        $vrt_relative_paths = get_vrt_relative_paths $PRODUCT_CODE $band $dates
+        Write-Information "Generated $($vrt_relative_paths.Count) VRT path(s) to download for band $($band)..." -InformationAction continue
+        $vrt_relative_paths
+
+        # Download all the tiles referenced in each VRT file.
+        download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES]
+    }
+
+    $BANDS | ForEach-Object { download_band $_ $dates }
     Write-Information "Processing complete!" -InformationAction continue
 
 }
