@@ -84,8 +84,8 @@ def get_vrt_sources(file):
 
 	file.seek(0) # Go to beginning of file.
 	xml_doc = file.read()
-	nodes = ET.fromstring(xml_doc).findall(".//VRTRasterBand/*/SourceFilename")	# Use wildcard for different source types.
-	files = sorted(list(map(lambda node: node.text, nodes)))					# Sort data after findall.
+	nodes = ET.fromstring(xml_doc).findall(".//VRTRasterBand/*/SourceFilename") # Use wildcard for different source types.
+	files = sorted(list(map(lambda node: node.text, nodes)))                    # Sort data after findall.
 
 	return files
 
