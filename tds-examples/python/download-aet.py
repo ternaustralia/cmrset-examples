@@ -68,10 +68,7 @@ def get_months(start, end):
 
 
 def get_vrt_relative_paths(product_code, band, dates):
-	"""
-	Get the relative paths for the VRT files.
-	This XML encoded file contains all the file references it will mosaic.
-	"""
+	""" Get the relative paths for the VRT files based upon product, band, and the date range. """
 
 	hash = {}
 	for date in dates:
@@ -121,17 +118,17 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 		# Download VRT file that contains references to the files it mosaics.
 		try:
 			vrt_url = "{base_url}{relative_path}".format(base_url=base_url,relative_path=relative_paths[date])
-			vrt_file = tempfile.TemporaryFile() # We use a system temporary file.
-			download_file(vrt_url, vrt_file)
-			files = get_vrt_sources(vrt_file)
+			vrt_file = tempfile.TemporaryFile()	# Create temporary file for VRT.
+			download_file(vrt_url, vrt_file)	# Download VRT contents to the temporary file.
+			files = get_vrt_sources(vrt_file)	# Read the source files referenced within the VRT.
 			filtered_files = list(filter(lambda file: any(tile_id in file for tile_id in tile_ids), files)) # Filter the tiles to those specified.
 		except Exception as error:
 			logging.error(error)
 			continue
 		finally:
-			vrt_file.close() # Delete the temporary VRT file.
+			vrt_file.close() # Delete the temporary file.
 
-		# Loop through all files and download each one.
+		# Download all the tiles for the filtered space/time parameters.
 		logging.info("Downloading {count} tile(s) for {date}...".format(count=len(filtered_files),date=date.strftime("%Y-%m-%d")))
 		for file in filtered_files:
 
