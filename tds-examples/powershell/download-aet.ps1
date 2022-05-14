@@ -118,7 +118,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
         }
                 
         # Loop through all files and download each one.
-        Write-Information "Downloading $($filtered_files.Count) tile(s) for $($date_str)..." -InformationAction continue
+        Write-Information "Downloading $($filtered_files.Count) tile(s) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
         foreach ($file in $filtered_files) {
             
             $tile_url = "$($base_url)/$($date.Year)/$($date_str)/$($file)"

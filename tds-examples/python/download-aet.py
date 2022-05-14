@@ -135,7 +135,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 			vrt_file.close() # Delete the temporary VRT file.
 
 		# Loop through all files and download each one.
-		logging.info("Downloading {count} tile(s) for {date_str}...".format(count=len(filtered_files),date_str=date_str))
+		logging.info("Downloading {count} tile(s) for {date}...".format(count=len(filtered_files),date=date.strftime("%Y-%m-%d")))
 		for file in filtered_files:
 
 			tile_url = "{base_url}/{year}/{date_str}/{file}".format(base_url=base_url,year=date.year,date_str=date_str,file=file)
