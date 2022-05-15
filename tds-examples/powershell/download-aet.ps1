@@ -103,14 +103,16 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
             $vrt_file = New-TemporaryFile                               # Create temporary file for VRT.
             download_file $vrt_url $vrt_file                            # Download VRT contents to the temporary file.
             $files = get_vrt_sources($vrt_file.FullName)                # Read the source files referenced within the VRT.
-            $filtered_files = $files | Select-String -Pattern $tile_ids # Filter the tiles to those specified.
         } catch { 
             Write-Error $_.Exception.Message
             continue 
         } finally {
             Remove-Item $vrt_file.FullName                              # Delete the temporary file.
         }
-                
+        
+        # Filter the tiles to those specified.
+        $filtered_files = $files | Select-String -Pattern $tile_ids
+
         # Download all the tiles for the filtered space/time/variable parameters.
         Write-Information "Downloading $($filtered_files.Count) tile(s) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
         foreach ($file in $filtered_files)
