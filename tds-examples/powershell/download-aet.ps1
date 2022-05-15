@@ -86,10 +86,8 @@ function get_vrt_sources([string]$file) {
 function download_file([string]$url, [string]$out_file) {
 
     Write-Information "Downloading: $($url)" -InformationAction continue
-    $Headers = @{ "X-API-Key" = "$($API_KEY)" }                # Accessed from global scope.
-    $out_dir = Split-Path -Path $out_file
-    $null = New-Item -ItemType Directory -Force -Path $out_dir # Assign to $null to avoid inteference from New-Item.
-    Invoke-WebRequest -Uri "$($url)" -OutFile $out_file -Headers $Headers
+    $Headers = @{ "X-API-Key" = "$($API_KEY)" } # Accessed from global scope.
+    Invoke-WebRequest -Uri "$($url)" -OutFile ( New-Item -Path $out_file -Force ) -Headers $Headers 
 
 }
 

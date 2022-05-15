@@ -95,15 +95,16 @@ def download_file(url, out_file):
 
 	logging.info("Downloading: {url}".format(url=url))
 	headers = {"X-API-Key": API_KEY} # Accessed from global scope.
+	response = requests.get(url, headers=headers, stream = True)
+	response.raise_for_status()      # Trigger exception for unacceptable status codes.
 
 	is_str = isinstance(out_file, str)
 	if is_str:
 		os.makedirs(os.path.dirname(out_file), exist_ok=True)
 		out_file = open(out_file,"wb")
 
-	response = requests.get(url, headers=headers, stream = True)
-	response.raise_for_status()      # Trigger exception for unacceptable status codes.
-	for chunk in response.iter_content(chunk_size=1024):
+	# Read large files in chunks.
+	for chunk in response.iter_content(chunk_size=1024 * 1024 * 10): # 10 MB Chunks.
 		out_file.write(chunk)
 
 	if is_str: out_file.close()
@@ -121,12 +122,14 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 			vrt_file = tempfile.TemporaryFile() # Create temporary file for VRT.
 			download_file(vrt_url, vrt_file)    # Download VRT contents to the temporary file.
 			files = get_vrt_sources(vrt_file)   # Read the source files referenced within the VRT.
-			filtered_files = list(filter(lambda file: any(tile_id in file for tile_id in tile_ids), files)) # Filter the tiles to those specified.
 		except Exception as error:
 			logging.error(error)
 			continue
 		finally:
 			vrt_file.close()                    # Delete the temporary file.
+
+		# Filter the tiles to those specified.
+		filtered_files = list(filter(lambda file: any(tile_id in file for tile_id in tile_ids), files))
 
 		# Download all the tiles for the filtered space/time/variable parameters.
 		logging.info("Downloading {count} tile(s) for {date}...".format(count=len(filtered_files),date=date.strftime("%Y-%m-%d")))
