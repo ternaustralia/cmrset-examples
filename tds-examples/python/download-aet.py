@@ -72,6 +72,7 @@ def get_vrt_relative_paths(product_code, dates, bands):
 
 	date_hash = {}
 	for date in dates:
+
 		date_hash[date] = {}
 		for band in bands:
 	
@@ -110,6 +111,8 @@ def download_file(url, out_file):
 		out_file.write(chunk)
 
 	if is_str: out_file.close()
+
+	return response
 
 
 def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0, 12)), overwrite=False, dryrun=False):
@@ -173,7 +176,6 @@ def main():
 
 	# Get the relative paths for each the VRT files for each date.
 	vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, dates, BANDS)
-	#logging.info("Generated {count} VRT path(s) to download for {band}...".format(count=len(vrt_relative_paths),band=band))
 
 	# Download all the tiles referenced in each VRT file.
 	download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup), overwrite=OVERWRITE, dryrun=DRYRUN)

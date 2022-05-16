@@ -91,7 +91,8 @@ function download_file([string]$url, [string]$out_file) {
 
     Write-Information "Downloading: $($url)" -InformationAction continue
     $Headers = @{ "X-API-Key" = "$($API_KEY)" } # Accessed from global scope.
-    Invoke-WebRequest -Uri "$($url)" -OutFile ( New-Item -Path $out_file -Force ) -Headers $Headers 
+    $response = Invoke-WebRequest -Uri "$($url)" -OutFile ( New-Item -Path $out_file -Force ) -Headers $Headers 
+    return $response
 
 }
 
@@ -166,7 +167,6 @@ $main = {
 
     # Get the relative paths for each the VRT files for each date.
     $vrt_relative_paths = get_vrt_relative_paths $PRODUCT_CODE $dates $BANDS
-    #Write-Information "Generated $($vrt_relative_paths.Count) VRT path(s) to download for band $($band)..." -InformationAction continue
     $vrt_relative_paths
 
     # Download all the tiles referenced in each VRT file.
