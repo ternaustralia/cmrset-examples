@@ -47,9 +47,11 @@ $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -Sess
 
 # An enum for the various processing methods.
 enum UpdateMethod {
-    UPDATE_MISSING
-    UPDATE_NEW
-    UPDATE_ALL
+
+    UPDATE_MISSING # Update missing files from local archive.
+    UPDATE_NEW     # Update missing/updated files from local archive.
+    UPDATE_ALL     # Update all files from local archive.
+
 }
 
 # Get a monthly array of dates between start and end.
@@ -114,11 +116,16 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
 
     switch ( $update_method )
     {
+        # Update missing files from local archive.
         UPDATE_MISSING { 
             $result = (-Not (Test-Path -Path $out_file)) 
             if (-Not $result) { Write-Information "Skipping already existing file: $($url)" -InformationAction continue }
         }
-        #UPDATE_NEW { $result = "" }
+        # Update missing/updated files from local archive.
+        #UPDATE_NEW {
+            #$result = "" 
+        #}
+        # Update all files in local archive.
         UPDATE_ALL { $result = $true }
     }
 
@@ -161,7 +168,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
                 $tile_url = "$($base_url)/$($date.Year)/$($date_str)/$($file)"
                 $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
 
-                # Only download files which have not already been downloaded or if forced to.
+                # Test whether a file should be downloaded, and do so if True.
                 if (confirm_download $tile_url $out_file $update_method) {
                     try { download_file $tile_url $out_file $dryrun }
                     catch { 

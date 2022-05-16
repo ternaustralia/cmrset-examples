@@ -60,9 +60,9 @@ Session.headers.update({"X-API-Key": API_KEY})
 class UpdateMethod(Enum):
 	""" An enum for the various processing methods. """
 
-	UPDATE_MISSING = auto()
-	UPDATE_NEW = auto()
-	UPDATE_ALL = auto()
+	UPDATE_MISSING = auto() # Update missing files from local archive.
+	UPDATE_NEW = auto()     # Update missing/updated files from local archive.
+	UPDATE_ALL = auto()     # Update all files from local archive.
 
 
 def get_months(start, end):
@@ -134,14 +134,17 @@ def confirm_download(url, out_file, update_method):
 	""" Determines whether a download should take place based upon the UpdateMethod. """
 
 	def update_missing():
+		""" Update missing files from local archive. """
 		result = not os.path.exists(out_file)
 		if not result: logging.info("Skipping already existing tile: {tile_url}".format(tile_url=url))
 		return result
 
 	def undate_new():
+		""" Update missing/updated files from local archive. """
 		pass
 
 	def update_all():
+		""" Update all files in local archive. """
 		return True
 
 	options = {
@@ -186,7 +189,7 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 				tile_url = "{base_url}/{year}/{date_str}/{file}".format(base_url=base_url,year=date.year,date_str=date_str,file=file)
 				out_file = "{base_folder}/{year}/{date_str}/{file}".format(base_folder=base_folder,year=date.year,date_str=date_str,file=file)
 
-				# Only download files which have not already been downloaded or if forced to.
+				# Test whether a file should be downloaded, and do so if True.
 				if confirm_download(tile_url, out_file, update_method):
 					try: download_file(tile_url, out_file, dryrun=dryrun)
 					except Exception as error:
