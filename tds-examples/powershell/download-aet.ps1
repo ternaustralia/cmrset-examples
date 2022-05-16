@@ -179,7 +179,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
                 }     
             }
         }
-     }
+    }
 }
 
 $main = {
