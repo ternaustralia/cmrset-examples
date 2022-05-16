@@ -136,7 +136,7 @@ def confirm_download(url, out_file, update_method):
 	def update_missing():
 		""" Update missing files from local archive. """
 		result = not os.path.exists(out_file)
-		if not result: logging.info("Skipping already existing tile: {tile_url}".format(tile_url=url))
+		if not result: logging.info("Skipping existing tile: {tile_url}".format(tile_url=url))
 		return result
 
 	def undate_new():

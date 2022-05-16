@@ -119,7 +119,7 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
         # Update missing files from local archive.
         UPDATE_MISSING { 
             $result = (-Not (Test-Path -Path $out_file)) 
-            if (-Not $result) { Write-Information "Skipping already existing file: $($url)" -InformationAction continue }
+            if (-Not $result) { Write-Information "Skipping existing file: $($url)" -InformationAction continue }
         }
         # Update missing/outdated files from local archive.
         #UPDATE_NEW {
