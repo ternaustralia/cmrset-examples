@@ -41,6 +41,7 @@ $TileLookup = @{
 }
 
 # A session which contains common settings which will be used for all web requests made.
+# In particular, an X-API-Key auth from a base64 encoded key.
 $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($API_KEY)"}
 
 
@@ -69,7 +70,7 @@ function get_months([datetime]$start, [datetime]$end) {
 
 }
 
-# Get the relative paths for the VRT files based upon product, band, and the date range.
+# Get the relative paths for the VRT files based upon product, date range and bands.
 function get_vrt_relative_paths([string]$product_code, [datetime[]]$dates, [string[]]$bands) {
 
     $date_hash = [ordered]@{}
@@ -97,7 +98,7 @@ function get_vrt_sources([string]$file) {
 
 }
 
-# Download a file requiring X-API-Key auth from a base64 encoded key.
+# Download a file via a session.
 function download_file([string]$url, [string]$out_file, [bool]$dryrun=$false) {
 
     Write-Information "Downloading: $($url)" -InformationAction continue

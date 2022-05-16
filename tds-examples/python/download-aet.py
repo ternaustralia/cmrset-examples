@@ -52,6 +52,7 @@ TileLookup = {
 }
 
 # A session which contains common settings which will be used for all web requests made.
+# In particular, an X-API-Key auth from a base64 encoded key.
 Session = requests.Session()
 Session.headers.update({"X-API-Key": API_KEY})
 
@@ -82,7 +83,7 @@ def get_months(start, end):
 
 
 def get_vrt_relative_paths(product_code, dates, bands):
-	""" Get the relative paths for the VRT files based upon product, band, and the date range. """
+	""" Get the relative paths for the VRT files based upon product, date range and bands. """
 
 	date_hash = {}
 	for date in dates:
@@ -97,7 +98,7 @@ def get_vrt_relative_paths(product_code, dates, bands):
 
 
 def get_vrt_sources(file):
-	"""	Get all the sources referenced within a VRT file. """
+	""" Get all the sources referenced within a VRT file. """
 
 	file.seek(0) # Go to beginning of file.
 	xml_doc = file.read()
@@ -108,7 +109,7 @@ def get_vrt_sources(file):
 
 
 def download_file(url, out_file, dryrun=False):
-	""" Download a file requiring X-API-Key auth from a base64 encoded key. """
+	""" Download a file via a session. """
 
 	logging.info("Downloading: {url}".format(url=url))
 	if dryrun == False:
