@@ -45,7 +45,14 @@ The dataset start date to begin downloading data from (formatted as YYYY-MM-DD).
 #### END
 The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
 
-#### OVERWRITE
+#### UPDATE_METHOD
+
+Available values are:
+- **UPDATE_MISSING:** Will update any missing files from your local archive, hence leaving existing images as they are.
+- **UPDATE_NEW:** Same as UPDATE_MISSING, but will also update any files in your local archive where *newer versions* have been detected on TERN Data Services. **Still in development!**
+- **UPDATE_ALL:** Will update all images. Typically you should never need to use this option, unless you think you may have some corrupted images in your local archive.
+
+- 
 If set to True, will overwrite files which have already been downloaded, otherwise will skip downloading if it already exists.  
 
 The default value is False.

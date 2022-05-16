@@ -5,7 +5,7 @@ $PATH_OUT = "your-output-path"  # e.g."C:/Downloads/AET"
 $PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
 $START = "2020-01-01"
 $END = "2020-12-01"
-$OVERWRITE = $false
+$UPDATE_METHOD = "UPDATE_MISSING"
 $DRYRUN = $false
 $BANDS = @("ETa", "pixel_qa")
 $TILES = 0..11 # All tiles
@@ -39,6 +39,15 @@ $TileLookup = @{
     10 = "0000087552-0000087552";
     11 = "0000087552-0000131328"
 }
+
+# An enum for the various processing methods
+enum UpdateMethod {
+    UPDATE_MISSING
+    UPDATE_NEW
+    UPDATE_ALL
+}
+
+$null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($API_KEY)"}
 
 # Get a monthly array of dates between start and end.
 function get_months([datetime]$start, [datetime]$end) {
@@ -87,17 +96,34 @@ function get_vrt_sources([string]$file) {
 }
 
 # Download a file requiring X-API-Key auth from a base64 encoded key.
-function download_file([string]$url, [string]$out_file) {
+function download_file([string]$url, [string]$out_file, [bool]$dryrun=$false) {
 
     Write-Information "Downloading: $($url)" -InformationAction continue
-    $Headers = @{ "X-API-Key" = "$($API_KEY)" } # Accessed from global scope.
-    $response = Invoke-WebRequest -Uri "$($url)" -OutFile ( New-Item -Path $out_file -Force ) -Headers $Headers 
-    return $response
+    if ($dryrun -eq $false) {
+        $response = Invoke-WebRequest -Uri "$($url)" -OutFile ( New-Item -Path $out_file -Force ) -WebSession $Session  # Session accessed from global scope.
+        return $response
+    }
+
+}
+
+function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update_method) {
+
+    switch ( $update_method )
+    {
+        UPDATE_MISSING { 
+            $result = (-Not (Test-Path -Path $out_file)) 
+            if (-Not $result) { Write-Information "Skipping already existing file: $($url)" -InformationAction continue }
+        }
+        #UPDATE_NEW { $result = "" }
+        UPDATE_ALL { $result = $true }
+    }
+
+    return $result
 
 }
 
 # Downloads the image tiles for the specified paths.
-function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids=0..11, [bool]$overwrite=$false, [bool]$dryrun=$false) {
+function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids=0..11, [UpdateMethod]$update_method="UPDATE_MISSING", [bool]$dryrun=$false) {
 
     foreach ($date in $relative_paths.Keys.GetEnumerator() | Sort-Object) # Need to sort keys from Enumerator
     {
@@ -132,20 +158,12 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
                 $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
 
                 # Only download files which have not already been downloaded or if forced to.
-                if ((-Not (Test-Path -Path $out_file)) -or ($overwrite -eq $true)) {
-                    # And if dryrun is not set.
-                    if ($dryrun -eq $false) {
-                        try { download_file $tile_url $out_file }
-                        catch { 
-                            Write-Error $_.Exception.Message
-                            continue 
-                        }
-                    } else {
-                        # It's not really downloading, but just say it is.
-                        Write-Information "Downloading: $($tile_url)" -InformationAction continue
+                if (confirm_download $tile_url $out_file $update_method) {
+                    try { download_file $tile_url $out_file $dryrun }
+                    catch { 
+                        Write-Error $_.Exception.Message
+                        continue 
                     }
-                } else {
-                    Write-Information "Skipping already existing file: $($tile_url)" -InformationAction continue
                 }     
             }
         }
@@ -170,7 +188,7 @@ $main = {
     $vrt_relative_paths
 
     # Download all the tiles referenced in each VRT file.
-    download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES] $OVERWRITE $DRYRUN
+    download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES] $UPDATE_METHOD $DRYRUN
     Write-Information "Processing complete!" -InformationAction continue
 
 }

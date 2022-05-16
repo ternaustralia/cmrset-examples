@@ -5,7 +5,7 @@ PATH_OUT = "your-output-path"  # e.g."C:/Downloads/AET"
 PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
 START = "2020-01-01"
 END = "2020-12-01"
-OVERWRITE = False
+UPDATE_METHOD = "UPDATE_MISSING"
 DRYRUN = False
 BANDS = ["ETa", "pixel_qa"]
 TILES = list(range(0, 12)) # All tiles
@@ -25,6 +25,7 @@ import datetime
 import os
 from dateutil.relativedelta import relativedelta
 from operator import itemgetter
+from enum import Enum, auto
 import xml.etree.ElementTree as ET
 logging.getLogger().setLevel(logging.INFO)
 
@@ -49,6 +50,14 @@ TileLookup = {
 	10: "0000087552-0000087552",
 	11: "0000087552-0000131328"
 }
+
+class UpdateMethod(Enum):
+	UPDATE_MISSING = auto()
+	UPDATE_NEW = auto()
+	UPDATE_ALL = auto()
+
+Session = requests.Session()
+Session.headers.update({"X-API-Key": API_KEY})
 
 def get_months(start, end):
 	""" Get a monthly array of dates between start and end. """
@@ -93,29 +102,48 @@ def get_vrt_sources(file):
 	return files
 
 
-def download_file(url, out_file):
+def download_file(url, out_file, dryrun=False):
 	""" Download a file requiring X-API-Key auth from a base64 encoded key. """
 
 	logging.info("Downloading: {url}".format(url=url))
-	headers = {"X-API-Key": API_KEY} # Accessed from global scope.
-	response = requests.get(url, headers=headers, stream = True)
-	response.raise_for_status()      # Trigger exception for unacceptable status codes.
+	if dryrun == False:
+		response = Session.get(url, stream = True)	# Session accessed from global scope.
+		response.raise_for_status()					# Trigger exception for unacceptable status codes.
 
-	is_str = isinstance(out_file, str)
-	if is_str:
-		os.makedirs(os.path.dirname(out_file), exist_ok=True)
-		out_file = open(out_file,"wb")
+		is_str = isinstance(out_file, str)
+		if is_str:
+			os.makedirs(os.path.dirname(out_file), exist_ok=True)
+			out_file = open(out_file,"wb")
 
-	# Read large files in chunks.
-	for chunk in response.iter_content(chunk_size=1024 * 1024 * 10): # 10 MB Chunks.
-		out_file.write(chunk)
+		# Read large files in chunks.
+		for chunk in response.iter_content(chunk_size=1024 * 1024 * 10): # 10 MB chunks.
+			out_file.write(chunk)
 
-	if is_str: out_file.close()
+		if is_str: out_file.close()
 
-	return response
+		return response
 
 
-def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0, 12)), overwrite=False, dryrun=False):
+def confirm_download(url, out_file, update_method):
+	def update_missing():
+		result = not os.path.exists(out_file)
+		if not result: logging.info("Skipping already existing tile: {tile_url}".format(tile_url=url))
+		return result
+	def undate_new():
+		pass
+	def update_all():
+		return True
+
+	options = {
+		UpdateMethod.UPDATE_MISSING : update_missing(),
+		UpdateMethod.UPDATE_NEW : undate_new(),
+		UpdateMethod.UPDATE_ALL : update_all(),
+	}
+
+	return options[update_method]
+
+
+def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0, 12)), update_method=UpdateMethod.UPDATE_MISSING, dryrun=False):
 	""" Downloads the image tiles for the specified paths. """
 
 	for date in relative_paths:
@@ -147,20 +175,13 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 				out_file = "{base_folder}/{year}/{date_str}/{file}".format(base_folder=base_folder,year=date.year,date_str=date_str,file=file)
 
 				# Only download files which have not already been downloaded or if forced to.
-				if (not os.path.exists(out_file) or overwrite == True):
-					# And if dryrun is not set.
-					if dryrun == False:
-						try: download_file(tile_url, out_file)
-						except Exception as error:
-							logging.error(error)
-							continue
-					else:
-						# It's not really downloading, but just say it is.
-						logging.info("Downloading: {tile_url}".format(tile_url=tile_url))
-				else:
-					logging.info("Skipping already existing tile: {tile_url}".format(tile_url=tile_url))
+				if confirm_download(tile_url, out_file, update_method):
+					try: download_file(tile_url, out_file, dryrun=dryrun)
+					except Exception as error:
+						logging.error(error)
+						continue
 
-	
+
 def main():
 
 	# Parse the period of interest.
@@ -178,7 +199,7 @@ def main():
 	vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, dates, BANDS)
 
 	# Download all the tiles referenced in each VRT file.
-	download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup), overwrite=OVERWRITE, dryrun=DRYRUN)
+	download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup), update_method=UpdateMethod[UPDATE_METHOD], dryrun=DRYRUN)
 
 	logging.info("Processing complete")
 
