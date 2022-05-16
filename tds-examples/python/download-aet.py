@@ -60,9 +60,9 @@ Session.headers.update({"X-API-Key": API_KEY})
 class UpdateMethod(Enum):
 	""" An enum for the various processing methods. """
 
-	UPDATE_MISSING = auto() # Update missing files from local archive.
-	UPDATE_NEW = auto()     # Update missing/outdated files from local archive.
-	UPDATE_ALL = auto()     # Update all files from local archive.
+	UPDATE_MISSING = auto() # Update missing files within the local archive.
+	UPDATE_NEW = auto()     # Update missing/outdated files within the local archive.
+	UPDATE_ALL = auto()     # Update all files within the local archive.
 
 
 def get_months(start, end):
@@ -134,18 +134,18 @@ def confirm_download(url, out_file, update_method):
 	""" Determines whether a download should take place based upon the UpdateMethod. """
 
 	def update_missing():
-		""" Update missing files from local archive. """
+		""" Update missing files within the local archive. """
 		result = not os.path.exists(out_file)
 		if not result: logging.info("Skipping existing tile: {tile_url}".format(tile_url=url))
 		return result
 
 	def undate_new():
-		""" Update missing/outdated files from local archive. """
+		""" Update missing/outdated files within the local archive. """
 		# In development.
 		pass
 
 	def update_all():
-		""" Update all files in local archive. """
+		""" Update all files within the local archive. """
 		return True
 
 	confirmation = {

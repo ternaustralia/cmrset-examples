@@ -48,9 +48,9 @@ $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -Sess
 # An enum for the various processing methods.
 enum UpdateMethod {
 
-    UPDATE_MISSING # Update missing files from local archive.
-    UPDATE_NEW     # Update missing/outdated files from local archive.
-    UPDATE_ALL     # Update all files from local archive.
+    UPDATE_MISSING # Update missing files within the local archive.
+    UPDATE_NEW     # Update missing/outdated files within the local archive.
+    UPDATE_ALL     # Update all files within the local archive.
 
 }
 
@@ -116,17 +116,17 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
 
     switch ( $update_method )
     {
-        # Update missing files from local archive.
+        # Update missing files within the local archive.
         UPDATE_MISSING { 
             $result = (-Not (Test-Path -Path $out_file)) 
             if (-Not $result) { Write-Information "Skipping existing file: $($url)" -InformationAction continue }
         }
-        # Update missing/outdated files from local archive.
+        # Update missing/outdated files within the local archive.
         #UPDATE_NEW {
             # In development.
             #$result = ""
         #}
-        # Update all files in local archive.
+        # Update all files within the local archive.
         UPDATE_ALL { $result = $true }
     }
 
