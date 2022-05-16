@@ -1,12 +1,12 @@
 # Script Parameters
 
 API_KEY = "your-api-key"             # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
-PATH_OUT = "your-output-path"        # e.g."C:/Downloads/AET"
+PATH_OUT = "your-output-path"        # e.g. "C:/Downloads/AET"
 UPDATE_METHOD = "UPDATE_MISSING"     # e.g. "UPDATE_MISSING", "UPDATE_NEW", "UPDATE_ALL"
-PRODUCT_CODE = "CMRSET_LANDSAT_V2_2" # CMRSET_LANDSAT_V2_2 is recommended
-START = "2020-01-01"                 # Like: "YYYY-MM-DD"
-END = "2020-12-01"                   # Like: "YYYY-MM-DD"
-BANDS = ["ETa", "pixel_qa"]          # Available values: e.g. "ETa", "pixel_qa"
+PRODUCT_CODE = "CMRSET_LANDSAT_V2_2" # e.g. "CMRSET_LANDSAT_V2_2" (recommended)
+START = "2020-01-01"                 # e.g. Like: "YYYY-MM-DD"
+END = "2020-12-01"                   # e.g. Like: "YYYY-MM-DD"
+BANDS = ["ETa", "pixel_qa"]          # Available values: "ETa", "pixel_qa"
 TILES = list(range(0, 12))           # All tiles
 #TILES = [10,11]                     # Some tiles
 DRYRUN = False                       # e.g. True, False
