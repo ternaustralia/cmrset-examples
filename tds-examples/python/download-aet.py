@@ -141,19 +141,20 @@ def confirm_download(url, out_file, update_method):
 
 	def undate_new():
 		""" Update missing/updated files from local archive. """
+		# In development.
 		pass
 
 	def update_all():
 		""" Update all files in local archive. """
 		return True
 
-	options = {
+	confirmation = {
 		UpdateMethod.UPDATE_MISSING : update_missing(),
 		UpdateMethod.UPDATE_NEW : undate_new(),
 		UpdateMethod.UPDATE_ALL : update_all(),
 	}
 
-	return options[update_method]
+	return confirmation[update_method]
 
 
 def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0, 12)), update_method=UpdateMethod.UPDATE_MISSING, dryrun=False):

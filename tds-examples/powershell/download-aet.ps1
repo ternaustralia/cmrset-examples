@@ -123,7 +123,8 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
         }
         # Update missing/updated files from local archive.
         #UPDATE_NEW {
-            #$result = "" 
+            # In development.
+            #$result = ""
         #}
         # Update all files in local archive.
         UPDATE_ALL { $result = $true }
