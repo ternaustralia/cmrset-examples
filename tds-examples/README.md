@@ -47,7 +47,7 @@ The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
 
 #### UPDATE_METHOD
 
-Available values are:
+The method used to update your local archive from TERN Data Services. Available values are:
 - **UPDATE_MISSING:** Will update any missing files from your local archive, hence leaving existing images as they are. 
 - **UPDATE_NEW:** Same as UPDATE_MISSING, but will also update any files in your local archive where *newer versions* have been detected on TERN Data Services. **Still in development!** 
 - **UPDATE_ALL:** Will update all images. Typically you should never need to use this option, unless you think you may have some corrupted images in your local archive. 
