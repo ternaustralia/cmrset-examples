@@ -51,15 +51,17 @@ TileLookup = {
 	11: "0000087552-0000131328"
 }
 
+# A session which contains common settings which will be used for all web requests made.
+Session = requests.Session()
+Session.headers.update({"X-API-Key": API_KEY})
+
+
 class UpdateMethod(Enum):
 	""" An enum for the various processing methods. """
 	UPDATE_MISSING = auto()
 	UPDATE_NEW = auto()
 	UPDATE_ALL = auto()
 
-# A session which contains common settings which will be used for all web requests made.
-Session = requests.Session()
-Session.headers.update({"X-API-Key": API_KEY})
 
 def get_months(start, end):
 	""" Get a monthly array of dates between start and end. """

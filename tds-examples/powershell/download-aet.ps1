@@ -40,15 +40,16 @@ $TileLookup = @{
     11 = "0000087552-0000131328"
 }
 
+# A session which contains common settings which will be used for all web requests made.
+$null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($API_KEY)"}
+
+
 # An enum for the various processing methods.
 enum UpdateMethod {
     UPDATE_MISSING
     UPDATE_NEW
     UPDATE_ALL
 }
-
-# A session which contains common settings which will be used for all web requests made.
-$null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($API_KEY)"}
 
 # Get a monthly array of dates between start and end.
 function get_months([datetime]$start, [datetime]$end) {
