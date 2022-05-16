@@ -34,6 +34,15 @@ The output folder where data will be saved.
 
 The complete path where files will be saved to is: \{ **PATH_OUT** } / \{ PRODUCT_CODE } / \{ YYYY } / \{ YYYY_MM_DD } /
 
+#### UPDATE_METHOD
+
+The method used to update your local archive from TERN Data Services. Available values are:
+- **UPDATE_MISSING:** Will update any missing files from your local archive, hence leaving existing images as they are. 
+- **UPDATE_NEW:** Same as UPDATE_MISSING, but will also update any files in your local archive where *newer versions* have been detected on TERN Data Services. **Still in development!** 
+- **UPDATE_ALL:** Will update all images. Typically you should never need to use this option, unless you think you may have some corrupted images in your local archive. 
+
+The default value is UPDATE_MISSING.
+
 #### PRODUCT_CODE
 The CMRSET AET product code to download.  
 
@@ -44,21 +53,6 @@ The dataset start date to begin downloading data from (formatted as YYYY-MM-DD).
 
 #### END
 The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
-
-#### UPDATE_METHOD
-
-The method used to update your local archive from TERN Data Services. Available values are:
-- **UPDATE_MISSING:** Will update any missing files from your local archive, hence leaving existing images as they are. 
-- **UPDATE_NEW:** Same as UPDATE_MISSING, but will also update any files in your local archive where *newer versions* have been detected on TERN Data Services. **Still in development!** 
-- **UPDATE_ALL:** Will update all images. Typically you should never need to use this option, unless you think you may have some corrupted images in your local archive. 
-
-The default value is UPDATE_MISSING.
-
-#### DRYRUN
-If set to True, will not download any data product files. 
-The script will just go through the *motions* of downloading the data product for debugging purposes.  
-
-The default value is False.
 
 #### BANDS
 The list of bands to download. Available values are **ETa** and **pixel_qa**.
@@ -73,6 +67,14 @@ The default value is a list containing ***all 12 tiles***.
 Indicies are shown in the figure below. i.e. if you are only interested in data for Victoria, you may use a list which contains the values 10 and 11.
 
 <img src="./CMRSET_Grid_Indicies.png" alt="CMRSET Grid Indicies" width="600"/>
+
+#### DRYRUN
+If set to True, will ***not download*** any data product files. 
+The script will just go through the *motions* of downloading the data product for debugging purposes.  
+
+The default value is False.
+
+
 
 ### Generating a TERN API Key
 

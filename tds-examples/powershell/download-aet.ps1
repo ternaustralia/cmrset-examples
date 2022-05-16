@@ -2,14 +2,14 @@
 
 $API_KEY = "your-api-key" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
 $PATH_OUT = "your-output-path"  # e.g."C:/Downloads/AET"
+$UPDATE_METHOD = "UPDATE_MISSING"
 $PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
 $START = "2020-01-01"
 $END = "2020-12-01"
-$UPDATE_METHOD = "UPDATE_MISSING"
-$DRYRUN = $false
 $BANDS = @("ETa", "pixel_qa")
 $TILES = 0..11 # All tiles
 #$TILES = @(10,11) # Some tiles
+$DRYRUN = $false
 
 
 # Dataset status (up/down), and important notes for running this script:
