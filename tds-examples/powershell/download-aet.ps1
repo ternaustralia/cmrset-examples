@@ -59,15 +59,19 @@ function get_months([datetime]$start, [datetime]$end) {
 }
 
 # Get the relative paths for the VRT files based upon product, band, and the date range.
-function get_vrt_relative_paths([string]$product_code, [string]$band, [datetime[]]$dates) {
+function get_vrt_relative_paths([string]$product_code, [datetime[]]$dates, [string[]]$bands) {
 
-    $hash = [ordered]@{}
+    $date_hash = [ordered]@{}
     foreach ($date in $dates)
     {
-        $date_str = $date.tostring("yyyy_MM_dd")
-        $hash[$date] = "/$($date.Year)/$($date_str)/$($product_code)_$($date_str)_$($band).vrt"
+        $date_hash[$date] = [ordered]@{}
+        foreach ($band in $bands)
+        {
+            $date_str = $date.tostring("yyyy_MM_dd")
+            $date_hash[$date][$band] = "/$($date.Year)/$($date_str)/$($product_code)_$($date_str)_$($band).vrt"
+        }
     }
-    return $hash
+    return $date_hash
 
 }
 
@@ -94,49 +98,55 @@ function download_file([string]$url, [string]$out_file) {
 # Downloads the image tiles for the specified paths.
 function download_images([string]$base_url, [string]$base_folder, [hashtable]$relative_paths, [string[]]$tile_ids=0..11, [bool]$overwrite=$false, [bool]$dryrun=$false) {
 
-    Write-Information "Processing $($relative_paths.Count) VRT file(s)..." -InformationAction continue
     foreach ($date in $relative_paths.Keys.GetEnumerator() | Sort-Object) # Need to sort keys from Enumerator
     {
-        # Download VRT file that contains references to the files it mosaics.
-        try {
-            $vrt_url = "$($base_url)$($relative_paths[$date])"
-            $vrt_file = New-TemporaryFile                               # Create temporary file for VRT.
-            download_file $vrt_url $vrt_file                            # Download VRT contents to the temporary file.
-            $files = get_vrt_sources($vrt_file.FullName)                # Read the source files referenced within the VRT.
-        } catch { 
-            Write-Error $_.Exception.Message
-            continue 
-        } finally {
-            Remove-Item $vrt_file.FullName                              # Delete the temporary file.
-        }
+        Write-Information "Processing $($relative_paths.Count) bands(s) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
         
-        # Filter the tiles to those specified.
-        $filtered_files = $files | Select-String -Pattern $tile_ids
-
-        # Download all the tiles for the filtered space/time/variable parameters.
-        Write-Information "Downloading $($filtered_files.Count) tile(s) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
-        foreach ($file in $filtered_files)
+        foreach ($band in $relative_paths[$date].Keys.GetEnumerator() | Sort-Object) # Need to sort keys from Enumerator
         {
-            $date_str = $date.tostring("yyyy_MM_dd")
-            $tile_url = "$($base_url)/$($date.Year)/$($date_str)/$($file)"
-            $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
+            Write-Information "Processing $($band) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
+            
+            # Download VRT file that contains references to the files it mosaics.
+            try {
+                $vrt_url = "$($base_url)$($relative_paths[$date][$band])"
+                $vrt_file = New-TemporaryFile                               # Create temporary file for VRT.
+                download_file $vrt_url $vrt_file                            # Download VRT contents to the temporary file.
+                $files = get_vrt_sources($vrt_file.FullName)                # Read the source files referenced within the VRT.
+            } catch { 
+                Write-Error $_.Exception.Message
+                continue 
+            } finally {
+                Remove-Item $vrt_file.FullName                              # Delete the temporary file.
+            }
 
-            # Only download files which have not already been downloaded or if forced to.
-            if ((-Not (Test-Path -Path $out_file)) -or ($overwrite -eq $true)) {
-                # And if dryrun is not set.
-                if ($dryrun -eq $false) {
-                    try { download_file $tile_url $out_file }
-                    catch { 
-                        Write-Error $_.Exception.Message
-                        continue 
+            # Filter the tiles to those specified.
+            $filtered_files = $files | Select-String -Pattern $tile_ids
+
+            # Download all the tiles for the filtered space/time/variable parameters.
+            Write-Information "Processing $($filtered_files.Count) tile(s) for $($band) on $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
+            foreach ($file in $filtered_files)
+            {
+                $date_str = $date.tostring("yyyy_MM_dd")
+                $tile_url = "$($base_url)/$($date.Year)/$($date_str)/$($file)"
+                $out_file = "$($base_folder)/$($date.Year)/$($date_str)/$($file)"
+
+                # Only download files which have not already been downloaded or if forced to.
+                if ((-Not (Test-Path -Path $out_file)) -or ($overwrite -eq $true)) {
+                    # And if dryrun is not set.
+                    if ($dryrun -eq $false) {
+                        try { download_file $tile_url $out_file }
+                        catch { 
+                            Write-Error $_.Exception.Message
+                            continue 
+                        }
+                    } else {
+                        # It's not really downloading, but just say it is.
+                        Write-Information "Downloading: $($tile_url)" -InformationAction continue
                     }
                 } else {
-                    # It's not really downloading, but just say it is.
-                    Write-Information "Downloading: $($tile_url)" -InformationAction continue
-                }
-            } else {
-                Write-Information "Skipping already existing file: $($tile_url)" -InformationAction continue
-            }     
+                    Write-Information "Skipping already existing file: $($tile_url)" -InformationAction continue
+                }     
+            }
         }
      }
 }
@@ -154,19 +164,13 @@ $main = {
     Write-Information "Processing data for the following dates:" -InformationAction continue
     $dates | ForEach-Object {$_.ToString("MMM yyyy")}
 
-    # Download all images for the specified band and period.
-    function download_product_band([string]$band, [datetime[]]$dates) {
+    # Get the relative paths for each the VRT files for each date.
+    $vrt_relative_paths = get_vrt_relative_paths $PRODUCT_CODE $dates $BANDS
+    #Write-Information "Generated $($vrt_relative_paths.Count) VRT path(s) to download for band $($band)..." -InformationAction continue
+    $vrt_relative_paths
 
-        # Get the relative paths for each the VRT files for each date.
-        $vrt_relative_paths = get_vrt_relative_paths $PRODUCT_CODE $band $dates
-        Write-Information "Generated $($vrt_relative_paths.Count) VRT path(s) to download for band $($band)..." -InformationAction continue
-        $vrt_relative_paths
-
-        # Download all the tiles referenced in each VRT file.
-        download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES] $OVERWRITE $DRYRUN
-    }
-
-    $BANDS | ForEach-Object { download_product_band $_ $dates }
+    # Download all the tiles referenced in each VRT file.
+    download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES] $OVERWRITE $DRYRUN
     Write-Information "Processing complete!" -InformationAction continue
 
 }
