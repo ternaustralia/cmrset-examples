@@ -1,15 +1,15 @@
 # Script Parameters
 
-$API_KEY = "your-api-key" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
-$PATH_OUT = "your-output-path"  # e.g."C:/Downloads/AET"
-$UPDATE_METHOD = "UPDATE_MISSING"
-$PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
-$START = "2020-01-01"
-$END = "2020-12-01"
-$BANDS = @("ETa", "pixel_qa")
-$TILES = 0..11 # All tiles
-#$TILES = @(10,11) # Some tiles
-$DRYRUN = $false
+$API_KEY = "your-api-key"             # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
+$PATH_OUT = "your-output-path"        # e.g."C:/Downloads/AET"
+$UPDATE_METHOD = "UPDATE_MISSING"     # e.g. "UPDATE_MISSING", "UPDATE_NEW", "UPDATE_ALL"
+$PRODUCT_CODE = "CMRSET_LANDSAT_V2_2" # CMRSET_LANDSAT_V2_2 is recommended
+$START = "2020-01-01"                 # Like: "YYYY-MM-DD"
+$END = "2020-12-01"                   # Like: "YYYY-MM-DD"
+$BANDS = @("ETa", "pixel_qa")         # Available values: e.g. "ETa", "pixel_qa"
+$TILES = 0..11                        # All tiles
+#$TILES = @(10,11)                    # Some tiles
+$DRYRUN = $false                      # e.g. $true, $false
 
 
 # Dataset status (up/down), and important notes for running this script:
@@ -49,7 +49,7 @@ $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -Sess
 enum UpdateMethod {
 
     UPDATE_MISSING # Update missing files from local archive.
-    UPDATE_NEW     # Update missing/updated files from local archive.
+    UPDATE_NEW     # Update missing/outdated files from local archive.
     UPDATE_ALL     # Update all files from local archive.
 
 }
@@ -121,7 +121,7 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
             $result = (-Not (Test-Path -Path $out_file)) 
             if (-Not $result) { Write-Information "Skipping already existing file: $($url)" -InformationAction continue }
         }
-        # Update missing/updated files from local archive.
+        # Update missing/outdated files from local archive.
         #UPDATE_NEW {
             # In development.
             #$result = ""

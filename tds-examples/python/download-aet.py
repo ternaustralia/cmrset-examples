@@ -1,15 +1,15 @@
 # Script Parameters
 
-API_KEY = "your-api-key" # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
-PATH_OUT = "your-output-path"  # e.g."C:/Downloads/AET"
-UPDATE_METHOD = "UPDATE_MISSING"
-PRODUCT_CODE = "CMRSET_LANDSAT_V2_2"
-START = "2020-01-01"
-END = "2020-12-01"
-BANDS = ["ETa", "pixel_qa"]
-TILES = list(range(0, 12)) # All tiles
-#TILES = [10,11] # Some tiles
-DRYRUN = False
+API_KEY = "your-api-key"             # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
+PATH_OUT = "your-output-path"        # e.g."C:/Downloads/AET"
+UPDATE_METHOD = "UPDATE_MISSING"     # e.g. "UPDATE_MISSING", "UPDATE_NEW", "UPDATE_ALL"
+PRODUCT_CODE = "CMRSET_LANDSAT_V2_2" # CMRSET_LANDSAT_V2_2 is recommended
+START = "2020-01-01"                 # Like: "YYYY-MM-DD"
+END = "2020-12-01"                   # Like: "YYYY-MM-DD"
+BANDS = ["ETa", "pixel_qa"]          # Available values: e.g. "ETa", "pixel_qa"
+TILES = list(range(0, 12))           # All tiles
+#TILES = [10,11]                     # Some tiles
+DRYRUN = False                       # e.g. True, False
 
 # Dataset status (up/down), and important notes for running this script:
 # https://github.com/ternaustralia/cmrset-examples/tree/main/tds-examples
@@ -61,7 +61,7 @@ class UpdateMethod(Enum):
 	""" An enum for the various processing methods. """
 
 	UPDATE_MISSING = auto() # Update missing files from local archive.
-	UPDATE_NEW = auto()     # Update missing/updated files from local archive.
+	UPDATE_NEW = auto()     # Update missing/outdated files from local archive.
 	UPDATE_ALL = auto()     # Update all files from local archive.
 
 
@@ -140,7 +140,7 @@ def confirm_download(url, out_file, update_method):
 		return result
 
 	def undate_new():
-		""" Update missing/updated files from local archive. """
+		""" Update missing/outdated files from local archive. """
 		# In development.
 		pass
 
