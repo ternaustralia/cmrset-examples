@@ -58,6 +58,7 @@ Session.headers.update({"X-API-Key": API_KEY})
 
 class UpdateMethod(Enum):
 	""" An enum for the various processing methods. """
+
 	UPDATE_MISSING = auto()
 	UPDATE_NEW = auto()
 	UPDATE_ALL = auto()
@@ -111,8 +112,8 @@ def download_file(url, out_file, dryrun=False):
 
 	logging.info("Downloading: {url}".format(url=url))
 	if dryrun == False:
-		response = Session.get(url, stream = True)	# Session accessed from global scope.
-		response.raise_for_status()					# Trigger exception for unacceptable status codes.
+		response = Session.get(url, stream = True) # Session accessed from global scope.
+		response.raise_for_status()                # Trigger exception for unacceptable status codes.
 
 		is_str = isinstance(out_file, str)
 		if is_str:
@@ -129,12 +130,16 @@ def download_file(url, out_file, dryrun=False):
 
 
 def confirm_download(url, out_file, update_method):
+	""" Determines whether a download should take place based upon the UpdateMethod. """
+
 	def update_missing():
 		result = not os.path.exists(out_file)
 		if not result: logging.info("Skipping already existing tile: {tile_url}".format(tile_url=url))
 		return result
+
 	def undate_new():
 		pass
+
 	def update_all():
 		return True
 
@@ -151,8 +156,10 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 	""" Downloads the image tiles for the specified paths. """
 
 	for date in relative_paths:
+
 		logging.info("Processing {count} band(s) for {date}...".format(count=len(relative_paths[date]),date=date))
 		for band in relative_paths[date]:
+
 			logging.info("Processing {band} for {date}...".format(band=band,date=date))
 	
 			# Download VRT file that contains references to the files it mosaics.

@@ -108,6 +108,7 @@ function download_file([string]$url, [string]$out_file, [bool]$dryrun=$false) {
 
 }
 
+# Determines whether a download should take place based upon the UpdateMethod.
 function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update_method) {
 
     switch ( $update_method )
