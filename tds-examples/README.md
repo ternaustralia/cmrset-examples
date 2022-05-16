@@ -52,6 +52,8 @@ The method used to update your local archive from TERN Data Services. Available 
 - **UPDATE_NEW:** Same as UPDATE_MISSING, but will also update any files in your local archive where *newer versions* have been detected on TERN Data Services. **Still in development!** 
 - **UPDATE_ALL:** Will update all images. Typically you should never need to use this option, unless you think you may have some corrupted images in your local archive. 
 
+The default value is UPDATE_MISSING.
+
 #### DRYRUN
 If set to True, will not download any data product files. 
 The script will just go through the *motions* of downloading the data product for debugging purposes.  
