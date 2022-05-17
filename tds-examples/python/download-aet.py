@@ -147,9 +147,9 @@ def confirm_download(url, out_file, update_method):
 	def undate_new():
 		""" Update missing/outdated files within the local archive. """
 
-		if not os.path.exists(out_file): return True # Return true if the file is missing.
+		if not os.path.exists(out_file): return True        # Return true if the file is missing.
 		dt = datetime.datetime.utcfromtimestamp((os.path.getctime(out_file)))
-		date_str = dt.strftime("%a, %d %b %Y %H:%M:%S GMT")
+		date_str = dt.strftime("%a, %d %b %Y %H:%M:%S GMT") # File creation date in GMT, for headers.
 		headers = {'If-Modified-Since': date_str}
 		response = Session.head(url, headers=headers, allow_redirects=True)
 		result = response.status_code != 304
