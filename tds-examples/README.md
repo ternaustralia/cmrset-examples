@@ -37,9 +37,9 @@ The complete path where files will be saved to is: \{ **PATH_OUT** } / \{ PRODUC
 #### UPDATE_METHOD
 
 The method used to update your local archive from TERN Data Services. Available values are:
-- **UPDATE_MISSING:** Will update any missing files within your local archive, hence leaving existing images as they are. 
-- **UPDATE_NEW:** Same as UPDATE_MISSING, but will also update any files in your local archive where *newer versions* have been detected on TERN Data Services. 
-- **UPDATE_ALL:** Will update all images. Typically you should never need to use this option, unless you think you may have some corrupted images in your local archive. 
+- **UPDATE_MISSING:** Will update any ***missing*** images within your local archive, hence leaving existing images as they are. 
+- **UPDATE_NEW:** Same as UPDATE_MISSING, but will also update any images in your local archive that have since been ***reprocessed***. Reprocessing occurs when: climate inputs have been updated; or new satellite imagery has become avalable. 
+- **UPDATE_ALL:** Will update ***all*** images. Typically you should never need to use this option, however it is provided in case you think you do. 
 
 The default value is UPDATE_MISSING.
 
