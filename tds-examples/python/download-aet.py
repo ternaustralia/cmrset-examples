@@ -22,7 +22,6 @@ import requests
 import logging
 import tempfile
 import datetime
-import time
 import os
 from dateutil.relativedelta import relativedelta
 from operator import itemgetter
@@ -152,7 +151,7 @@ def confirm_download(url, out_file, update_method):
 		date_str = dt.strftime("%a, %d %b %Y %H:%M:%S GMT") # File creation date in GMT, for headers.
 		headers = {'If-Modified-Since': date_str}
 		response = Session.head(url, headers=headers, allow_redirects=True)
-		result = response.status_code != 304
+		result = response.status_code != 304                # Check if response is a HTTP 304 Not Modified status code.
 		if not result: logging.info("Skipping up to date file: {url}".format(url=url))
 		return result
 
