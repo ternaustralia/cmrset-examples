@@ -117,17 +117,20 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
 
     switch ( $update_method )
     {
+
         # Update missing files within the local archive.
         UPDATE_MISSING { 
             $result = (-Not (Test-Path -Path $out_file)) 
             if (-Not $result) { Write-Information "Skipping existing file: $($url)" -InformationAction continue }
+
         }
+
         # Update missing/outdated files within the local archive.
         UPDATE_NEW {
-            if (-Not (Test-Path -Path $out_file)) { $result=$true; break }
+            if (-Not (Test-Path -Path $out_file)) { $result=$true; break }     # Return true if the file is missing.
             $dt = (Get-ChildItem -Path $out_file | select CreationTimeUtc).CreationTimeUtc
             $date_str = $dt.ToString("ddd, dd MMM yyyy HH:mm:ss") + " GMT"
-            $headers = @{ "If-Modified-Since" = "$($date_str)"}+$key_headers # key_headers accessed from global scope.
+            $headers = @{ "If-Modified-Since" = "$($date_str)"} + $key_headers # key_headers accessed from global scope.
             try{
                 $response = Invoke-WebRequest -Uri "$($url)" -Method "HEAD" -Headers $headers
             }
@@ -137,8 +140,10 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
             if (-Not $result) { Write-Information "Skipping up to date file: $($url)" -InformationAction continue }
 
         }
+
         # Update all files within the local archive.
         UPDATE_ALL { $result = $true }
+
     }
 
     return $result

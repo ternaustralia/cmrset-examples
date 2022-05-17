@@ -135,16 +135,19 @@ def download_file(url, out_file, dryrun=False):
 def confirm_download(url, out_file, update_method):
 	""" Determines whether a download should take place based upon the UpdateMethod. """
 
+
 	def update_missing():
 		""" Update missing files within the local archive. """
+
 		result = not os.path.exists(out_file)
 		if not result: logging.info("Skipping existing file: {url}".format(url=url))
 		return result
 
+
 	def undate_new():
 		""" Update missing/outdated files within the local archive. """
 
-		if not os.path.exists(out_file): return True
+		if not os.path.exists(out_file): return True # Return true if the file is missing.
 		dt = datetime.datetime.utcfromtimestamp((os.path.getctime(out_file)))
 		date_str = dt.strftime("%a, %d %b %Y %H:%M:%S GMT")
 		headers = {'If-Modified-Since': date_str}
@@ -153,9 +156,12 @@ def confirm_download(url, out_file, update_method):
 		if not result: logging.info("Skipping up to date file: {url}".format(url=url))
 		return result
 
+
 	def update_all():
 		""" Update all files within the local archive. """
+
 		return True
+
 
 	confirmation = {
 		UpdateMethod.UPDATE_MISSING : update_missing,
