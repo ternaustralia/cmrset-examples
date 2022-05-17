@@ -22,6 +22,7 @@ import requests
 import logging
 import tempfile
 import datetime
+import time
 import os
 from dateutil.relativedelta import relativedelta
 from operator import itemgetter
@@ -108,13 +109,14 @@ def get_vrt_sources(file):
 	return files
 
 
-def download_file(url, out_file, dryrun=False):
+def download_file(url, out_file, dryrun=False, headers={}):
 	""" Download a file via a session. """
 
 	logging.info("Downloading: {url}".format(url=url))
 	if dryrun == False:
-		response = Session.get(url, stream = True) # Session accessed from global scope.
-		response.raise_for_status()                # Trigger exception for unacceptable status codes.
+
+		response = Session.get(url, stream = True, headers=headers) # Session accessed from global scope.
+		response.raise_for_status()									# Trigger exception for unacceptable status codes.
 
 		is_str = isinstance(out_file, str)
 		if is_str:
@@ -136,25 +138,32 @@ def confirm_download(url, out_file, update_method):
 	def update_missing():
 		""" Update missing files within the local archive. """
 		result = not os.path.exists(out_file)
-		if not result: logging.info("Skipping existing tile: {tile_url}".format(tile_url=url))
+		if not result: logging.info("Skipping existing file: {url}".format(url=url))
 		return result
 
 	def undate_new():
 		""" Update missing/outdated files within the local archive. """
-		# In development.
-		pass
+
+		if not os.path.exists(out_file): return True
+		dt = datetime.datetime.utcfromtimestamp((os.path.getctime(out_file)))
+		date_str = dt.strftime("%a, %d %b %Y %H:%M:%S GMT")
+		headers = {'If-Modified-Since': date_str}
+		response = Session.head(url, headers=headers, allow_redirects=True)
+		result = response.status_code != 304
+		if not result: logging.info("Skipping up to date file: {url}".format(url=url))
+		return result
 
 	def update_all():
 		""" Update all files within the local archive. """
 		return True
 
 	confirmation = {
-		UpdateMethod.UPDATE_MISSING : update_missing(),
-		UpdateMethod.UPDATE_NEW : undate_new(),
-		UpdateMethod.UPDATE_ALL : update_all(),
+		UpdateMethod.UPDATE_MISSING : update_missing,
+		UpdateMethod.UPDATE_NEW : undate_new,
+		UpdateMethod.UPDATE_ALL : update_all,
 	}
 
-	return confirmation[update_method]
+	return confirmation[update_method]()
 
 
 def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0, 12)), update_method=UpdateMethod.UPDATE_MISSING, dryrun=False):

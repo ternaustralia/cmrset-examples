@@ -42,7 +42,8 @@ $TileLookup = @{
 
 # A session which contains common settings which will be used for all web requests made.
 # In particular, an X-API-Key auth from a base64 encoded key.
-$null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($API_KEY)"}
+$key_headers = @{ "X-API-Key" = "$($API_KEY)"}
+$null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers $key_headers
 
 
 # An enum for the various processing methods.
@@ -122,10 +123,20 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
             if (-Not $result) { Write-Information "Skipping existing file: $($url)" -InformationAction continue }
         }
         # Update missing/outdated files within the local archive.
-        #UPDATE_NEW {
-            # In development.
-            #$result = ""
-        #}
+        UPDATE_NEW {
+            if (-Not (Test-Path -Path $out_file)) { $result=$true; break }
+            $dt = (Get-ChildItem -Path $out_file | select CreationTimeUtc).CreationTimeUtc
+            $date_str = $dt.ToString("ddd, dd MMM yyyy HH:mm:ss") + " GMT"
+            $headers = @{ "If-Modified-Since" = "$($date_str)"}+$key_headers # key_headers accessed from global scope.
+            try{
+                $response = Invoke-WebRequest -Uri "$($url)" -Method "HEAD" -Headers $headers
+            }
+            catch{
+                $result = ($_.Exception.Response.StatusCode -ne "NotModified")
+            }
+            if (-Not $result) { Write-Information "Skipping up to date file: $($url)" -InformationAction continue }
+
+        }
         # Update all files within the local archive.
         UPDATE_ALL { $result = $true }
     }
