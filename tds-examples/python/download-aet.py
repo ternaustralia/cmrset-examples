@@ -109,14 +109,14 @@ def get_vrt_sources(file):
 	return files
 
 
-def download_file(url, out_file, dryrun=False, headers={}):
+def download_file(url, out_file, dryrun=False):
 	""" Download a file via a session. """
 
 	logging.info("Downloading: {url}".format(url=url))
 	if dryrun == False:
 
-		response = Session.get(url, stream = True, headers=headers) # Session accessed from global scope.
-		response.raise_for_status()									# Trigger exception for unacceptable status codes.
+		response = Session.get(url, stream = True) # Session accessed from global scope.
+		response.raise_for_status()                # Trigger exception for unacceptable status codes.
 
 		is_str = isinstance(out_file, str)
 		if is_str:
