@@ -29,11 +29,14 @@ from enum import Enum, auto
 import xml.etree.ElementTree as ET
 logging.getLogger().setLevel(logging.INFO)
 
+
+
 # Lookup for available products.
 ProductCodes = {
 	"CMRSET_LANDSAT_V2_2": "https://data.tern.org.au/landscapes/aet/v2_2",
 	"CMRSET_LANDSAT_V2_1": "https://data.tern.org.au/landscapes/aet/v2_1" # Discontinued
 }
+
 
 # Lookup for tile indicies.
 TileLookup = {
@@ -50,24 +53,6 @@ TileLookup = {
 	10: "0000087552-0000087552",
 	11: "0000087552-0000131328"
 }
-
-# Use environment variables as preference (if defined) before script variables.
-TERN_API_KEY = os.getenv("TERN_API_KEY", TERN_API_KEY)
-PATH_OUT = os.getenv("PATH_OUT", PATH_OUT)
-UPDATE_METHOD = os.getenv("UPDATE_METHOD", UPDATE_METHOD)
-PRODUCT_CODE = os.getenv("PRODUCT_CODE", PRODUCT_CODE)
-START = os.getenv("START", START)
-END = os.getenv("END", END)
-BANDS = os.getenv("BANDS", BANDS) #e.g. for env var "ETa,pixel_qa"
-if not isinstance(BANDS, list): BANDS = [band.strip() for band in BANDS.split(",")]
-TILES = os.getenv("TILES", TILES) #e.g. for env var "10,11"
-if not isinstance(TILES, list): TILES = [int(tile.strip()) for tile in TILES.split(",")]
-DRYRUN = bool(os.getenv("DRYRUN", DRYRUN))
-
-# A session which contains common settings which will be used for all web requests made.
-# In particular, an X-API-Key auth from a base64 encoded key.
-Session = requests.Session()
-Session.headers.update({"X-API-Key": TERN_API_KEY})
 
 
 class UpdateMethod(Enum):
@@ -226,6 +211,28 @@ def download_images(base_url, base_folder, relative_paths, tile_ids=list(range(0
 
 
 def main():
+
+	# Declare these variables as global so local variables of these name are not created.
+	global TERN_API_KEY, PATH_OUT, UPDATE_METHOD, PRODUCT_CODE, START, END, BANDS, TILES, DRYRUN
+	global Session # An extra global variable defined in this function.
+
+	# Use environment variables as preference (if defined) before script variables.
+	TERN_API_KEY = os.getenv("TERN_API_KEY", TERN_API_KEY)
+	PATH_OUT = os.getenv("PATH_OUT", PATH_OUT)
+	UPDATE_METHOD = os.getenv("UPDATE_METHOD", UPDATE_METHOD)
+	PRODUCT_CODE = os.getenv("PRODUCT_CODE", PRODUCT_CODE)
+	START = os.getenv("START", START)
+	END = os.getenv("END", END)
+	BANDS = os.getenv("BANDS", BANDS) #e.g. for env var "ETa,pixel_qa"
+	if not isinstance(BANDS, list): BANDS = [band.strip() for band in BANDS.split(",")]
+	TILES = os.getenv("TILES", TILES) #e.g. for env var "10,11"
+	if not isinstance(TILES, list): TILES = [int(tile.strip()) for tile in TILES.split(",")]
+	DRYRUN = bool(os.getenv("DRYRUN", DRYRUN))
+
+	# A session which contains common settings which will be used for all web requests made.
+	# In particular, an X-API-Key auth from a base64 encoded key.
+	Session = requests.Session()
+	Session.headers.update({"X-API-Key": TERN_API_KEY})
 
 	# Parse the period of interest.
 	start = datetime.date.fromisoformat(START)
