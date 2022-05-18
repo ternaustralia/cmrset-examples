@@ -15,7 +15,8 @@ defaults:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  #IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: "CMRSET/download-aet"
 
 jobs:
   build-and-push-image:

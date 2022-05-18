@@ -6,5 +6,6 @@ docker run --rm ^
 	-e START=2016-01-01 ^
 	-e END=2016-02-01 ^
 	-e TILES=10,11 ^
+	-e DRYRUN=True ^
 	tern/download_aet:v2 ^
 

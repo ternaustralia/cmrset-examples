@@ -31,6 +31,8 @@ pip install python-dateutil
 
 ## Running using Docker
 
+## Locally
+
 ### Building the Container
 
 To build the docker container please ensure [Docker Desktop](https://www.docker.com/products/docker-desktop) is installed if using Windows or MacOS.  Linux users can install docker by issuing the following commands:
@@ -46,19 +48,27 @@ To build the docker container you can then issue the following command:
 docker build -t tern/download_aet:v2 .
 ```
 
+### Pulling the Container
+
+The latest version of this container is also published to GitHub Packages. To pull this docker container you can then issue the following command:
+
+```shell
+docker pull ghcr.io/ternaustralia/cmrset-examples:main
+```
+
 ### Running the Container
 
 To run the container you can then issue commands similar to the following:
 
 ```shell
 docker run --rm ^
-	-v C:/Downloads/AET/:/usr/src/app/data ^
-	-e PATH_OUT=/usr/src/app/data/ ^
+	-v C:/Downloads/AET/:/usr/data/ ^
+	-e PATH_OUT=/usr/data/ ^
 	-e TERN_API_KEY=your-api-key ^
 	-e START=2016-01-01 ^
 	-e END=2016-02-01 ^
 	-e TILES=10,11 ^
-	tern/download_aet:v2 ^
+	ghcr.io/ternaustralia/cmrset-examples:main ^
 ```
 
 ### References
