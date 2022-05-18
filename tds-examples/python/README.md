@@ -54,7 +54,7 @@ docker build -t tern/download_aet:v2 .
 The latest version of this container is also published in the docker registry on GitHub Packages. To pull this docker container locally you can issue the following command:
 
 ```shell
-docker pull ghcr.io/ternaustralia/cmrset-examples:main
+docker pull ghcr.io/ternaustralia/cmrset-examples/download-aet
 ```
 
 ### Running the Container
@@ -69,7 +69,7 @@ docker run --rm ^
 	-e START=2016-01-01 ^
 	-e END=2016-02-01 ^
 	-e TILES=10,11 ^
-	ghcr.io/ternaustralia/cmrset-examples/download-aet:main ^
+	ghcr.io/ternaustralia/cmrset-examples/download-aet ^
 ```
 
 ### References
