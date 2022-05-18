@@ -123,9 +123,12 @@ function confirm_download([string]$url, [string]$out_file, [UpdateMethod]$update
         UPDATE_NEW
         {
             if (-Not (Test-Path -Path $out_file)) { $result=$true; break }     # Return true if the file is missing.
-            $dt = (Get-ChildItem -Path $out_file | select CreationTimeUtc).CreationTimeUtc
+            $dt = (Get-ChildItem -Path $out_file | Select-Object CreationTimeUtc).CreationTimeUtc
             $date_str = $dt.ToString("ddd, dd MMM yyyy HH:mm:ss") + " GMT"     # File creation date in GMT, for headers.
-            $headers = @{ "If-Modified-Since" = "$($date_str)"} + $key_headers # key_headers accessed from global scope.
+            $headers = @{
+                "If-Modified-Since" = "$($date_str)";
+                "X-API-Key" = "$($TERN_API_KEY)" # TERN_API_KEY accessed from global scope.
+            }  
             try{
                 $response = Invoke-WebRequest -Uri "$($url)" -Method "HEAD" -Headers $headers
             }
@@ -207,8 +210,7 @@ $main = {
 
     # A session which contains common settings which will be used for all web requests made.
     # In particular, an X-API-Key auth from a base64 encoded key.
-    $key_headers = @{ "X-API-Key" = "$($TERN_API_KEY)"}
-    $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers $key_headers
+    $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($TERN_API_KEY)"}
 
     # Parse the period of interest.
     $start = [datetime]::ParseExact($START, 'yyyy-MM-dd', $null)
