@@ -22,7 +22,9 @@ The two implementations we provide here are:
 
 ### Script Parameters
 
-The following parameters are configurable on all of the CMRSET AET downloading scripts provided here:
+The following parameters are configurable on all of the CMRSET AET downloading scripts provided here. 
+Parameters can be modified directly within the scripts or may be set via environment variables. 
+If environment variable values are set, then they will take precedence ofve the values defined within the scripts.
 
 #### TERN_API_KEY
 Your TERN API Key which is used to authenticate to TERN Data Services.  
