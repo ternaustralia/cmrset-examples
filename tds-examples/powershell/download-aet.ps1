@@ -1,6 +1,6 @@
 # Script Parameters
 
-$API_KEY = "your-api-key"             # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
+$TERN_API_KEY = "your-api-key"        # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
 $PATH_OUT = "your-output-path"        # e.g. "C:/Downloads/AET"
 $UPDATE_METHOD = "UPDATE_MISSING"     # e.g. "UPDATE_MISSING", "UPDATE_NEW", "UPDATE_ALL"
 $PRODUCT_CODE = "CMRSET_LANDSAT_V2_2" # e.g. "CMRSET_LANDSAT_V2_2" (recommended)
@@ -40,9 +40,20 @@ $TileLookup = @{
     11 = "0000087552-0000131328"
 }
 
+# Use environment variables as preference (if defined) before script variables.
+$TERN_API_KEY = if (Test-Path 'env:TERN_API_KEY') {$env:TERN_API_KEY} else {$TERN_API_KEY}
+$PATH_OUT = if (Test-Path 'env:PATH_OUT') {$env:PATH_OUT} else {$PATH_OUT}
+$UPDATE_METHOD = if (Test-Path 'env:UPDATE_METHOD') {$env:UPDATE_METHOD} else {$UPDATE_METHOD}
+$PRODUCT_CODE = if (Test-Path 'env:PRODUCT_CODE') {$env:PRODUCT_CODE} else {$PRODUCT_CODE}
+$START = if (Test-Path 'env:START') {$env:START} else {$START}
+$END = if (Test-Path 'env:END') {$env:END} else {$END}
+$BANDS = if (Test-Path 'env:BANDS') {$env:BANDS -split "," | ForEach-Object {$_.Trim()} } else {$BANDS}
+$TILES = if (Test-Path 'env:TILES') {$env:TILES -split "," | ForEach-Object {[int]$_.Trim()} } else {$TILES}
+$DRYRUN = if (Test-Path 'env:DRYRUN') {[System.Convert]::ToBoolean($env:DRYRUN)} else {$DRYRUN}
+
 # A session which contains common settings which will be used for all web requests made.
 # In particular, an X-API-Key auth from a base64 encoded key.
-$key_headers = @{ "X-API-Key" = "$($API_KEY)"}
+$key_headers = @{ "X-API-Key" = "$($TERN_API_KEY)"}
 $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers $key_headers
 
 

@@ -1,6 +1,6 @@
 # Script Parameters
 
-API_KEY = "your-api-key"             # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
+TERN_API_KEY = "your-api-key"        # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
 PATH_OUT = "your-output-path"        # e.g. "C:/Downloads/AET"
 UPDATE_METHOD = "UPDATE_MISSING"     # e.g. "UPDATE_MISSING", "UPDATE_NEW", "UPDATE_ALL"
 PRODUCT_CODE = "CMRSET_LANDSAT_V2_2" # e.g. "CMRSET_LANDSAT_V2_2" (recommended)
@@ -51,10 +51,23 @@ TileLookup = {
 	11: "0000087552-0000131328"
 }
 
+# Use environment variables as preference (if defined) before script variables.
+TERN_API_KEY = os.getenv("TERN_API_KEY", TERN_API_KEY)
+PATH_OUT = os.getenv("PATH_OUT", PATH_OUT)
+UPDATE_METHOD = os.getenv("UPDATE_METHOD", UPDATE_METHOD)
+PRODUCT_CODE = os.getenv("PRODUCT_CODE", PRODUCT_CODE)
+START = os.getenv("START", START)
+END = os.getenv("END", END)
+BANDS = os.getenv("BANDS", BANDS) #e.g. for env var "ETa,pixel_qa"
+if not isinstance(BANDS, list): BANDS = [band.strip() for band in BANDS.split(",")]
+TILES = os.getenv("TILES", TILES) #e.g. for env var "10,11"
+if not isinstance(TILES, list): TILES = [int(tile.strip()) for tile in TILES.split(",")]
+DRYRUN = bool(os.getenv("DRYRUN", DRYRUN))
+
 # A session which contains common settings which will be used for all web requests made.
 # In particular, an X-API-Key auth from a base64 encoded key.
 Session = requests.Session()
-Session.headers.update({"X-API-Key": API_KEY})
+Session.headers.update({"X-API-Key": TERN_API_KEY})
 
 
 class UpdateMethod(Enum):

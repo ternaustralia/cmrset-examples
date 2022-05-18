@@ -24,7 +24,7 @@ The two implementations we provide here are:
 
 The following parameters are configurable on all of the CMRSET AET downloading scripts provided here:
 
-#### API_KEY
+#### TERN_API_KEY
 Your TERN API Key which is used to authenticate to TERN Data Services.  
 
 *Further details on how to obtain an API key are provided below*.
