@@ -9,6 +9,10 @@ on:
   push:
     branches: [main]
 
+defaults:
+  run:
+    working-directory: tds-examples/python/
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
