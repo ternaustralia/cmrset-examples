@@ -50,7 +50,7 @@ docker build -t tern/download_aet:v2 .
 
 ### Pulling the Container
 
-The latest version of this container is also published to GitHub Packages. To pull this docker container you can then issue the following command:
+The latest version of this container is also published to GitHub Packages. To pull this docker container locally you can issue the following command:
 
 ```shell
 docker pull ghcr.io/ternaustralia/cmrset-examples:main
