@@ -27,6 +27,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include=".github\" />
+    <Folder Include=".github\workflows\" />
     <Folder Include="certs\" />
     <Folder Include="gee-examples\" />
     <Folder Include="gee-examples\javascript\" />
@@ -37,6 +39,10 @@
     <Folder Include="wps-examples\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".github\workflows\main.yml" />
+    <Content Include=".github\workflows\publish_github.yml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include=".gitignore" />
     <Content Include="certs\TERN_API_Key.txt" />
     <Content Include="gee-examples\GEE-Example1.png" />
