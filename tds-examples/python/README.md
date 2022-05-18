@@ -5,10 +5,12 @@
 
 # Important Notes
 
+## Running locally
+
 To execute this script you will need to ensure you have the following 2 python packages installed:
 
 
-## 1. Requests
+### 1. Requests
 
 https://docs.python-requests.org/en/latest/
 
@@ -18,7 +20,7 @@ pip install requests
 ```
 
 
-## 2. dateutil
+### 2. dateutil
 
 https://dateutil.readthedocs.io/en/stable/
 
@@ -27,6 +29,37 @@ To install the *dateutil* package run the following command:
 pip install python-dateutil
 ```
 
+## Running using Docker
+
+### Building the Container
+
+To build the docker container please ensure [Docker Desktop](https://www.docker.com/products/docker-desktop) is installed if using Windows or MacOS.  Linux users can install docker by issuing the following commands:
+
+```shell
+sudo apt-get install docker-engine -y
+sudo service docker start
+```
+
+To build the docker container you can then issue the following command:
+
+```shell
+docker build -t tern/download_aet:v2 .
+```
+
+### Running the Container
+
+To run the container you can then issue commands similar to the following:
+
+```shell
+docker run --rm ^
+	-v C:/Downloads/AET/:/usr/src/app/data ^
+	-e PATH_OUT=/usr/src/app/data/ ^
+	-e TERN_API_KEY=your-api-key ^
+	-e START=2016-01-01 ^
+	-e END=2016-02-01 ^
+	-e TILES=10,11 ^
+	tern/download_aet:v2 ^
+```
 
 ### References
 

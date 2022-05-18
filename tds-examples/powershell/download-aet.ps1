@@ -208,6 +208,8 @@ $main = {
     $TILES = if (Test-Path 'env:TILES') {$env:TILES -split "," | ForEach-Object {[int]$_.Trim()} } else {$TILES} #e.g. for env var "10,11"
     $DRYRUN = if (Test-Path 'env:DRYRUN') {[System.Convert]::ToBoolean($env:DRYRUN)} else {$DRYRUN}              #e.g. for env var "True"
 
+    Write-Information "DRYRUN: $DRYRUN" -InformationAction continue
+
     # A session which contains common settings which will be used for all web requests made.
     # In particular, an X-API-Key auth from a base64 encoded key.
     $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($TERN_API_KEY)"}

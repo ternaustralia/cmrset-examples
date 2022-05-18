@@ -227,7 +227,9 @@ def main():
 	if not isinstance(BANDS, list): BANDS = [band.strip() for band in BANDS.split(",")]
 	TILES = os.getenv("TILES", TILES) #e.g. for env var "10,11"
 	if not isinstance(TILES, list): TILES = [int(tile.strip()) for tile in TILES.split(",")]
-	DRYRUN = bool(os.getenv("DRYRUN", DRYRUN))
+	DRYRUN = str(os.getenv("DRYRUN", DRYRUN)).lower() == "true"
+
+	logging.info("DRYRUN: {dryrun}".format(dryrun=DRYRUN))
 
 	# A session which contains common settings which will be used for all web requests made.
 	# In particular, an X-API-Key auth from a base64 encoded key.

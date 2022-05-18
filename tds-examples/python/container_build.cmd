@@ -1,0 +1,1 @@
+docker build --no-cache -t tern/download_aet:v2 .

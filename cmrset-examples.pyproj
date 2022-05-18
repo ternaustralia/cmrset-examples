@@ -64,6 +64,11 @@
     <Content Include="tds-examples\Execution_Policy_Error.png" />
     <Content Include="tds-examples\powershell\download-aet.ps1" />
     <Content Include="tds-examples\powershell\README.md" />
+    <Content Include="tds-examples\python\container_build.cmd" />
+    <Content Include="tds-examples\python\container_run.cmd">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tds-examples\python\Dockerfile" />
     <Content Include="tds-examples\Set_Execution_Policy.png" />
     <Content Include="tds-examples\python\README.md" />
     <Content Include="tds-examples\python\requirements.txt">

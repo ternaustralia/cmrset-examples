@@ -20,6 +20,8 @@ The two implementations we provide here are:
     This is why it's sometimes also referred to as the *"universal language for data science"*.
     Python also runs on Windows, Linux, and macOS.
 
+Note: the Python implementation is also provided as a docker container. Please refer to the Python readme for more information.
+
 ### Script Parameters
 
 The following parameters are configurable on all of the CMRSET AET downloading scripts provided here. 
