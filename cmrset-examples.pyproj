@@ -39,8 +39,8 @@
     <Folder Include="wps-examples\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".github\workflows\main.yml" />
-    <Content Include=".github\workflows\publish_github.yml">
+    <Content Include=".github\workflows\build_binder_image.yml" />
+    <Content Include=".github\workflows\build_github_image.yml">
       <SubType>Code</SubType>
     </Content>
     <Content Include=".gitignore" />
