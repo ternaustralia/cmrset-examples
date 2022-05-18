@@ -5,7 +5,7 @@
 
 # Important Notes
 
-## Running locally
+## Running the script locally
 
 To execute this script you will need to ensure you have the following 2 python packages installed:
 
@@ -29,9 +29,10 @@ To install the *dateutil* package run the following command:
 pip install python-dateutil
 ```
 
+Note: A requirements.txt file is also provided to assist with installation of these python packages.
+
 ## Running using Docker
 
-## Locally
 
 ### Building the Container
 
@@ -58,7 +59,7 @@ docker pull ghcr.io/ternaustralia/cmrset-examples:main
 
 ### Running the Container
 
-To run the container you can then issue commands similar to the following:
+To run the container you can then issue commands similar to the following (refer to available parameters in the parent readme):
 
 ```shell
 docker run --rm ^
