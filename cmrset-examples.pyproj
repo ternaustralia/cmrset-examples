@@ -36,6 +36,7 @@
     <Folder Include="tds-examples\" />
     <Folder Include="tds-examples\python\" />
     <Folder Include="tds-examples\powershell\" />
+    <Folder Include="tds-examples\python\shell\" />
     <Folder Include="wps-examples\" />
   </ItemGroup>
   <ItemGroup>
@@ -71,7 +72,7 @@
     <Content Include="tds-examples\powershell\download-aet.ps1" />
     <Content Include="tds-examples\powershell\README.md" />
     <Content Include="tds-examples\python\container_build.cmd" />
-    <Content Include="tds-examples\python\container_run.cmd">
+    <Content Include="tds-examples\python\shell\container_run.cmd">
       <SubType>Code</SubType>
     </Content>
     <Content Include="tds-examples\python\Dockerfile" />
