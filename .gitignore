@@ -1,3 +1,4 @@
 *.suo
 env
 certs
+/tds-examples/python/shell
