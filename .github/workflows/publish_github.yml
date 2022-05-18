@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Create and publish a Docker image
+name: Create and Publish download-aet Docker Image
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 defaults:
   run:
-    working-directory: tds-examples/python/
+    working-directory: ./tds-examples/python/
 
 env:
   REGISTRY: ghcr.io
