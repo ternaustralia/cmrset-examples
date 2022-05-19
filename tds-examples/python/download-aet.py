@@ -21,7 +21,7 @@ DRYRUN = False                       # e.g. True, False
 import requests
 import logging
 import tempfile
-import datetime
+from datetime import date, datetime
 import os
 from dateutil.relativedelta import relativedelta
 from operator import itemgetter
@@ -145,7 +145,7 @@ def confirm_download(url, out_file, update_method):
 		""" Update missing/outdated files within the local archive. """
 
 		if not os.path.exists(out_file): return True        # Return true if the file is missing.
-		dt = datetime.datetime.utcfromtimestamp((os.path.getctime(out_file)))
+		dt = datetime.utcfromtimestamp((os.path.getctime(out_file)))
 		date_str = dt.strftime("%a, %d %b %Y %H:%M:%S GMT") # File creation date in GMT, for headers.
 		headers = {'If-Modified-Since': date_str}
 		response = Session.head(url, headers=headers, allow_redirects=True)
@@ -236,22 +236,19 @@ def main():
 	Session = requests.Session()
 	Session.headers.update({"X-API-Key": TERN_API_KEY})
 
-	# Parse the period of interest.
-	start = datetime.date.min if START == "" else datetime.date.fromisoformat(START)
-	end = datetime.date.max if END == "" else datetime.date.fromisoformat(END)
-
 	# Constrain start/end to within dataset temporal bounds.
-	product_start = datetime.date.fromisoformat(ProductCodes[PRODUCT_CODE]["Start"])
-	product_end = datetime.date.today() if ProductCodes[PRODUCT_CODE]["End"] == None else datetime.date.fromisoformat(ProductCodes[PRODUCT_CODE]["End"])
-	start = max(start, product_start)
-	end = min(end, product_end)
+	product_start = date.fromisoformat(ProductCodes[PRODUCT_CODE]["Start"])
+	product_end = date.fromisoformat(ProductCodes[PRODUCT_CODE]["End"]) if ProductCodes[PRODUCT_CODE]["End"] != None else date.today()
+	start = max(date.fromisoformat(START), product_start)
+	end = min(date.fromisoformat(END), product_end)
+
 	logging.info("Start: {start}".format(start=start))
 	logging.info("End: {end}".format(end=end))
 
 	# Generate the list of dates to download.
 	dates = get_months(start, end)
 	logging.info("Processing data for the following dates:")
-	for date in dates: logging.info(date.strftime("%b %Y"))
+	for d in dates: logging.info(d.strftime("%b %Y"))
 
 	# Get the relative paths for each the VRT files for each date.
 	vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, dates, BANDS)

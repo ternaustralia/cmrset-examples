@@ -214,15 +214,12 @@ $main = {
     # In particular, an X-API-Key auth from a base64 encoded key.
     $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE]["Url"] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($TERN_API_KEY)"}
 
-    # Parse the period of interest.
-    $start = [datetime]::ParseExact($START, 'yyyy-MM-dd', $null)
-    $end = [datetime]::ParseExact($END, 'yyyy-MM-dd', $null)
-
 	# Constrain start/end to within dataset temporal bounds.
-	$product_start = [datetime]$ProductCodes[$PRODUCT_CODE]["Start"]
-	$product_end =  if ($ProductCodes[$PRODUCT_CODE]["End"] -eq $null) {Get-Date} else {[datetime]$ProductCodes[$PRODUCT_CODE]["End"]}
-	$start = ($start, $product_start | Measure-Object -Maximum).Maximum.Date
-	$end = ($end, $product_end | Measure-Object -Minimum).Minimum.Date
+	$product_start = $ProductCodes[$PRODUCT_CODE]["Start"]
+	$product_end = if ($ProductCodes[$PRODUCT_CODE]["End"] -ne $null) {$ProductCodes[$PRODUCT_CODE]["End"]} else {Get-Date}
+	$start = ([datetime]$START, [datetime]$product_start | Measure-Object -Maximum).Maximum.Date
+	$end = ([datetime]$END, [datetime]$product_end | Measure-Object -Minimum).Minimum.Date
+
     Write-Information "Start: $start" -InformationAction continue
     Write-Information "End: $end" -InformationAction continue
 
