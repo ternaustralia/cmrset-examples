@@ -1,3 +1,6 @@
+# Dataset status (up/down), and important notes for running this script:
+# https://github.com/ternaustralia/cmrset-examples/tree/main/tds-examples
+
 # Script Parameters
 
 $TERN_API_KEY = "your-api-key"           # e.g. "bmRSFNPXp5KSF5aiI7OjpUM1s6eiANQmgyKF8NJjRpZFJqSGMlPWlRVQlGKndoUzI4JXhkVSYQka0xqNCohcXhVXDRmWQpCNWVJDU2o0SmtE"
@@ -10,9 +13,6 @@ $BANDS = @("ETa", "pixel_qa")            # Available values: "ETa", "pixel_qa"
 $TILES = @(0,1,2,3,4,5,6,7,8,9,10,10,11) # Avallable values: 0-11
 $DRYRUN = $false                         # e.g. $true, $false
 
-
-# Dataset status (up/down), and important notes for running this script:
-# https://github.com/ternaustralia/cmrset-examples/tree/main/tds-examples
 
 ########################################################################################
 
