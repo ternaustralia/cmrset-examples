@@ -50,18 +50,23 @@ The default value is UPDATE_MISSING.
 #### PRODUCT_CODE
 The CMRSET AET product code to download.  
 
-The default value is *CMRSET_LANDSAT_V2_2* which is the ***latest*** and ***recommended*** version.
+The default value is ***CMRSET_LANDSAT_V2_2*** which is the *latest* and *recommended* version.
 
 #### START
 The dataset start date to begin downloading data from (formatted as YYYY-MM-DD).
 
+The default value is the ***start date*** of the ***product code*** specified.
+
 #### END
 The dataset end date to finish downloading data on (formatted as YYYY-MM-DD).
 
-#### BANDS
-The list of bands to download. Available values are **ETa** and **pixel_qa**.
+The default value is either the ***end date*** of the product code specified, or  ***todays date*** if the product is currently active.
 
-The default value is a list containing both ETa and pixel_qa.
+
+#### BANDS
+The list of bands to download. Available values are ETa and pixel_qa.
+
+The default value is a list containing both ***ETa*** and ***pixel_qa***.
 
 #### TILES
 The list of tile indicies to download, which specify a region within Australia. Available values are 0 through 11.
@@ -76,7 +81,7 @@ Indicies are shown in the figure below. i.e. if you are only interested in data 
 If set to True, will ***not download*** any data product files. 
 The script will just go through the *motions* of downloading the data product for debugging purposes.  
 
-The default value is False.
+The default value is ***False***.
 
 
 
