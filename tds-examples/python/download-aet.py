@@ -17,17 +17,17 @@ DRYRUN = False                       # e.g. True, False
 ########################################################################################
 
 
-import requests
+import os
 import logging
 import tempfile
-from datetime import date, datetime
-import os
-from dateutil.relativedelta import relativedelta
-from operator import itemgetter
-from enum import Enum, auto
+import requests
 import xml.etree.ElementTree as ET
-logging.getLogger().setLevel(logging.INFO)
+from enum import Enum, auto
+from operator import itemgetter
+from datetime import date, datetime
+from dateutil.relativedelta import relativedelta
 
+logging.getLogger().setLevel(logging.INFO)
 
 
 # Lookup for available products.
