@@ -45,7 +45,7 @@ The method used to update your local archive from TERN Data Services. Available 
 - **UPDATE_NEW:** Same as UPDATE_MISSING, but will also update any images in your local archive that have since been ***reprocessed***. Reprocessing occurs when: climate inputs have been updated; or new satellite imagery has become avalable. 
 - **UPDATE_ALL:** Will update ***all*** images. Typically you should never need to use this option, however it is provided in case you think you do. 
 
-The default value is UPDATE_MISSING.
+The default value is ***UPDATE_MISSING***.
 
 #### PRODUCT_CODE
 The CMRSET AET product code to download.  
