@@ -40,7 +40,7 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/download-aet
-          labels:
+          labels: |
             org.opencontainers.image.title=Download CMRSET AET
             org.opencontainers.image.description=This package will download the CMRSET actual evapotranspiration products from the TERN Data Services Catalogue as Cloud-Optimized GeoTIFF's. This package is effectively a bot which will scrape the online data archive for you (to save you clicking on links).
 
