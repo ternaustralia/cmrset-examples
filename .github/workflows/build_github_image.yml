@@ -45,6 +45,8 @@ jobs:
             org.opencontainers.image.description=This package will download the CMRSET actual evapotranspiration products from the TERN Data Services Catalogue as Cloud-Optimized GeoTIFF's. This package is effectively a bot which will scrape the online data archive for you (to save you clicking on links).
             org.opencontainers.image.url=https://portal.tern.org.au/actual-evapotranspiration-australia-cmrset-algorithm/21915
             org.opencontainers.image.source=https://github.com/ternaustralia/cmrset-examples/tree/main/tds-examples
+          flavor: |
+            latest=true
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.0.0
