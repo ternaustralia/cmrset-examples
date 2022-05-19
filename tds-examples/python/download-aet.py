@@ -7,8 +7,7 @@ PRODUCT_CODE = "CMRSET_LANDSAT_V2_2" # e.g. "CMRSET_LANDSAT_V2_2" (recommended)
 START = "0001-01-01"                 # e.g. Like: "YYYY-MM-DD"
 END = "9999-12-31"                   # e.g. Like: "YYYY-MM-DD"
 BANDS = ["ETa", "pixel_qa"]          # Available values: "ETa", "pixel_qa"
-TILES = list(range(0, 12))           # All tiles
-#TILES = [10,11]                     # Some tiles
+TILES = [0,1,2,3,4,5,6,7,8,9,10,11]  # Avallable values: 0-11
 DRYRUN = False                       # e.g. True, False
 
 # Dataset status (up/down), and important notes for running this script:
