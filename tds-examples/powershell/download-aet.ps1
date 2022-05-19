@@ -20,8 +20,8 @@ $DRYRUN = $false                      # e.g. $true, $false
 
 # Lookup for available products.
 $ProductCodes = @{
-    CMRSET_LANDSAT_V2_2 = "https://data.tern.org.au/landscapes/aet/v2_2";
-    CMRSET_LANDSAT_V2_1 = "https://data.tern.org.au/landscapes/aet/v2_1" # Discontinued
+    CMRSET_LANDSAT_V2_2 = @{Url = "https://data.tern.org.au/landscapes/aet/v2_2"; Start = "2000-02-01"; End = $null};
+    CMRSET_LANDSAT_V2_1 = @{Url = "https://data.tern.org.au/landscapes/aet/v2_1"; Start = "2012-02-01"; End = "2021-02-01"} # Discontinued
 }
 
 # Lookup for tile indicies.
@@ -152,7 +152,7 @@ function download_images([string]$base_url, [string]$base_folder, [hashtable]$re
 
     foreach ($date in $relative_paths.Keys.GetEnumerator() | Sort-Object) # Need to sort keys from Enumerator
     {
-        Write-Information "Processing $($relative_paths.Count) bands(s) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
+        Write-Information "Processing $($relative_paths[$date].Count) bands(s) for $($date.tostring("yyyy-MM-dd"))..." -InformationAction continue
         
         foreach ($band in $relative_paths[$date].Keys.GetEnumerator() | Sort-Object) # Need to sort keys from Enumerator
         {
@@ -212,11 +212,17 @@ $main = {
 
     # A session which contains common settings which will be used for all web requests made.
     # In particular, an X-API-Key auth from a base64 encoded key.
-    $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($TERN_API_KEY)"}
+    $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE]["Url"] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($TERN_API_KEY)"}
 
     # Parse the period of interest.
     $start = [datetime]::ParseExact($START, 'yyyy-MM-dd', $null)
     $end = [datetime]::ParseExact($END, 'yyyy-MM-dd', $null)
+
+	# Constrain start/end to within dataset temporal bounds.
+	$product_start = [datetime]$ProductCodes[$PRODUCT_CODE]["Start"]
+	$product_end =  if ($ProductCodes[$PRODUCT_CODE]["End"] -eq $null) {Get-Date} else {[datetime]$ProductCodes[$PRODUCT_CODE]["End"]}
+	$start = ($start, $product_start | Measure-Object -Maximum).Maximum.Date
+	$end = ($end, $product_end | Measure-Object -Minimum).Minimum.Date
     Write-Information "Start: $start" -InformationAction continue
     Write-Information "End: $end" -InformationAction continue
 
@@ -230,7 +236,7 @@ $main = {
     $vrt_relative_paths
 
     # Download all the tiles referenced in each VRT file.
-    download_images $ProductCodes[$PRODUCT_CODE] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES] $UPDATE_METHOD $DRYRUN
+    download_images $ProductCodes[$PRODUCT_CODE]["Url"] "$PATH_OUT/$PRODUCT_CODE" $vrt_relative_paths $TileLookup[$TILES] $UPDATE_METHOD $DRYRUN
     Write-Information "Processing complete!" -InformationAction continue
 
 }

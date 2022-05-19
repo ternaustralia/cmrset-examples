@@ -33,8 +33,8 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Lookup for available products.
 ProductCodes = {
-	"CMRSET_LANDSAT_V2_2": "https://data.tern.org.au/landscapes/aet/v2_2",
-	"CMRSET_LANDSAT_V2_1": "https://data.tern.org.au/landscapes/aet/v2_1" # Discontinued
+	"CMRSET_LANDSAT_V2_2": {"Url": "https://data.tern.org.au/landscapes/aet/v2_2", "Start": "2000-02-01", "End": None},
+	"CMRSET_LANDSAT_V2_1": {"Url": "https://data.tern.org.au/landscapes/aet/v2_1", "Start": "2012-02-01", "End": "2021-02-01"} # Discontinued
 }
 
 
@@ -237,8 +237,14 @@ def main():
 	Session.headers.update({"X-API-Key": TERN_API_KEY})
 
 	# Parse the period of interest.
-	start = datetime.date.fromisoformat(START)
-	end = datetime.date.fromisoformat(END)
+	start = datetime.date.min if START == "" else datetime.date.fromisoformat(START)
+	end = datetime.date.max if END == "" else datetime.date.fromisoformat(END)
+
+	# Constrain start/end to within dataset temporal bounds.
+	product_start = datetime.date.fromisoformat(ProductCodes[PRODUCT_CODE]["Start"])
+	product_end = datetime.date.today() if ProductCodes[PRODUCT_CODE]["End"] == None else datetime.date.fromisoformat(ProductCodes[PRODUCT_CODE]["End"])
+	start = max(start, product_start)
+	end = min(end, product_end)
 	logging.info("Start: {start}".format(start=start))
 	logging.info("End: {end}".format(end=end))
 
@@ -251,7 +257,7 @@ def main():
 	vrt_relative_paths = get_vrt_relative_paths(PRODUCT_CODE, dates, BANDS)
 
 	# Download all the tiles referenced in each VRT file.
-	download_images(ProductCodes[PRODUCT_CODE], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup), update_method=UpdateMethod[UPDATE_METHOD], dryrun=DRYRUN)
+	download_images(ProductCodes[PRODUCT_CODE]["Url"], "{path_out}/{product_code}".format(path_out=PATH_OUT,product_code=PRODUCT_CODE), vrt_relative_paths, itemgetter(*TILES)(TileLookup), update_method=UpdateMethod[UPDATE_METHOD], dryrun=DRYRUN)
 
 	logging.info("Processing complete")
 
