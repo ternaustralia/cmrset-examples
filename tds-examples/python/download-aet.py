@@ -223,9 +223,9 @@ def main():
 	PRODUCT_CODE = os.getenv("PRODUCT_CODE", PRODUCT_CODE)
 	START = os.getenv("START", START)
 	END = os.getenv("END", END)
-	BANDS = os.getenv("BANDS", BANDS) #e.g. for env var "ETa,pixel_qa"
+	BANDS = os.getenv("BANDS", BANDS) # e.g. for env var: ETa,pixel_qa
 	if not isinstance(BANDS, list): BANDS = [band.strip() for band in BANDS.split(",")]
-	TILES = os.getenv("TILES", TILES) #e.g. for env var "10,11"
+	TILES = os.getenv("TILES", TILES) # e.g. for env var: 10,11
 	if not isinstance(TILES, list): TILES = [int(tile.strip()) for tile in TILES.split(",")]
 	DRYRUN = str(os.getenv("DRYRUN", DRYRUN)).lower() == "true"
 

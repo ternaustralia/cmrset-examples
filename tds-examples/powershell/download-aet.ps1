@@ -204,9 +204,9 @@ $main = {
     $PRODUCT_CODE = if (Test-Path 'env:PRODUCT_CODE') {$env:PRODUCT_CODE} else {$PRODUCT_CODE}
     $START = if (Test-Path 'env:START') {$env:START} else {$START}
     $END = if (Test-Path 'env:END') {$env:END} else {$END}
-    $BANDS = if (Test-Path 'env:BANDS') {$env:BANDS -split "," | ForEach-Object {$_.Trim()} } else {$BANDS}      #e.g. for env var "ETa,pixel_qa"
-    $TILES = if (Test-Path 'env:TILES') {$env:TILES -split "," | ForEach-Object {[int]$_.Trim()} } else {$TILES} #e.g. for env var "10,11"
-    $DRYRUN = if (Test-Path 'env:DRYRUN') {[System.Convert]::ToBoolean($env:DRYRUN)} else {$DRYRUN}              #e.g. for env var "True"
+    $BANDS = if (Test-Path 'env:BANDS') {$env:BANDS -split "," | ForEach-Object {$_.Trim()} } else {$BANDS}      # e.g. for env var: ETa,pixel_qa
+    $TILES = if (Test-Path 'env:TILES') {$env:TILES -split "," | ForEach-Object {[int]$_.Trim()} } else {$TILES} # e.g. for env var: 10,11
+    $DRYRUN = if (Test-Path 'env:DRYRUN') {[System.Convert]::ToBoolean($env:DRYRUN)} else {$DRYRUN}              # e.g. for env var: True
 
     Write-Information "DRYRUN: $DRYRUN" -InformationAction continue
 
@@ -214,11 +214,11 @@ $main = {
     # In particular, an X-API-Key auth from a base64 encoded key.
     $null = Invoke-WebRequest -Uri $ProductCodes[$PRODUCT_CODE]["Url"] -Method "HEAD" -SessionVariable "Session" -Headers @{ "X-API-Key" = "$($TERN_API_KEY)"}
 
-	# Constrain start/end to within dataset temporal bounds.
-	$product_start = $ProductCodes[$PRODUCT_CODE]["Start"]
-	$product_end = if ($ProductCodes[$PRODUCT_CODE]["End"] -ne $null) {$ProductCodes[$PRODUCT_CODE]["End"]} else {Get-Date}
-	$start = ([datetime]$START, [datetime]$product_start | Measure-Object -Maximum).Maximum.Date
-	$end = ([datetime]$END, [datetime]$product_end | Measure-Object -Minimum).Minimum.Date
+    # Constrain start/end to within dataset temporal bounds.
+    $product_start = $ProductCodes[$PRODUCT_CODE]["Start"]
+    $product_end = if ($ProductCodes[$PRODUCT_CODE]["End"] -ne $null) {$ProductCodes[$PRODUCT_CODE]["End"]} else {Get-Date}
+    $start = ([datetime]$START, [datetime]$product_start | Measure-Object -Maximum).Maximum.Date
+    $end = ([datetime]$END, [datetime]$product_end | Measure-Object -Minimum).Minimum.Date
 
     Write-Information "Start: $start" -InformationAction continue
     Write-Information "End: $end" -InformationAction continue
