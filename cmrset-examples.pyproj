@@ -15,8 +15,8 @@
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
-    <Environment>
-    </Environment>
+    <Environment>TERN_API_KEY=TXlmY1p1N21DSlNWNUlSeS5PC1IkSzEkSiFbdkI2NEFDUnlVL1ZWPgx1IlYsJ2VRZ0AhC0EKMU5UeFNQSAx2DGhrYydoDTg9WGkgTFR4MGtH
+PATH_OUT=C:/Downloads/AET</Environment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +44,8 @@
     <Content Include=".github\workflows\build_github_image.yml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include=".github\workflows\codeql-analysis.yml" />
+    <Content Include=".github\workflows\snyk-container.yml" />
     <Content Include=".gitignore" />
     <Content Include="certs\TERN_API_Key.txt" />
     <Content Include="gee-examples\GEE-Example1.png" />
