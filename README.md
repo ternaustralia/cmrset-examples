@@ -3,11 +3,11 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
 ![PowerShell](https://img.shields.io/badge/-PowerShell-blue)
-![GitHub issues](https://img.shields.io/github/issues/ternaustralia/cmrset-examples)
+[![GitHub issues](https://img.shields.io/github/issues/ternaustralia/cmrset-examples)](https://github.com/ternaustralia/cmrset-examples/issues)
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/ternaustralia/cmrset-examples)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ternaustralia/cmrset-examples/Create%20and%20Publish%20download-aet%20Docker%20Image)
-![Docker Build](https://img.shields.io/badge/docker%20build-automated-blue)
-[![hits](https://hits.deltapapa.io/github/ternaustralia/cmrset-examples.svg)](https://github.com/jamievleeshouwer/cmrset-examples)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ternaustralia/cmrset-examples/Create%20and%20Publish%20download-aet%20Docker%20Image)](https://github.com/ternaustralia/cmrset-examples/pkgs/container/cmrset-examples%2Fdownload-aet)
+[![Docker Build](https://img.shields.io/badge/docker%20build-automated-blue)](https://github.com/ternaustralia/cmrset-examples/pkgs/container/cmrset-examples%2Fdownload-aet)
+[![hits](https://hits.deltapapa.io/github/ternaustralia/cmrset-examples.svg)](https://github.com/ternaustralia/cmrset-examples)
 
 ## CMRSET Code Examples
 

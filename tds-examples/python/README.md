@@ -1,10 +1,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Dataset status: down](https://img.shields.io/website-up-down-green-red/http/data.tern.org.au/landscapes/aet/v2_2.svg?label=Dataset%20status)](https://data.tern.org.au/landscapes/aet/v2_2/) 
 ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
-![GitHub issues](https://img.shields.io/github/issues/ternaustralia/cmrset-examples)
+[![GitHub issues](https://img.shields.io/github/issues/ternaustralia/cmrset-examples)](https://github.com/ternaustralia/cmrset-examples/issues)
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/ternaustralia/cmrset-examples)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ternaustralia/cmrset-examples/Create%20and%20Publish%20download-aet%20Docker%20Image)
-![Docker Build](https://img.shields.io/badge/docker%20build-automated-blue)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ternaustralia/cmrset-examples/Create%20and%20Publish%20download-aet%20Docker%20Image)](https://github.com/ternaustralia/cmrset-examples/pkgs/container/cmrset-examples%2Fdownload-aet)
+[![Docker Build](https://img.shields.io/badge/docker%20build-automated-blue)](https://github.com/ternaustralia/cmrset-examples/pkgs/container/cmrset-examples%2Fdownload-aet)
 
 # Important Notes
 
