@@ -1,6 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Dataset status: down](https://img.shields.io/website-up-down-green-red/http/data.tern.org.au/landscapes/aet/v2_2.svg?label=Dataset%20status)](https://data.tern.org.au/landscapes/aet/v2_2/) 
 ![PowerShell](https://img.shields.io/badge/-PowerShell-blue)
+![GitHub issues](https://img.shields.io/github/issues/ternaustralia/cmrset-examples)
 
 # Important Notes
 
