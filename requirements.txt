@@ -7,6 +7,6 @@ shapely
 matplotlib
 ipyleaflet
 rasterio
-mistune>2.0.3 # Added for security reasons when using geemap
+#mistune>2.0.3 # Added for security reasons when using geemap
 # Modules for TERN Data Services Examples
 python-dateutil
