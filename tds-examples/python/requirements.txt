@@ -1,4 +1,5 @@
 requests
 python-dateutil
+defusedxml # Use defusedxml instead of default (xml.etree) for security reasons
 
 
