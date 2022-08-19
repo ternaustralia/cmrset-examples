@@ -21,7 +21,8 @@ import os
 import logging
 import tempfile
 import requests
-import xml.etree.ElementTree as ET
+#import xml.etree.ElementTree as ET
+import defusedxml.ElementTree as ET
 from enum import Enum, auto
 from operator import itemgetter
 from datetime import date, datetime
