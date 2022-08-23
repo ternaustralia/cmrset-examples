@@ -7,8 +7,8 @@
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/ternaustralia/cmrset-examples)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ternaustralia/cmrset-examples/Create%20and%20Publish%20download-aet%20Docker%20Image)](https://github.com/ternaustralia/cmrset-examples/pkgs/container/cmrset-examples%2Fdownload-aet)
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/ternaustralia/cmrset-examples)
+[![HitCount](https://hits.dwyl.com/ternaustralia/cmrset-examples.svg?style=flat)](http://hits.dwyl.com/ternaustralia/cmrset-examples)
 [![Docker Build](https://img.shields.io/badge/docker%20build-automated-blue)](https://github.com/ternaustralia/cmrset-examples/pkgs/container/cmrset-examples%2Fdownload-aet)
-[![hits](https://hits.deltapapa.io/github/ternaustralia/cmrset-examples.svg)](https://github.com/ternaustralia/cmrset-examples)
 
 ## CMRSET Code Examples
 
