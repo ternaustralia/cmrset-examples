@@ -71,7 +71,7 @@ This example illustrates how to unpack the <a href="https://developers.google.co
 
 This example illustrates how to export the CMRSET Landsat V2.2 imagery via Earth Engine for a study area in the Pilbara. Both ETa and QA bands are exported. We will also illustrate changing the <a href="https://developers.google.com/earth-engine/guides/projections" target="_blank">projection</a> of the exported images to <a href="https://epsg.io/4283" target="_blank">GDA94</a> (EPSG:4283). This example can potentially generate gigabytes of data, so we demonstrate two different methods for exporting the data to suit your own storage capabilities. These methods are:
 
-1. **Via Google Drive** - This method is the simplest, however you may not be prepared to pay for a monthly subscription to upgrade your Google Drive storage limits if your export exceeds the free storage tier (20 GB).
+1. **Via Google Drive** - This method is the simplest, however you may not be prepared to pay for a monthly subscription to upgrade your Google Drive storage limits if your export exceeds the free storage tier (15 GB).
 
 2. **Via Google Cloud Storage** - This method can incur a once-off fee (rather than a subscription) for the egress costs associated with downloading the imagery from Google Cloud Storage. This method is recommended when method 1) is not appropriate for your circumstances.
 
