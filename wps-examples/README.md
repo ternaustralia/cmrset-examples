@@ -10,6 +10,9 @@
 
 Examples of accessing functions on the TERN Landscapes Web Processing Server (WPS).
 
+A TERN APIKey is required to run these examples. Follow the steps detailed in this [TERN Knowledge Base article](https://ternaus.atlassian.net/wiki/spaces/TERNSup/pages/2353496065/API+Key+Usage) to acquire an API
+key.
+
 Note: these processing services are based upon the datasets provided through the TERN Data Services Catalogue (also referred to tds-examples in this repository).
 
 
