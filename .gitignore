@@ -2,3 +2,6 @@
 env
 certs
 /tds-examples/python/shell
+/venv/
+/.venv/
+myfile.tif
