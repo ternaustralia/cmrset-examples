@@ -12,7 +12,8 @@
     <Name>cmrset-examples</Name>
     <RootNamespace>cmrset-examples</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>
+    </InterpreterId>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>TERN_API_KEY=TXlmY1p1N21DSlNWNUlSeS5PC1IkSzEkSiFbdkI2NEFDUnlVL1ZWPgx1IlYsJ2VRZ0AhC0EKMU5UeFNQSAx2DGhrYydoDTg9WGkgTFR4MGtH
@@ -94,17 +95,6 @@ PATH_OUT=C:/Downloads/AET</Environment>
     <Compile Include="tds-examples\python\download-aet.py">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Interpreter Include="env\">
-      <Id>env</Id>
-      <Version>3.7</Version>
-      <Description>env (Python 3.7 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
